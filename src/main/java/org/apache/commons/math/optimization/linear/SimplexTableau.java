@@ -29,8 +29,11 @@ import java.util.Set;
 
 import org.apache.commons.math.linear.Array2DRowRealMatrix;
 import org.apache.commons.math.linear.MatrixUtils;
+import org.apache.commons.math.linear.NegateFunction;
 import org.apache.commons.math.linear.RealMatrix;
 import org.apache.commons.math.linear.RealVector;
+import org.apache.commons.math.linear.UnaryFunction;
+import org.apache.commons.math.linear.UnaryMultiplyFunction;
 import org.apache.commons.math.optimization.GoalType;
 import org.apache.commons.math.optimization.RealPointValuePair;
 import org.apache.commons.math.util.MathUtils;
@@ -162,7 +165,7 @@ class SimplexTableau implements Serializable {
         int zIndex = (getNumObjectiveFunctions() == 1) ? 0 : 1;
         matrix.setEntry(zIndex, zIndex, maximize ? 1 : -1);
         RealVector objectiveCoefficients =
-            maximize ? f.getCoefficients().mapMultiply(-1) : f.getCoefficients();
+            maximize ? f.getCoefficients().map(new NegateFunction()) : f.getCoefficients();
         copyArray(objectiveCoefficients.getData(), matrix.getDataRef()[zIndex]);
         matrix.setEntry(zIndex, width - 1,
             maximize ? f.getConstantTerm() : -1 * f.getConstantTerm());
@@ -230,7 +233,7 @@ class SimplexTableau implements Serializable {
      */
     private LinearConstraint normalize(final LinearConstraint constraint) {
         if (constraint.getValue() < 0) {
-            return new LinearConstraint(constraint.getCoefficients().mapMultiply(-1),
+            return new LinearConstraint(constraint.getCoefficients().map(new NegateFunction()),
                                         constraint.getRelationship().oppositeRelationship(),
                                         -1 * constraint.getValue());
         }
@@ -418,7 +421,7 @@ class SimplexTableau implements Serializable {
     protected void subtractRow(final int minuendRow, final int subtrahendRow,
                                final double multiple) {
         tableau.setRowVector(minuendRow, tableau.getRowVector(minuendRow)
-            .subtract(tableau.getRowVector(subtrahendRow).mapMultiply(multiple)));
+            .subtract(tableau.getRowVector(subtrahendRow).map(new UnaryMultiplyFunction(multiple))));
     }
 
     /**
