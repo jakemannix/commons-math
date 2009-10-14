@@ -316,7 +316,7 @@ public interface RealVector extends Iterable<RealVector.Entry> {
     
     double collect(BinaryCollector coll, RealVector v);
     
-    interface Entry {
+    public interface Entry {
       int index();
       double getValue();
       void setValue(double newValue);
