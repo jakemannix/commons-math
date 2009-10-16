@@ -18,6 +18,7 @@ package org.apache.commons.math.linear;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import org.apache.commons.math.MathRuntimeException;
 import org.apache.commons.math.util.MathUtils;
@@ -27,7 +28,7 @@ import org.apache.commons.math.util.MathUtils;
  * @version $Revision$ $Date$
  * @since 2.0
  */
-public class ArrayRealVector implements RealVector, Serializable {
+public class ArrayRealVector extends AbstractRealVector implements Serializable {
 
     /** Serializable version identifier. */
     private static final long serialVersionUID = -1097961340710804027L;
@@ -221,7 +222,7 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector copy() {
+    public AbstractRealVector copy() {
         return new ArrayRealVector(this, true);
     }
 
@@ -1379,6 +1380,37 @@ public class ArrayRealVector implements RealVector, Serializable {
                     "index {0} out of allowed range [{1}, {2}]",
                     index, 0, getDimension() - 1);
         }
+    }
+
+    public Iterator<Entry> iterator()
+    {
+      return new Iterator<Entry>()
+      {
+        int i = -1;
+        Entry e = new Entry()
+        {
+          public double getValue() { return data[i]; }
+          public int index() { return i; }
+          public void setValue(double newValue) { data[i] = newValue; }
+        };
+        
+        public boolean hasNext()
+        {
+          return i<data.length-1;
+        }
+
+        public Entry next()
+        {
+          i++;
+          return e;
+        }
+
+        public void remove()
+        {
+          throw new UnsupportedOperationException("remove() not supported on RealVector iterators");
+        }
+        
+      };
     }
 
 }

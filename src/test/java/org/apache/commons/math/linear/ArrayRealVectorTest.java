@@ -17,6 +17,7 @@
 package org.apache.commons.math.linear;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -457,6 +458,46 @@ public class ArrayRealVectorTest extends TestCase {
 
         public boolean isInfinite() {
             throw unsupported();
+        }
+
+        public double collect(UnaryCollector collector)
+        {
+          throw unsupported();
+        }
+
+        public double collect(BinaryCollector collector, RealVector other)
+        {
+          throw unsupported();
+        }
+
+        public Iterator<Entry> iterator()
+        {
+          throw unsupported();
+        }
+
+        public RealVector map(UnaryFunction function)
+        {
+          throw unsupported();
+        }
+
+        public RealVector map(BinaryFunction function, RealVector other)
+        {
+          throw unsupported();
+        }
+
+        public RealVector mapToSelf(UnaryFunction function)
+        {
+          throw unsupported();
+        }
+
+        public RealVector mapToSelf(BinaryFunction function, RealVector other)
+        {
+          throw unsupported();
+        }
+
+        public Iterator<Entry> nonDefaultIterator()
+        {
+          throw unsupported();
         }
 
     }

@@ -27,7 +27,7 @@ import org.apache.commons.math.util.OpenIntToDoubleHashMap.Iterator;
  * @version $Revision$ $Date$
  * @since 2.0
 */
-public class OpenMapRealVector implements SparseRealVector, Serializable {
+public class OpenMapRealVector extends AbstractRealVector implements SparseRealVector, Serializable {
 
     /** Default Tolerance for having a value considered zero. */
     public static final double DEFAULT_ZERO_TOLERANCE = 1.0e-12;
@@ -1305,6 +1305,51 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
      */
     public double getSparcity() {
         return (double)entries.size()/(double)getDimension();
+    }
+
+    public java.util.Iterator<Entry> iterator()
+    {
+      return new java.util.Iterator<Entry>()
+      {
+        int i = -1;
+        public boolean hasNext() { return i<virtualSize-1; }
+        public Entry next()
+        {
+          i++;
+          return new Entry()
+          {
+            public double getValue() { return entries.get(i); }
+            public int index() { return i; }
+            public void setValue(double newValue) { entries.put(i, newValue); }            
+          };
+        }
+        
+        public void remove() { throw new UnsupportedOperationException("RealVector iterators do not support remove()"); }
+      };
+    }
+    
+    @Override
+    public java.util.Iterator<Entry> nonDefaultIterator()
+    {
+      return new java.util.Iterator<Entry>()
+      {
+        Iterator it = entries.iterator();
+        
+        public boolean hasNext() { return it.hasNext(); }
+
+        public Entry next()
+        {
+          it.advance();
+          return new Entry()
+          {
+            public double getValue() { return it.value(); }
+            public int index() { return it.key(); }
+            public void setValue(double newValue) { throw new UnsupportedOperationException("Not modifiable via iterator"); }            
+          };
+        }
+        
+        public void remove() { throw new UnsupportedOperationException("RealVector iterators do not support remove()"); }
+      };
     }
 
 }

@@ -497,13 +497,7 @@ public abstract class AbstractRealVector implements RealVector
   public RealVector projection(RealVector v) throws IllegalArgumentException
   {
     final double proj = dotProduct(v);
-    return v.map(new DefaultPreservingUnaryFunction()
-    {
-      public double apply(double d)
-      {
-        return proj * d;
-      }
-    });
+    return v.map(Multiply.provideDefaultSecondArgument(proj));
   }
 
   public RealVector projection(double[] v) throws IllegalArgumentException
@@ -558,7 +552,7 @@ public abstract class AbstractRealVector implements RealVector
     return collector.result();
   }
 
-  public double collect(BinaryCollector collector, AbstractRealVector other)
+  public double collect(BinaryCollector collector, RealVector other)
   {
     Iterator<Entry> it = collector instanceof NonDefaultCollector
                        ? nonDefaultIterator()
@@ -576,19 +570,17 @@ public abstract class AbstractRealVector implements RealVector
     return iterator();
   }
   
-  public AbstractRealVector map(UnaryFunction function)
+  public RealVector map(UnaryFunction function)
   {
-    AbstractRealVector copy = copy();
-    return copy.mapToSelf(function);
+    return copy().mapToSelf(function);
   }
 
-  public AbstractRealVector map(BinaryFunction function, AbstractRealVector other)
+  public RealVector map(BinaryFunction function, RealVector other)
   {
-    AbstractRealVector copy = copy();
-    return copy.mapToSelf(function, other);
+    return copy().mapToSelf(function, other);
   }
 
-  public AbstractRealVector mapToSelf(UnaryFunction function)
+  public RealVector mapToSelf(UnaryFunction function)
   {
     Iterator<Entry> it = function instanceof DefaultPreservingUnaryFunction
                        ? nonDefaultIterator()
@@ -607,7 +599,7 @@ public abstract class AbstractRealVector implements RealVector
    * @param other
    * @return
    */
-  public AbstractRealVector mapToSelf(BinaryFunction function, AbstractRealVector other)
+  public RealVector mapToSelf(BinaryFunction function, RealVector other)
   {
     Iterator<Entry> it = function instanceof DefaultPreservingBinaryFunction 
                        ? other.nonDefaultIterator()
