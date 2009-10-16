@@ -4,11 +4,16 @@ import java.util.Iterator;
 
 public class IntDoublePairVector implements RealVector
 {
+  protected int dimension;
   protected int[] indices;
   protected double[] values;
   
   public RealVector add(RealVector v) throws IllegalArgumentException
   {
+    if(v.getDimension() != dimension) 
+    {
+      throw new IllegalArgumentException("Incompatible sizes: " + v.getDimension() + " != " + dimension);
+    }
     for(Entry e : v)
     {
       //setEntry(e.index(), )
@@ -222,8 +227,44 @@ public class IntDoublePairVector implements RealVector
 
   public Iterator<Entry> iterator()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not yet supported");
+    return new Iterator<Entry>()
+    {
+      int i=0;
+      public boolean hasNext()
+      {
+        return i<indices.length;
+      }
+
+      public Entry next()
+      {
+        final int index = i;
+        Entry e = new Entry()
+        {
+          public double getValue()
+          {
+            return values[index];
+          }
+
+          public int index()
+          {
+            return indices[index];
+          }
+
+          public void setValue(double newValue)
+          {
+            values[index] = newValue;
+          }
+        };
+        i++;
+        return e;
+      }
+
+      public void remove()
+      {
+        throw new UnsupportedOperationException();
+      }
+      
+    };
   }
 
 }
