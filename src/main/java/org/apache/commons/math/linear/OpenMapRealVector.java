@@ -629,6 +629,405 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
         return false;
     }
 
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapAbs() {
+        return copy().mapAbsToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapAbsToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.abs(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapAcos() {
+        return copy().mapAcosToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapAcosToSelf() {
+        for (int i = 0; i < virtualSize; i++) {
+            setEntry(i, Math.acos(getEntry(i)));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapAdd(double d) {
+        return copy().mapAddToSelf(d);
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapAddToSelf(double d) {
+        for (int i = 0; i < virtualSize; i++) {
+            setEntry(i, getEntry(i) + d);
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapAsin() {
+        return copy().mapAsinToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapAsinToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.asin(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapAtan() {
+        return copy().mapAtanToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapAtanToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.atan(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapCbrt() {
+        return copy().mapCbrtToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapCbrtToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.cbrt(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapCeil() {
+        return copy().mapCeilToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapCeilToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.ceil(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapCos() {
+        return copy().mapCosToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapCosToSelf() {
+        for (int i = 0; i < virtualSize; i++) {
+            setEntry(i, Math.cos(getEntry(i)));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapCosh() {
+        return copy().mapCoshToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapCoshToSelf() {
+        for (int i = 0; i < virtualSize; i++) {
+            setEntry(i, Math.cosh(getEntry(i)));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapDivide(double d) {
+        return copy().mapDivideToSelf(d);
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapDivideToSelf(double d) {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), iter.value() / d);
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapExp() {
+        return copy().mapExpToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapExpToSelf() {
+        for (int i = 0; i < virtualSize; i++) {
+            entries.put(i, Math.exp(entries.get(i)));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapExpm1() {
+        return copy().mapExpm1ToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapExpm1ToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.expm1(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapFloor() {
+        return copy().mapFloorToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapFloorToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.floor(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapInv() {
+        return copy().mapInvToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapInvToSelf() {
+        for (int i = 0; i < virtualSize; i++) {
+            setEntry(i, 1.0/getEntry(i));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapLog() {
+        return copy().mapLogToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapLog10() {
+        return copy().mapLog10ToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapLog10ToSelf() {
+        for (int i = 0; i < virtualSize; i++) {
+            setEntry(i, Math.log10(getEntry(i)));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapLog1p() {
+        return copy().mapLog1pToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapLog1pToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.log1p(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapLogToSelf() {
+        for (int i = 0; i < virtualSize; i++) {
+            setEntry(i, Math.log(getEntry(i)));
+        }
+       return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapMultiply(double d) {
+        return copy().mapMultiplyToSelf(d);
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapMultiplyToSelf(double d) {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), iter.value() * d);
+        }
+        return this;
+    }
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapPow(double d) {
+        return copy().mapPowToSelf(d);
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapPowToSelf(double d) {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.pow(iter.value(), d));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapRint() {
+        return copy().mapRintToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapRintToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.rint(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapSignum() {
+        return copy().mapSignumToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapSignumToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.signum(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapSin() {
+        return copy().mapSinToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapSinToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.sin(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapSinh() {
+        return copy().mapSinhToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapSinhToSelf() {
+
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.sinh(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapSqrt() {
+        return copy().mapSqrtToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapSqrtToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.sqrt(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapSubtract(double d) {
+        return copy().mapSubtractToSelf(d);
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapSubtractToSelf(double d) {
+        return mapAddToSelf(-d);
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapTan() {
+        return copy().mapTanToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapTanToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.tan(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapTanh() {
+        return copy().mapTanhToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapTanhToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.tanh(iter.value()));
+        }
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapUlp() {
+        return copy().mapUlpToSelf();
+    }
+
+    /** {@inheritDoc} */
+    public OpenMapRealVector mapUlpToSelf() {
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            entries.put(iter.key(), Math.ulp(iter.value()));
+        }
+        return this;
+    }
+
     /**
      * Optimized method to compute the outer product.
      * @param v The vector to comput the outer product on
@@ -688,10 +1087,7 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
     /** {@inheritDoc} */
     public RealVector projection(RealVector v) throws IllegalArgumentException {
         checkVectorDimensions(v.getDimension());
-        final double p = dotProduct(v) / v.dotProduct(v);
-        return v.map(new UnaryFunction() {
-          public double apply(double d) { return p * d; }
-        });
+        return v.mapMultiply(dotProduct(v) / v.dotProduct(v));
     }
 
     /** {@inheritDoc} */
@@ -909,96 +1305,6 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
      */
     public double getSparcity() {
         return (double)entries.size()/(double)getDimension();
-    }
-
-    public double collect(UnaryCollector coll) {
-      java.util.Iterator<Entry> it = iterateNonZero();
-      Entry e = null;
-      while(it.hasNext() && (e = it.next()) != null) {
-        coll.collect(e.index(), e.getValue());
-      }
-      return coll.result();
-    }
-
-    public double collect(BinaryCollector coll, RealVector v) {
-      java.util.Iterator<Entry> it = iterateNonZero();
-      Entry e = null;
-      while(it.hasNext() && (e = it.next()) != null) {
-        coll.collect(e.index(), e.getValue(), v.getEntry(e.index()));
-      }
-      return coll.result();
-    }
-
-    public java.util.Iterator<Entry> iterateNonZero() {
-      final Iterator it = entries.iterator();
-      return new java.util.Iterator<Entry>() {
-        public boolean hasNext() { return it.hasNext(); }
-        public Entry next()
-        {
-          it.advance();
-          return new Entry() {
-            public double getValue() { return it.value(); }
-            public int index() { return it.key(); }
-            public void setValue(double newValue) { }
-          };
-        }
-        public void remove() { throw new UnsupportedOperationException("Not yet supported"); }        
-      };
-    }
-
-    public RealVector map(UnaryFunction func) {
-      RealVector v = new OpenMapRealVector(virtualSize);
-      java.util.Iterator<Entry> it = iterateNonZero();
-      Entry e = null;
-      while(it.hasNext() && (e = it.next()) != null) {
-        v.setEntry(e.index(), func.apply(e.getValue()));
-      }
-      return v;
-    }
-
-    public RealVector map(BinaryFunction func, RealVector v) {
-      RealVector w = new OpenMapRealVector(virtualSize);
-      java.util.Iterator<Entry> it = iterateNonZero();
-      Entry e = null;
-      while(it.hasNext() && (e = it.next()) != null) {
-        w.setEntry(e.index(), func.apply(e.getValue(), v.getEntry(e.index())));
-      }
-      return w;
-    }
-
-    public java.util.Iterator<Entry> iterator() {
-      return new java.util.Iterator<Entry>() {
-        int i = 0;
-        public boolean hasNext() { return i < getDimension(); }
-        public Entry next() { 
-          return new Entry() {
-            public double getValue() { return getEntry(i); }
-            public int index() { return i; }
-            public void setValue(double newValue) { setEntry(i, newValue); }            
-          };
-        }
-        public void remove() {
-          throw new UnsupportedOperationException("Cannot remove"); 
-        }
-      };
-    }
-
-    public RealVector mapToSelf(UnaryFunction func) {
-      java.util.Iterator<Entry> it = iterator();
-      Entry e = null;
-      while(it.hasNext() && (e = it.next()) != null) {
-        e.setValue(func.apply(e.getValue()));
-      }
-      return this;
-    }
-
-    public RealVector mapToSelf(BinaryFunction func, RealVector v) {
-      java.util.Iterator<Entry> it = iterator();
-      Entry e = null;
-      while(it.hasNext() && (e = it.next()) != null) {
-        e.setValue(func.apply(e.getValue(), v.getEntry(e.index())));
-      }
-      return this;
     }
 
 }

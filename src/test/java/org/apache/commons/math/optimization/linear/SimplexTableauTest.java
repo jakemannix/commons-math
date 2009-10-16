@@ -25,7 +25,7 @@ import org.apache.commons.math.optimization.GoalType;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SimplexTableauTestNOT {
+public class SimplexTableauTest {
 
     @Test
     public void testInitialization() {

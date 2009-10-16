@@ -18,7 +18,6 @@ package org.apache.commons.math.linear;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Iterator;
 
 import org.apache.commons.math.MathRuntimeException;
 import org.apache.commons.math.util.MathUtils;
@@ -1088,13 +1087,7 @@ public class ArrayRealVector implements RealVector, Serializable {
 
     /** {@inheritDoc} */
     public RealVector projection(RealVector v) {
-      final double proj = dotProduct(v) / v.dotProduct(v);
-      return v.map(new UnaryFunction() {
-        public double apply(double d) {
-          return d * proj;
-        }
-        
-      });
+        return v.mapMultiply(dotProduct(v) / v.dotProduct(v));
     }
 
     /** {@inheritDoc} */
@@ -1413,94 +1406,6 @@ public class ArrayRealVector implements RealVector, Serializable {
                     "index {0} out of allowed range [{1}, {2}]",
                     index, 0, getDimension() - 1);
         }
-    }
-    
-    public double collect(UnaryCollector coll) {
-      for(Entry entry : this) {
-        coll.collect(entry.index(), entry.getValue());
-      }
-      return coll.result();
-    }
-
-    public double collect(BinaryCollector coll, RealVector v) {
-      Iterator<Entry> nonZero = v.iterateNonZero();
-      Entry e = null;
-      while(nonZero.hasNext() && (e = nonZero.next()) != null) {
-        coll.collect(e.index(), getEntry(e.index()), e.getValue());
-      }
-      return coll.result();
-    }
-
-    public Iterator<Entry> iterateNonZero() {
-      return iterator();
-    }
-
-    public RealVector map(UnaryFunction func) {
-      RealVector copy = new ArrayRealVector(data.length);
-      for(Entry entry : this) {
-        copy.setEntry(entry.index(), func.apply(entry.getValue()));
-      }
-      return copy;
-    }
-
-    public RealVector map(BinaryFunction func, RealVector v) {
-      RealVector copy = new ArrayRealVector(data.length);
-      for(Entry entry : this) {
-        int i = entry.index();
-        copy.setEntry(i, func.apply(entry.getValue(), v.getEntry(i)));
-      }
-      return copy;
-    }
-
-    public Iterator<Entry> iterator() {
-      return new Iterator<Entry>() {
-        int i = 0;
-        public boolean hasNext() {
-          return i < data.length;
-        }
-
-        public Entry next() {
-          return new Entry() {
-
-            public double getValue() {
-              return data[i];
-            }
-
-            public int index() {
-              return i;
-            }
-
-            public void setValue(double newValue) {
-              data[i] = newValue;
-            }
-            
-          };
-        }
-
-        public void remove() {
-          // TODO Auto-generated method stub
-          throw new UnsupportedOperationException("ArrayRealVector does not support remove()");
-        }
-        
-      };
-    }
-
-    public RealVector mapToSelf(UnaryFunction func) {
-      Iterator<Entry> it = iterator();
-      Entry e = null;
-      while(it.hasNext() && (e = it.next()) != null) {
-        e.setValue(func.apply(e.getValue()));
-      }
-      return this;
-    }
-
-    public RealVector mapToSelf(BinaryFunction func, RealVector v) {
-      Iterator<Entry> it = iterator();
-      Entry e = null;
-      while(it.hasNext() && (e = it.next()) != null) {
-        e.setValue(func.apply(e.getValue(), v.getEntry(e.index())));
-      }
-      return this;
     }
 
 }
