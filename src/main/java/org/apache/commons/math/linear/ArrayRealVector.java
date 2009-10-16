@@ -1265,33 +1265,6 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /**
-     * Check if instance and specified vectors have the same dimension.
-     * @param v vector to compare instance with
-     * @exception IllegalArgumentException if the vectors do not
-     * have the same dimension
-     */
-    protected void checkVectorDimensions(RealVector v)
-        throws IllegalArgumentException {
-        checkVectorDimensions(v.getDimension());
-    }
-
-    /**
-     * Check if instance dimension is equal to some expected value.
-     *
-     * @param n expected dimension.
-     * @exception IllegalArgumentException if the dimension is
-     * inconsistent with vector size
-     */
-    protected void checkVectorDimensions(int n)
-        throws IllegalArgumentException {
-        if (data.length != n) {
-            throw MathRuntimeException.createIllegalArgumentException(
-                    "vector length mismatch: got {0} but expected {1}",
-                    data.length, n);
-        }
-    }
-
-    /**
      * Returns true if any coordinate of this vector is NaN; false otherwise
      * @return  true if any coordinate of this vector is NaN; false otherwise
      */

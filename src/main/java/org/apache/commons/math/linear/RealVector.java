@@ -16,6 +16,9 @@
  */
 package org.apache.commons.math.linear;
 
+import java.util.Iterator;
+
+
 /**
  * Interface defining a real-valued vector with basic algebraic operations.
  * <p>
@@ -41,6 +44,28 @@ package org.apache.commons.math.linear;
  */
 public interface RealVector {
 
+  RealVector map(UnaryFunction function);
+  
+  RealVector mapToSelf(UnaryFunction function);
+  
+  RealVector map(BinaryFunction function, RealVector other);
+  
+  RealVector mapToSelf(BinaryFunction function, RealVector other);
+  
+  double collect(UnaryCollector collector);
+  
+  double collect(BinaryCollector collector, RealVector other);
+  
+  public interface Entry {
+    double getValue();
+    int index();
+    void setValue(double newValue);
+  }
+  
+  Iterator<Entry> iterator();
+  
+  Iterator<Entry> nonDefaultIterator();
+  
     /**
      * Returns a (deep) copy of this.
      * @return vector copy
