@@ -519,19 +519,7 @@ public class SparseRealVectorTest extends TestCase {
         OpenMapRealVector v3 = new OpenMapRealVector(vec1);
         assertEquals("testData len", 3, v3.getDimension());
         assertEquals("testData is 2.0 ", 2.0, v3.getEntry(1));
-
-        //SparseRealVector v4 = new SparseRealVector(vec4, 3, 2);
-        //assertEquals("testData len", 2, v4.getDimension());
-        //assertEquals("testData is 4.0 ", 4.0, v4.getEntry(0));
-        //try {
-        //    new SparseRealVector(vec4, 8, 3);
-        //    fail("IllegalArgumentException expected");
-        //} catch (IllegalArgumentException ex) {
-            // expected behavior
-        //} catch (Exception e) {
-        //    fail("wrong exception caught");
-        //}
-
+        
         RealVector v5_i = new OpenMapRealVector(dvec1);
         assertEquals("testData len", 9, v5_i.getDimension());
         assertEquals("testData is 9.0 ", 9.0, v5_i.getEntry(8));
@@ -575,7 +563,7 @@ public class SparseRealVectorTest extends TestCase {
         assertEquals("testData len", 6, v_append_3.getDimension());
         assertEquals("testData is  ", 4.0, v_append_3.getEntry(3));
 
-	    RealVector v_append_4 = v1.append(v2_t);
+        RealVector v_append_4 = v1.append(v2_t);
         assertEquals("testData len", 6, v_append_4.getDimension());
         assertEquals("testData is 4.0 ", 4.0, v_append_4.getEntry(3));
 

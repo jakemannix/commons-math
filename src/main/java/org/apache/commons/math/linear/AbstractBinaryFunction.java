@@ -3,28 +3,67 @@ package org.apache.commons.math.linear;
 public abstract class AbstractBinaryFunction implements BinaryFunction
 {
 
-  public BinaryCollector asCollector(BinaryFunction combiner, double initialValue)
+  public abstract double apply(double d1, double d2);
+
+  public double apply(int index, double d1, double d2)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not yet supported");
+    return apply(d1, d2);
+  }
+
+  public BinaryCollector asCollector()
+  {
+    return asCollector(Add);
   }
 
   public BinaryCollector asCollector(BinaryFunction combiner)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not yet supported");
+    return asCollector(combiner, 0);
   }
 
-  public UnaryFunction provideDefaultFirstArgument(double d1)
+  public BinaryCollector asCollector(final BinaryFunction combiner, final double initialValue)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not yet supported");
+    return new AbstractBinaryCollector(initialValue)
+    {
+      public void collect(int index, double d1, double d2)
+      {
+        result = combiner.apply(index, result, AbstractBinaryFunction.this.apply(index, d1, d2));
+      }
+      public void collect(double d1, double d2)
+      {
+        result = combiner.apply(result, AbstractBinaryFunction.this.apply(d1, d2));
+      }     
+    };
   }
 
-  public UnaryFunction provideDefaultSecondArgument(double d2)
+  public UnaryFunction provideDefaultFirstArgument(final double d1)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not yet supported");
+    return new AbstractUnaryFunction()
+    {
+      public double apply(double d)
+      {
+        return AbstractBinaryFunction.this.apply(d1, d);
+      }
+      public double apply(int index, double d)
+      {
+        return AbstractBinaryFunction.this.apply(index, d1, d);
+      }
+    };
   }
+
+  public UnaryFunction provideDefaultSecondArgument(final double d2)
+  {
+    return new AbstractUnaryFunction()
+    {
+      public double apply(double d)
+      {
+        return AbstractBinaryFunction.this.apply(d, d2);
+      }
+      public double apply(int index, double d)
+      {
+        return AbstractBinaryFunction.this.apply(index, d, d2);
+      }
+    };
+  }
+
 
 }

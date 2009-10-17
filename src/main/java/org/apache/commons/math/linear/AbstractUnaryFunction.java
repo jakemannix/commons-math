@@ -1,18 +1,40 @@
 package org.apache.commons.math.linear;
 
+
 public abstract class AbstractUnaryFunction implements UnaryFunction
 {
-
-  public UnaryCollector asCollector(BinaryFunction combiner, double initialValue)
+  public double apply(int index, double d)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not yet supported");
+    return apply(d);
+  }
+  
+  public abstract double apply(double d);
+
+  public UnaryCollector asCollector()
+  {
+    return asCollector(BinaryFunction.Add);
   }
 
   public UnaryCollector asCollector(BinaryFunction combiner)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not yet supported");
+    return asCollector(combiner, 0d);
   }
+  
+  public UnaryCollector asCollector(final BinaryFunction combiner, final double initialValue)
+  {
+    return new AbstractUnaryCollector(initialValue)
+    {
+      public void collect(double d)
+      {
+        result = combiner.apply(result, d);
+      }
+      
+      public void collect(int index, double d)
+      {
+        result = combiner.apply(index, result, d);
+      }
+    };
+  }
+  
 
 }

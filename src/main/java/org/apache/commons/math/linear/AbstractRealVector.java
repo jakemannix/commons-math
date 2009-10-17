@@ -3,7 +3,6 @@ package org.apache.commons.math.linear;
 import java.util.Iterator;
 
 import org.apache.commons.math.MathRuntimeException;
-import static org.apache.commons.math.linear.Functions.*;
 
 public abstract class AbstractRealVector implements RealVector
 {
@@ -38,7 +37,7 @@ public abstract class AbstractRealVector implements RealVector
   
   public RealVector add(RealVector v) throws IllegalArgumentException
   {
-    return map(Add, v);
+    return map(BinaryFunction.Add, v);
   }
 
   public RealVector add(double[] v) throws IllegalArgumentException
@@ -50,7 +49,7 @@ public abstract class AbstractRealVector implements RealVector
 
   public double dotProduct(RealVector v) throws IllegalArgumentException
   {
-    return collect(new EuclideanInnerProduct(), v);
+    return collect(BinaryCollector.DOT, v);
   }
 
   public double dotProduct(double[] v) throws IllegalArgumentException
@@ -60,7 +59,7 @@ public abstract class AbstractRealVector implements RealVector
 
   public RealVector ebeDivide(RealVector v) throws IllegalArgumentException
   {
-    return mapToSelf(Divide, (AbstractRealVector) v);
+    return mapToSelf(BinaryFunction.Divide, v);
   }
 
   public RealVector ebeDivide(double[] v) throws IllegalArgumentException
@@ -70,7 +69,7 @@ public abstract class AbstractRealVector implements RealVector
 
   public RealVector ebeMultiply(RealVector v) throws IllegalArgumentException
   {
-    return mapToSelf(Multiply, v);
+    return mapToSelf(BinaryFunction.Multiply, v);
   }
 
   public RealVector ebeMultiply(double[] v) throws IllegalArgumentException
@@ -100,7 +99,7 @@ public abstract class AbstractRealVector implements RealVector
 
   public double getL1Norm()
   {
-    return collect(new AbsCollector());
+    return collect(UnaryFunction.Abs.asCollector());
   }
 
   public double getLInfDistance(RealVector v) throws IllegalArgumentException
@@ -115,7 +114,7 @@ public abstract class AbstractRealVector implements RealVector
 
   public double getLInfNorm()
   {
-    return collect(new LInfCollector());
+    return collect(UnaryCollector.Inf);
   }
 
   public double getNorm()
@@ -497,7 +496,7 @@ public abstract class AbstractRealVector implements RealVector
   public RealVector projection(RealVector v) throws IllegalArgumentException
   {
     final double proj = dotProduct(v);
-    return v.map(Multiply.provideDefaultSecondArgument(proj));
+    return v.map(BinaryFunction.Multiply.provideDefaultSecondArgument(proj));
   }
 
   public RealVector projection(double[] v) throws IllegalArgumentException
@@ -517,7 +516,7 @@ public abstract class AbstractRealVector implements RealVector
   
   public RealVector subtract(RealVector v) throws IllegalArgumentException
   {
-    return map(Subtract, v);
+    return map(BinaryFunction.Subtract, v);
   }
 
   public RealVector subtract(double[] v) throws IllegalArgumentException
