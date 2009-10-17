@@ -330,14 +330,12 @@ public abstract class AbstractRealVector implements RealVector
 
   public RealVector mapMultiply(double d)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapMultiplyToSelf(d);
   }
 
   public RealVector mapMultiplyToSelf(double d)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return mapToSelf(BinaryFunction.Multiply.provideDefaultSecondArgument(d));
   }
 
   public RealVector mapPow(double d)
@@ -414,14 +412,12 @@ public abstract class AbstractRealVector implements RealVector
 
   public RealVector mapSubtract(double d)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapSubtractToSelf(d);
   }
 
   public RealVector mapSubtractToSelf(double d)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return mapToSelf(BinaryFunction.Subtract.provideDefaultSecondArgument(d));
   }
 
   public RealVector mapTan()
