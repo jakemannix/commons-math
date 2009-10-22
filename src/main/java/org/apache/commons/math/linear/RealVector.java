@@ -16,6 +16,13 @@
  */
 package org.apache.commons.math.linear;
 
+import java.util.Iterator;
+
+import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.analysis.BinaryRealFunction;
+import org.apache.commons.math.analysis.UnivariateRealFunction;
+
+
 /**
  * Interface defining a real-valued vector with basic algebraic operations.
  * <p>
@@ -41,6 +48,28 @@ package org.apache.commons.math.linear;
  */
 public interface RealVector {
 
+  RealVector map(UnivariateRealFunction function) throws FunctionEvaluationException;
+  
+  RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException;
+  
+  RealVector map(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
+  
+  RealVector mapToSelf(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
+  
+  double collect(UnaryCollector collector) throws FunctionEvaluationException;
+  
+  double collect(BinaryCollector collector, RealVector other) throws FunctionEvaluationException;
+  
+  public interface Entry {
+    double getValue();
+    int index();
+    void setValue(double newValue);
+  }
+  
+  Iterator<Entry> iterator();
+  
+  Iterator<Entry> nonDefaultIterator();
+  
     /**
      * Returns a (deep) copy of this.
      * @return vector copy
