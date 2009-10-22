@@ -1107,22 +1107,6 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
     }
 
     /** {@inheritDoc} */
-    public void setSubVector(int index, RealVector v) throws MatrixIndexException {
-        checkIndex(index);
-        checkIndex(index + v.getDimension() - 1);
-        setSubVector(index, v.getData());
-    }
-
-    /** {@inheritDoc} */
-    public void setSubVector(int index, double[] v) throws MatrixIndexException {
-        checkIndex(index);
-        checkIndex(index + v.length - 1);
-        for (int i = 0; i < v.length; i++) {
-            setEntry(i + index, v[i]);
-        }
-    }
-
-    /** {@inheritDoc} */
     public void set(double value) {
         for (int i = 0; i < virtualSize; i++) {
             setEntry(i, value);
@@ -1194,22 +1178,6 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
             entries.put(iter.key(), iter.value() / norm);
         }
 
-    }
-
-    /**
-     * Check if an index is valid.
-     *
-     * @param index
-     *            index to check
-     * @exception MatrixIndexException
-     *                if index is not valid
-     */
-    private void checkIndex(final int index) throws MatrixIndexException {
-        if (index < 0 || index >= getDimension()) {
-            throw new MatrixIndexException(
-                    "index {0} out of allowed range [{1}, {2}]",
-                    index, 0, getDimension() - 1);
-        }
     }
 
     /**

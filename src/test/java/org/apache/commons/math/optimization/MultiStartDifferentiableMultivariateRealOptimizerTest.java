@@ -24,6 +24,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.analysis.AbstractMultivariateRealFunction;
 import org.apache.commons.math.analysis.DifferentiableMultivariateRealFunction;
 import org.apache.commons.math.analysis.MultivariateRealFunction;
 import org.apache.commons.math.analysis.MultivariateVectorialFunction;
@@ -81,7 +82,7 @@ public class MultiStartDifferentiableMultivariateRealOptimizerTest {
         assertEquals(3.1267527, optimum.getValue(), 1.0e-8);
     }
 
-    private static class Circle implements DifferentiableMultivariateRealFunction {
+    private static class Circle extends AbstractMultivariateRealFunction implements DifferentiableMultivariateRealFunction {
 
         private ArrayList<Point2D.Double> points;
 
@@ -147,7 +148,7 @@ public class MultiStartDifferentiableMultivariateRealOptimizerTest {
         }
 
         public MultivariateRealFunction partialDerivative(final int k) {
-            return new MultivariateRealFunction() {
+            return new AbstractMultivariateRealFunction() {
                 public double value(double[] point) {
                     return gradient(point)[k];
                 }

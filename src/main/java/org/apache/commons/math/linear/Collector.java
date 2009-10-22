@@ -2,5 +2,5 @@ package org.apache.commons.math.linear;
 
 public interface Collector
 {
-  double result();
+  double collectedValue();
 }

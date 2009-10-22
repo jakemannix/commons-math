@@ -18,6 +18,7 @@
 package org.apache.commons.math.analysis;
 
 import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.linear.RealVector;
 
 /**
  * An interface representing a multivariate real function.
@@ -35,5 +36,6 @@ public interface MultivariateRealFunction {
      */
     double value(double[] point)
         throws FunctionEvaluationException, IllegalArgumentException;
-
+    
+    double value(RealVector point) throws FunctionEvaluationException;
 }

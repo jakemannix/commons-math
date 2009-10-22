@@ -26,6 +26,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.analysis.AbstractMultivariateRealFunction;
 import org.apache.commons.math.analysis.DifferentiableMultivariateRealFunction;
 import org.apache.commons.math.analysis.MultivariateRealFunction;
 import org.apache.commons.math.analysis.MultivariateVectorialFunction;
@@ -363,7 +364,8 @@ extends TestCase {
         assertEquals(48.135167894, center.y, 1.0e-8);
     }
 
-    private static class LinearProblem implements DifferentiableMultivariateRealFunction, Serializable {
+    private static class LinearProblem extends AbstractMultivariateRealFunction 
+      implements DifferentiableMultivariateRealFunction, Serializable {
 
         private static final long serialVersionUID = 703247177355019415L;
         final RealMatrix factors;
@@ -405,7 +407,7 @@ extends TestCase {
         }
 
         public MultivariateRealFunction partialDerivative(final int k) {
-            return new MultivariateRealFunction() {
+            return new AbstractMultivariateRealFunction() {
                 private static final long serialVersionUID = -6186178619133562011L;
                 public double value(double[] point) {
                     return gradient(point)[k];
@@ -415,7 +417,8 @@ extends TestCase {
 
     }
 
-    private static class Circle implements DifferentiableMultivariateRealFunction, Serializable {
+    private static class Circle extends AbstractMultivariateRealFunction 
+      implements DifferentiableMultivariateRealFunction, Serializable {
 
         private static final long serialVersionUID = -4711170319243817874L;
 
@@ -484,7 +487,7 @@ extends TestCase {
         }
 
         public MultivariateRealFunction partialDerivative(final int k) {
-            return new MultivariateRealFunction() {
+            return new AbstractMultivariateRealFunction() {
                 private static final long serialVersionUID = 3073956364104833888L;
                 public double value(double[] point) {
                     return gradient(point)[k];

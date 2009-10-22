@@ -2,7 +2,13 @@ package org.apache.commons.math.linear;
 
 import java.util.Iterator;
 
+import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathRuntimeException;
+import org.apache.commons.math.analysis.BinaryRealFunction;
+import org.apache.commons.math.analysis.DefaultPreservingBinaryRealFunction;
+import org.apache.commons.math.analysis.DefaultPreservingUnivariateRealFunction;
+import org.apache.commons.math.analysis.UnivariateRealFunction;
+import org.apache.commons.math.analysis.UnivariateRealFunctions;
 
 public abstract class AbstractRealVector implements RealVector
 {
@@ -35,9 +41,39 @@ public abstract class AbstractRealVector implements RealVector
       }
   }
   
+  /**
+   * Check if an index is valid.
+   * @param index index to check
+   * @exception MatrixIndexException if index is not valid
+   */
+  protected void checkIndex(final int index)
+      throws MatrixIndexException {
+      if (index < 0 || index >= getDimension()) {
+          throw new MatrixIndexException(
+                  "index {0} out of allowed range [{1}, {2}]",
+                  index, 0, getDimension() - 1);
+      }
+  }
+
+  /** {@inheritDoc} */
+  public void setSubVector(int index, RealVector v) throws MatrixIndexException {
+      checkIndex(index);
+      checkIndex(index + v.getDimension() - 1);
+      setSubVector(index, v.getData());
+  }
+
+  /** {@inheritDoc} */
+  public void setSubVector(int index, double[] v) throws MatrixIndexException {
+      checkIndex(index);
+      checkIndex(index + v.length - 1);
+      for (int i = 0; i < v.length; i++) {
+          setEntry(i + index, v[i]);
+      }
+  }
+  
   public RealVector add(RealVector v) throws IllegalArgumentException
   {
-    return map(BinaryFunction.Add, v);
+    return map(BinaryRealFunction.Add, v);
   }
 
   public RealVector add(double[] v) throws IllegalArgumentException
@@ -49,7 +85,7 @@ public abstract class AbstractRealVector implements RealVector
 
   public double dotProduct(RealVector v) throws IllegalArgumentException
   {
-    return collect(BinaryCollector.DOT, v);
+    return collect(Collectors.Dot, v);
   }
 
   public double dotProduct(double[] v) throws IllegalArgumentException
@@ -59,7 +95,7 @@ public abstract class AbstractRealVector implements RealVector
 
   public RealVector ebeDivide(RealVector v) throws IllegalArgumentException
   {
-    return mapToSelf(BinaryFunction.Divide, v);
+    return mapToSelf(BinaryRealFunction.Divide, v);
   }
 
   public RealVector ebeDivide(double[] v) throws IllegalArgumentException
@@ -69,7 +105,7 @@ public abstract class AbstractRealVector implements RealVector
 
   public RealVector ebeMultiply(RealVector v) throws IllegalArgumentException
   {
-    return mapToSelf(BinaryFunction.Multiply, v);
+    return mapToSelf(BinaryRealFunction.Multiply, v);
   }
 
   public RealVector ebeMultiply(double[] v) throws IllegalArgumentException
@@ -99,7 +135,20 @@ public abstract class AbstractRealVector implements RealVector
 
   public double getL1Norm()
   {
-    return collect(UnaryFunction.Abs.asCollector());
+    try
+    {
+      return collect(new AbstractUnaryCollector()
+      {
+        public void collect(double d)
+        {
+          value += Math.abs(d);
+        }
+      });
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public double getLInfDistance(RealVector v) throws IllegalArgumentException
@@ -114,7 +163,21 @@ public abstract class AbstractRealVector implements RealVector
 
   public double getLInfNorm()
   {
-    return collect(UnaryCollector.Inf);
+    try
+    {
+      return collect(new AbstractUnaryCollector()
+      {
+        public void collect(double d)
+        {
+          value = Math.max(value, d);
+        }
+        
+      });
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public double getNorm()
@@ -126,206 +189,291 @@ public abstract class AbstractRealVector implements RealVector
   
   public RealVector mapAbs()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapAbsToSelf();
   }
 
   public RealVector mapAbsToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Abs);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapAcos()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapAcosToSelf();
   }
 
   public RealVector mapAcosToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Acos);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapAdd(double d)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapAddToSelf(d);
   }
 
   public RealVector mapAddToSelf(double d)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(BinaryRealFunction.Add.provideDefaultSecondArgument(d));
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapAsin()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapAsinToSelf();
   }
 
   public RealVector mapAsinToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Asin);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapAtan()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapAtanToSelf();
   }
 
   public RealVector mapAtanToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Atan);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapCbrt()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapCbrtToSelf();
   }
 
   public RealVector mapCbrtToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Cbrt);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapCeil()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapCeilToSelf();
   }
 
   public RealVector mapCeilToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Ceil);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapCos()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapCosToSelf();
   }
 
   public RealVector mapCosToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Cos);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapCosh()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapCoshToSelf();
   }
 
   public RealVector mapCoshToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Cosh);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapDivide(double d)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapDivideToSelf(d);
   }
 
   public RealVector mapDivideToSelf(double d)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(BinaryRealFunction.Divide.provideDefaultSecondArgument(d));
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapExp()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapExpToSelf();
   }
 
   public RealVector mapExpToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Exp);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapExpm1()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapExpm1ToSelf();
   }
 
   public RealVector mapExpm1ToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Exp1m);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapFloor()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapFloorToSelf();
   }
 
   public RealVector mapFloorToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Floor);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapInv()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapFloorToSelf();
   }
 
   public RealVector mapInvToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(BinaryRealFunction.Divide.provideDefaultFirstArgument(1d));
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapLog()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapLogToSelf();
+  }
+  
+  public RealVector mapLogToSelf()
+  {
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Log);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapLog10()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapLog10ToSelf();
   }
 
   public RealVector mapLog10ToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Log10);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapLog1p()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapLog1pToSelf();
   }
 
   public RealVector mapLog1pToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
-  }
-
-  public RealVector mapLogToSelf()
-  {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Asin);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapMultiply(double d)
@@ -335,79 +483,116 @@ public abstract class AbstractRealVector implements RealVector
 
   public RealVector mapMultiplyToSelf(double d)
   {
-    return mapToSelf(BinaryFunction.Multiply.provideDefaultSecondArgument(d));
+    try
+    {
+      return mapToSelf(BinaryRealFunction.Multiply.provideDefaultSecondArgument(d));
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException();
+    }
   }
 
   public RealVector mapPow(double d)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapPowToSelf(d);
   }
 
   public RealVector mapPowToSelf(double d)
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(BinaryRealFunction.Pow.provideDefaultSecondArgument(d));
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapRint()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapRintToSelf();
   }
 
   public RealVector mapRintToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Rint);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapSignum()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapSignumToSelf();
   }
 
   public RealVector mapSignumToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Signum);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapSin()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapSinToSelf();
   }
 
   public RealVector mapSinToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Sin);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapSinh()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapSinhToSelf();
   }
 
   public RealVector mapSinhToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Sinh);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapSqrt()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapSqrtToSelf();
   }
 
   public RealVector mapSqrtToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Sqrt);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapSubtract(double d)
@@ -417,43 +602,65 @@ public abstract class AbstractRealVector implements RealVector
 
   public RealVector mapSubtractToSelf(double d)
   {
-    return mapToSelf(BinaryFunction.Subtract.provideDefaultSecondArgument(d));
+    try
+    {
+      return mapToSelf(BinaryRealFunction.Subtract.provideDefaultSecondArgument(d));
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapTan()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapTanToSelf();
   }
 
   public RealVector mapTanToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Tan);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapTanh()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapTanhToSelf();
   }
 
   public RealVector mapTanhToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Tanh);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector mapUlp()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    return copy().mapUlpToSelf();
   }
 
   public RealVector mapUlpToSelf()
   {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Not supported yet");
+    try
+    {
+      return mapToSelf(UnivariateRealFunctions.Ulp);
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 /*****************************/
   
@@ -492,7 +699,14 @@ public abstract class AbstractRealVector implements RealVector
   public RealVector projection(RealVector v) throws IllegalArgumentException
   {
     final double proj = dotProduct(v);
-    return v.map(BinaryFunction.Multiply.provideDefaultSecondArgument(proj));
+    try
+    {
+      return v.map(BinaryRealFunction.Multiply.provideDefaultSecondArgument(proj));
+    }
+    catch (FunctionEvaluationException e)
+    {
+      throw new IllegalArgumentException(e);
+    }
   }
 
   public RealVector projection(double[] v) throws IllegalArgumentException
@@ -512,7 +726,7 @@ public abstract class AbstractRealVector implements RealVector
   
   public RealVector subtract(RealVector v) throws IllegalArgumentException
   {
-    return map(BinaryFunction.Subtract, v);
+    return map(BinaryRealFunction.Subtract, v);
   }
 
   public RealVector subtract(double[] v) throws IllegalArgumentException
@@ -520,7 +734,21 @@ public abstract class AbstractRealVector implements RealVector
     return subtract(new ArrayRealVector(v, false));
   }
 
-  public abstract double[] toArray();
+  public double[] toArray()
+  {
+    int dim = getDimension();
+    double[] values = new double[dim];
+    for(int i=0; i<dim; i++)
+    {
+      values[i] = getEntry(i);
+    }
+    return values;
+  }
+  
+  public double[] getData()
+  {
+    return toArray();
+  }
 
   public RealVector unitVector()
   {
@@ -534,7 +762,7 @@ public abstract class AbstractRealVector implements RealVector
     mapDivideToSelf(getNorm());
   }
 
-  public double collect(UnaryCollector collector)
+  public double collect(UnaryCollector collector) throws FunctionEvaluationException
   {
     Iterator<Entry> it = collector instanceof NonDefaultCollector
                        ? nonDefaultIterator()
@@ -544,7 +772,7 @@ public abstract class AbstractRealVector implements RealVector
     {
       collector.collect(e.index(), e.getValue());
     }
-    return collector.result();
+    return collector.collectedValue();
   }
 
   public double collect(BinaryCollector collector, RealVector other)
@@ -557,56 +785,76 @@ public abstract class AbstractRealVector implements RealVector
     {
       collector.collect(e.index(), e.getValue(), other.getEntry(e.index()));
     }
-    return collector.result();
+    return collector.collectedValue();
   }
 
   public Iterator<Entry> nonDefaultIterator()
   {
     return iterator();
   }
+
+  public Iterator<Entry> iterator()
+  {
+    final int dim = getDimension();
+    return new Iterator<Entry>()
+    {
+      int i=0;
+      EntryImpl e = new EntryImpl();      
+      public boolean hasNext() { return i<dim; }
+      public Entry next() 
+      {
+        e.index = i++;
+        return e;
+      }
+      public void remove()
+      {
+        throw new UnsupportedOperationException("Not supported");
+      }
+    };
+  }
   
-  public RealVector map(UnaryFunction function)
+  public RealVector map(UnivariateRealFunction function) throws FunctionEvaluationException
   {
     return copy().mapToSelf(function);
   }
 
-  public RealVector map(BinaryFunction function, RealVector other)
+  public RealVector map(BinaryRealFunction function, RealVector other)
   {
     return copy().mapToSelf(function, other);
   }
 
-  public RealVector mapToSelf(UnaryFunction function)
+  public RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException
   {
-    Iterator<Entry> it = function instanceof DefaultPreservingUnaryFunction
+    Iterator<Entry> it = function instanceof DefaultPreservingUnivariateRealFunction
                        ? nonDefaultIterator()
                        : iterator();
     Entry e = null;
     while(it.hasNext() && (e = it.next()) != null)
     {
-      e.setValue(function.apply(e.getValue()));
+      e.setValue(function.value(e.getValue()));
     }
     return this;
   }
 
-  /**
-   * TODO: optimize w.r.t SparseVector
-   * @param function
-   * @param other
-   * @return
-   */
-  public RealVector mapToSelf(BinaryFunction function, RealVector other)
+  public RealVector mapToSelf(BinaryRealFunction function, RealVector other)
   {
-    Iterator<Entry> it = function instanceof DefaultPreservingBinaryFunction 
+    Iterator<Entry> it = function instanceof DefaultPreservingBinaryRealFunction 
                        ? other.nonDefaultIterator()
                        : other.iterator();
     Entry e = null;
     while(it.hasNext() && (e = it.next()) != null)
     {
-      setEntry(e.index(), function.apply(getEntry(e.index()), e.getValue()));
+      setEntry(e.index(), function.value(getEntry(e.index()), e.getValue()));
     }
     return this;
   }
 
-
+  protected class EntryImpl implements Entry
+  {
+    int index;
+    public double getValue() { return getEntry(index); }
+    public int index() { return index; }
+    public void setValue(double newValue) { setEntry(index, newValue); }    
+  }
   
 }

@@ -23,7 +23,11 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.TestUtils;
+import org.apache.commons.math.analysis.BinaryRealFunction;
+import org.apache.commons.math.analysis.MultivariateRealFunction;
+import org.apache.commons.math.analysis.UnivariateRealFunction;
 
 /**
  * Test cases for the {@link ArrayRealVector} class.
@@ -460,11 +464,6 @@ public class ArrayRealVectorTest extends TestCase {
             throw unsupported();
         }
 
-        public double collect(UnaryCollector collector)
-        {
-          throw unsupported();
-        }
-
         public double collect(BinaryCollector collector, RealVector other)
         {
           throw unsupported();
@@ -475,27 +474,32 @@ public class ArrayRealVectorTest extends TestCase {
           throw unsupported();
         }
 
-        public RealVector map(UnaryFunction function)
+        public RealVector map(UnivariateRealFunction function)
         {
           throw unsupported();
         }
 
-        public RealVector map(BinaryFunction function, RealVector other)
+        public RealVector map(BinaryRealFunction function, RealVector other)
         {
           throw unsupported();
         }
 
-        public RealVector mapToSelf(UnaryFunction function)
+        public RealVector mapToSelf(UnivariateRealFunction function)
         {
           throw unsupported();
         }
 
-        public RealVector mapToSelf(BinaryFunction function, RealVector other)
+        public RealVector mapToSelf(BinaryRealFunction function, RealVector other)
         {
           throw unsupported();
         }
 
         public Iterator<Entry> nonDefaultIterator()
+        {
+          throw unsupported();
+        }
+
+        public double collect(UnaryCollector collector) throws FunctionEvaluationException
         {
           throw unsupported();
         }

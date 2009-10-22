@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.math.ConvergenceException;
 import org.apache.commons.math.FunctionEvaluationException;
-import org.apache.commons.math.analysis.MultivariateRealFunction;
+import org.apache.commons.math.analysis.AbstractMultivariateRealFunction;
 import org.apache.commons.math.optimization.direct.NelderMead;
 import org.apache.commons.math.random.GaussianRandomGenerator;
 import org.apache.commons.math.random.JDKRandomGenerator;
@@ -59,7 +59,7 @@ public class MultiStartMultivariateRealOptimizerTest {
 
   }
 
-  private static class Rosenbrock implements MultivariateRealFunction {
+  private static class Rosenbrock extends AbstractMultivariateRealFunction {
 
       private int count;
 

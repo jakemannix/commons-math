@@ -28,6 +28,7 @@ import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.MaxEvaluationsExceededException;
 import org.apache.commons.math.MaxIterationsExceededException;
+import org.apache.commons.math.analysis.AbstractMultivariateRealFunction;
 import org.apache.commons.math.analysis.MultivariateRealFunction;
 import org.apache.commons.math.analysis.MultivariateVectorialFunction;
 import org.apache.commons.math.linear.Array2DRowRealMatrix;
@@ -45,7 +46,7 @@ public class NelderMeadTest {
   @Test
   public void testFunctionEvaluationExceptions() {
       MultivariateRealFunction wrong =
-          new MultivariateRealFunction() {
+          new AbstractMultivariateRealFunction() {
             private static final long serialVersionUID = 4751314470965489371L;
             public double value(double[] x) throws FunctionEvaluationException {
                 if (x[0] < 0) {
@@ -92,7 +93,7 @@ public class NelderMeadTest {
       final double valueXmYp = -valueXmYm;                // local  minimum
       final double valueXpYm = -0.7290400707055187115322; // global minimum
       final double valueXpYp = -valueXpYm;                // global maximum
-      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+      MultivariateRealFunction fourExtrema = new AbstractMultivariateRealFunction() {
           private static final long serialVersionUID = -7039124064449091152L;
           public double value(double[] variables) throws FunctionEvaluationException {
               final double x = variables[0];
@@ -289,7 +290,7 @@ public class NelderMeadTest {
       }
   }
 
-  private static class Rosenbrock implements MultivariateRealFunction {
+  private static class Rosenbrock extends AbstractMultivariateRealFunction {
 
       private int count;
 
@@ -310,7 +311,7 @@ public class NelderMeadTest {
 
   }
 
-  private static class Powell implements MultivariateRealFunction {
+  private static class Powell extends AbstractMultivariateRealFunction {
 
       private int count;
 

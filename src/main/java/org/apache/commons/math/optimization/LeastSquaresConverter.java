@@ -20,6 +20,7 @@ package org.apache.commons.math.optimization;
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathRuntimeException;
 import org.apache.commons.math.analysis.MultivariateRealFunction;
+import org.apache.commons.math.analysis.AbstractMultivariateRealFunction;
 import org.apache.commons.math.analysis.MultivariateVectorialFunction;
 import org.apache.commons.math.linear.RealMatrix;
 
@@ -54,7 +55,7 @@ import org.apache.commons.math.linear.RealMatrix;
  * @since 2.0
  */
 
-public class LeastSquaresConverter implements MultivariateRealFunction {
+public class LeastSquaresConverter extends AbstractMultivariateRealFunction implements MultivariateRealFunction {
 
     /** Underlying vectorial function. */
     private final MultivariateVectorialFunction function;
@@ -188,5 +189,4 @@ public class LeastSquaresConverter implements MultivariateRealFunction {
         return sumSquares;
 
     }
-
 }

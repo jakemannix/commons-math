@@ -19,6 +19,7 @@ package org.apache.commons.math.optimization.direct;
 
 import org.apache.commons.math.ConvergenceException;
 import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.analysis.AbstractMultivariateRealFunction;
 import org.apache.commons.math.analysis.MultivariateRealFunction;
 import org.apache.commons.math.optimization.GoalType;
 import org.apache.commons.math.optimization.OptimizationException;
@@ -32,7 +33,7 @@ public class MultiDirectionalTest {
   @Test
   public void testFunctionEvaluationExceptions() {
       MultivariateRealFunction wrong =
-          new MultivariateRealFunction() {
+          new AbstractMultivariateRealFunction() {
             private static final long serialVersionUID = 4751314470965489371L;
             public double value(double[] x) throws FunctionEvaluationException {
                 if (x[0] < 0) {
@@ -79,7 +80,7 @@ public class MultiDirectionalTest {
       final double valueXmYp = -valueXmYm;                // local  minimum
       final double valueXpYm = -0.7290400707055187115322; // global minimum
       final double valueXpYp = -valueXpYm;                // global maximum
-      MultivariateRealFunction fourExtrema = new MultivariateRealFunction() {
+      MultivariateRealFunction fourExtrema = new AbstractMultivariateRealFunction() {
           private static final long serialVersionUID = -7039124064449091152L;
           public double value(double[] variables) throws FunctionEvaluationException {
               final double x = variables[0];
@@ -132,7 +133,7 @@ public class MultiDirectionalTest {
     throws FunctionEvaluationException, ConvergenceException {
 
     MultivariateRealFunction rosenbrock =
-      new MultivariateRealFunction() {
+      new AbstractMultivariateRealFunction() {
         private static final long serialVersionUID = -9044950469615237490L;
         public double value(double[] x) throws FunctionEvaluationException {
           ++count;
@@ -164,7 +165,7 @@ public class MultiDirectionalTest {
     throws FunctionEvaluationException, ConvergenceException {
 
     MultivariateRealFunction powell =
-      new MultivariateRealFunction() {
+      new AbstractMultivariateRealFunction() {
         private static final long serialVersionUID = -832162886102041840L;
         public double value(double[] x) throws FunctionEvaluationException {
           ++count;
@@ -216,7 +217,7 @@ public class MultiDirectionalTest {
 
   }
 
-  private static class Gaussian2D implements MultivariateRealFunction {
+  private static class Gaussian2D extends AbstractMultivariateRealFunction {
 
       private final double[] maximumPosition;
 

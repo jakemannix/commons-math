@@ -1,7 +1,10 @@
 package org.apache.commons.math.linear;
 
-public abstract class AbstractDefaultPreservingBinaryFunction extends AbstractBinaryFunction implements
-    DefaultPreservingBinaryFunction
+import org.apache.commons.math.analysis.AbstractBinaryRealFunction;
+import org.apache.commons.math.analysis.DefaultPreservingBinaryRealFunction;
+
+public abstract class AbstractDefaultPreservingBinaryFunction extends AbstractBinaryRealFunction implements
+    DefaultPreservingBinaryRealFunction
 {
 
 }

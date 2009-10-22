@@ -18,6 +18,10 @@ package org.apache.commons.math.linear;
 
 import java.util.Iterator;
 
+import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.analysis.BinaryRealFunction;
+import org.apache.commons.math.analysis.UnivariateRealFunction;
+
 
 /**
  * Interface defining a real-valued vector with basic algebraic operations.
@@ -44,17 +48,17 @@ import java.util.Iterator;
  */
 public interface RealVector {
 
-  RealVector map(UnaryFunction function);
+  RealVector map(UnivariateRealFunction function) throws FunctionEvaluationException;
   
-  RealVector mapToSelf(UnaryFunction function);
+  RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException;
   
-  RealVector map(BinaryFunction function, RealVector other);
+  RealVector map(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
   
-  RealVector mapToSelf(BinaryFunction function, RealVector other);
+  RealVector mapToSelf(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
   
-  double collect(UnaryCollector collector);
+  double collect(UnaryCollector collector) throws FunctionEvaluationException;
   
-  double collect(BinaryCollector collector, RealVector other);
+  double collect(BinaryCollector collector, RealVector other) throws FunctionEvaluationException;
   
   public interface Entry {
     double getValue();

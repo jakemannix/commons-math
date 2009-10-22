@@ -20,7 +20,9 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathRuntimeException;
+import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.util.MathUtils;
 
 /**
@@ -1368,20 +1370,6 @@ public class ArrayRealVector extends AbstractRealVector implements Serializable 
         return MathUtils.hash(data);
     }
 
-    /**
-     * Check if an index is valid.
-     * @param index index to check
-     * @exception MatrixIndexException if index is not valid
-     */
-    private void checkIndex(final int index)
-        throws MatrixIndexException {
-        if (index < 0 || index >= getDimension()) {
-            throw new MatrixIndexException(
-                    "index {0} out of allowed range [{1}, {2}]",
-                    index, 0, getDimension() - 1);
-        }
-    }
-
     public Iterator<Entry> iterator()
     {
       return new Iterator<Entry>()
@@ -1412,5 +1400,4 @@ public class ArrayRealVector extends AbstractRealVector implements Serializable 
         
       };
     }
-
 }
