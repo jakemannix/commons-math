@@ -19,7 +19,6 @@ package org.apache.commons.math.linear;
 import java.util.Iterator;
 
 import org.apache.commons.math.FunctionEvaluationException;
-import org.apache.commons.math.analysis.BinaryRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 
 
@@ -52,6 +51,7 @@ public interface RealVector {
   
   RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException;
   
+  /*
   RealVector map(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
   
   RealVector mapToSelf(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
@@ -59,11 +59,11 @@ public interface RealVector {
   double collect(UnaryCollector collector) throws FunctionEvaluationException;
   
   double collect(BinaryCollector collector, RealVector other) throws FunctionEvaluationException;
+  */
   
-  public interface Entry {
-    double getValue();
-    int index();
-    void setValue(double newValue);
+  public class Entry {
+    double value;
+    int index;
   }
   
   Iterator<Entry> iterator();
