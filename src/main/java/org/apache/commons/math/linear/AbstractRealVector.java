@@ -4,9 +4,6 @@ import java.util.Iterator;
 
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathRuntimeException;
-import org.apache.commons.math.analysis.BinaryRealFunction;
-import org.apache.commons.math.analysis.DefaultPreservingBinaryRealFunction;
-import org.apache.commons.math.analysis.DefaultPreservingUnivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunctions;
 
@@ -70,43 +67,44 @@ public abstract class AbstractRealVector implements RealVector
           setEntry(i + index, v[i]);
       }
   }
-  
+  /*
   public RealVector add(RealVector v) throws IllegalArgumentException
   {
     return map(BinaryRealFunction.Add, v);
   }
-
+*/
   public RealVector add(double[] v) throws IllegalArgumentException
   {
     return add(new ArrayRealVector(v, false));
   }
 
   public abstract AbstractRealVector copy();
-
+/*
   public double dotProduct(RealVector v) throws IllegalArgumentException
   {
     return collect(Collectors.Dot, v);
   }
-
+*/
   public double dotProduct(double[] v) throws IllegalArgumentException
   {
     return dotProduct(new ArrayRealVector(v, false));
   }
-
+/*
   public RealVector ebeDivide(RealVector v) throws IllegalArgumentException
   {
     return mapToSelf(BinaryRealFunction.Divide, v);
   }
-
+*/
   public RealVector ebeDivide(double[] v) throws IllegalArgumentException
   {
     return ebeDivide(new ArrayRealVector(v, false));
   }
-
+/*
   public RealVector ebeMultiply(RealVector v) throws IllegalArgumentException
   {
     return mapToSelf(BinaryRealFunction.Multiply, v);
   }
+  */
 
   public RealVector ebeMultiply(double[] v) throws IllegalArgumentException
   {
@@ -132,7 +130,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     return getL1Distance(new ArrayRealVector(v, false));
   }
-
+/*
   public double getL1Norm()
   {
     try
@@ -150,7 +148,7 @@ public abstract class AbstractRealVector implements RealVector
       throw new IllegalArgumentException(e);
     }
   }
-
+*/
   public double getLInfDistance(RealVector v) throws IllegalArgumentException
   {
     return subtract(v).getLInfNorm();
@@ -160,7 +158,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     return getLInfDistance(new ArrayRealVector(v, false));
   }
-
+/*
   public double getLInfNorm()
   {
     try
@@ -185,7 +183,7 @@ public abstract class AbstractRealVector implements RealVector
     return Math.sqrt(dotProduct(this));
   }
 
-/**************/
+**************/
   
   public RealVector mapAbs()
   {
@@ -225,7 +223,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     return copy().mapAddToSelf(d);
   }
-
+/*
   public RealVector mapAddToSelf(double d)
   {
     try
@@ -237,7 +235,7 @@ public abstract class AbstractRealVector implements RealVector
       throw new IllegalArgumentException(e);
     }
   }
-
+*/
   public RealVector mapAsin()
   {
     return copy().mapAsinToSelf();
@@ -344,7 +342,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     return copy().mapDivideToSelf(d);
   }
-
+/*
   public RealVector mapDivideToSelf(double d)
   {
     try
@@ -356,7 +354,7 @@ public abstract class AbstractRealVector implements RealVector
       throw new IllegalArgumentException(e);
     }
   }
-
+*/
   public RealVector mapExp()
   {
     return copy().mapExpToSelf();
@@ -412,7 +410,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     return copy().mapFloorToSelf();
   }
-
+/*
   public RealVector mapInvToSelf()
   {
     try
@@ -423,7 +421,7 @@ public abstract class AbstractRealVector implements RealVector
     {
       throw new IllegalArgumentException(e);
     }
-  }
+  }*/
 
   public RealVector mapLog()
   {
@@ -480,7 +478,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     return copy().mapMultiplyToSelf(d);
   }
-
+/*
   public RealVector mapMultiplyToSelf(double d)
   {
     try
@@ -491,13 +489,13 @@ public abstract class AbstractRealVector implements RealVector
     {
       throw new IllegalArgumentException();
     }
-  }
+  }*/
 
   public RealVector mapPow(double d)
   {
     return copy().mapPowToSelf(d);
   }
-
+/*
   public RealVector mapPowToSelf(double d)
   {
     try
@@ -508,7 +506,7 @@ public abstract class AbstractRealVector implements RealVector
     {
       throw new IllegalArgumentException(e);
     }
-  }
+  }*/
 
   public RealVector mapRint()
   {
@@ -599,7 +597,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     return copy().mapSubtractToSelf(d);
   }
-
+/*
   public RealVector mapSubtractToSelf(double d)
   {
     try
@@ -610,7 +608,7 @@ public abstract class AbstractRealVector implements RealVector
     {
       throw new IllegalArgumentException(e);
     }
-  }
+  }*/
 
   public RealVector mapTan()
   {
@@ -684,7 +682,7 @@ public abstract class AbstractRealVector implements RealVector
       Entry otherE = null;
       while(otherIt.hasNext() && (otherE = otherIt.next()) != null)
       {
-        product.setEntry(thisE.index(), otherE.index(), thisE.getValue() * otherE.getValue());
+        product.setEntry(thisE.index, otherE.index, thisE.getValue() * otherE.getValue());
       }
     }
     
@@ -695,7 +693,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     return outerProduct(new ArrayRealVector(v, false));
   }
-
+/*
   public RealVector projection(RealVector v) throws IllegalArgumentException
   {
     final double proj = dotProduct(v);
@@ -707,7 +705,7 @@ public abstract class AbstractRealVector implements RealVector
     {
       throw new IllegalArgumentException(e);
     }
-  }
+  }*/
 
   public RealVector projection(double[] v) throws IllegalArgumentException
   {
@@ -723,12 +721,12 @@ public abstract class AbstractRealVector implements RealVector
       e.setValue(value);
     }
   }
-  
+  /*
   public RealVector subtract(RealVector v) throws IllegalArgumentException
   {
     return map(BinaryRealFunction.Subtract, v);
   }
-
+*/
   public RealVector subtract(double[] v) throws IllegalArgumentException
   {
     return subtract(new ArrayRealVector(v, false));
@@ -761,7 +759,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     mapDivideToSelf(getNorm());
   }
-
+/*
   public double collect(UnaryCollector collector) throws FunctionEvaluationException
   {
     Iterator<Entry> it = collector instanceof NonDefaultCollector
@@ -786,7 +784,7 @@ public abstract class AbstractRealVector implements RealVector
       collector.collect(e.index(), e.getValue(), other.getEntry(e.index()));
     }
     return collector.collectedValue();
-  }
+  }*/
 
   public Iterator<Entry> nonDefaultIterator()
   {
@@ -817,15 +815,15 @@ public abstract class AbstractRealVector implements RealVector
   {
     return copy().mapToSelf(function);
   }
-
+/*
   public RealVector map(BinaryRealFunction function, RealVector other)
   {
     return copy().mapToSelf(function, other);
   }
-
+*/
   public RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException
   {
-    Iterator<Entry> it = function instanceof DefaultPreservingUnivariateRealFunction
+    Iterator<Entry> it = getDefaultValue() == function.value(getDefaultValue())
                        ? nonDefaultIterator()
                        : iterator();
     Entry e = null;
@@ -835,7 +833,7 @@ public abstract class AbstractRealVector implements RealVector
     }
     return this;
   }
-
+/*
   public RealVector mapToSelf(BinaryRealFunction function, RealVector other)
   {
     Iterator<Entry> it = function instanceof DefaultPreservingBinaryRealFunction 
@@ -847,13 +845,11 @@ public abstract class AbstractRealVector implements RealVector
       setEntry(e.index(), function.value(getEntry(e.index()), e.getValue()));
     }
     return this;
-  }
+  }*/
 
-  protected class EntryImpl implements Entry
+  protected class EntryImpl extends Entry
   {
-    int index;
     public double getValue() { return getEntry(index); }
-    public int index() { return index; }
     public void setValue(double newValue) { setEntry(index, newValue); }    
   }
   

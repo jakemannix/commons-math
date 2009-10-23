@@ -51,6 +51,8 @@ public interface RealVector {
   
   RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException;
   
+  double getDefaultValue();
+  
   /*
   RealVector map(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
   
@@ -61,9 +63,10 @@ public interface RealVector {
   double collect(BinaryCollector collector, RealVector other) throws FunctionEvaluationException;
   */
   
-  public class Entry {
-    double value;
+  public abstract class Entry {
     int index;
+    abstract double getValue();
+    abstract void setValue(double newValue);
   }
   
   Iterator<Entry> iterator();

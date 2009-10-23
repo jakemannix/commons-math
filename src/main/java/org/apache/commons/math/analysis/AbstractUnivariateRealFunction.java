@@ -1,8 +1,8 @@
 package org.apache.commons.math.analysis;
 
 import org.apache.commons.math.FunctionEvaluationException;
-import org.apache.commons.math.linear.AbstractUnaryCollector;
-import org.apache.commons.math.linear.RealVector;
+//import org.apache.commons.math.linear.AbstractUnaryCollector;
+//import org.apache.commons.math.linear.RealVector;
 
 
 public abstract class AbstractUnivariateRealFunction implements UnivariateRealFunction
@@ -13,7 +13,7 @@ public abstract class AbstractUnivariateRealFunction implements UnivariateRealFu
   }
   
   public abstract double value(double d) throws FunctionEvaluationException;
-
+/*
   public MultivariateRealFunction asCollector()
   {
     return asCollector(BinaryRealFunction.Add);
@@ -50,7 +50,7 @@ public abstract class AbstractUnivariateRealFunction implements UnivariateRealFu
       }
     };
   }
-  
+  */
   public UnivariateRealFunction preCompose(final UnivariateRealFunction f)
   {
     return new AbstractUnivariateRealFunction()
