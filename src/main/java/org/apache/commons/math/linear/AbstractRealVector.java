@@ -677,11 +677,11 @@ public abstract class AbstractRealVector implements RealVector
       product = new Array2DRowRealMatrix(this.getDimension(), v.getDimension());
     }
     Iterator<Entry> thisIt = nonDefaultIterator();
-    Entry thisE = null;
+    Entry thisE;
     while(thisIt.hasNext() && (thisE = thisIt.next()) != null)
     {
       Iterator<Entry> otherIt = v.nonDefaultIterator();
-      Entry otherE = null;
+      Entry otherE;
       while(otherIt.hasNext() && (otherE = otherIt.next()) != null)
       {
         product.setEntry(thisE.index(), otherE.index(), thisE.getValue() * otherE.getValue());
@@ -717,7 +717,7 @@ public abstract class AbstractRealVector implements RealVector
   public void set(double value)
   {
     Iterator<Entry> it = iterator();
-    Entry e = null;
+    Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
       e.setValue(value);
@@ -767,7 +767,7 @@ public abstract class AbstractRealVector implements RealVector
     Iterator<Entry> it = collector instanceof NonDefaultCollector
                        ? nonDefaultIterator()
                        : iterator();
-    Entry e = null;
+    Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
       collector.collect(e.index(), e.getValue());
@@ -780,7 +780,7 @@ public abstract class AbstractRealVector implements RealVector
     Iterator<Entry> it = collector instanceof NonDefaultCollector
                        ? nonDefaultIterator()
                        : iterator();
-    Entry e = null;
+    Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
       collector.collect(e.index(), e.getValue(), other.getEntry(e.index()));
@@ -828,7 +828,7 @@ public abstract class AbstractRealVector implements RealVector
     Iterator<Entry> it = function instanceof DefaultPreservingUnivariateRealFunction
                        ? nonDefaultIterator()
                        : iterator();
-    Entry e = null;
+    Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
       e.setValue(function.value(e.getValue()));
@@ -841,7 +841,7 @@ public abstract class AbstractRealVector implements RealVector
     Iterator<Entry> it = function instanceof DefaultPreservingBinaryRealFunction 
                        ? other.nonDefaultIterator()
                        : other.iterator();
-    Entry e = null;
+    Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
       setEntry(e.index(), function.value(getEntry(e.index()), e.getValue()));
