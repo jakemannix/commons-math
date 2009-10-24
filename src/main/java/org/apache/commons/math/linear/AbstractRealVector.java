@@ -16,8 +16,7 @@ public abstract class AbstractRealVector implements RealVector
    * @exception IllegalArgumentException if the vectors do not
    * have the same dimension
    */
-  protected void checkVectorDimensions(RealVector v)
-      throws IllegalArgumentException {
+  protected void checkVectorDimensions(RealVector v) {
       checkVectorDimensions(v.getDimension());
   }
 
