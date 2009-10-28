@@ -27,7 +27,7 @@ import org.apache.commons.math.util.MathUtils;
  * @version $Revision$ $Date$
  * @since 2.0
  */
-public class ArrayRealVector implements RealVector, Serializable {
+public class ArrayRealVector extends AbstractRealVector implements RealVector, Serializable {
 
     /** Serializable version identifier. */
     private static final long serialVersionUID = -1097961340710804027L;
@@ -221,7 +221,7 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector copy() {
+    public AbstractRealVector copy() {
         return new ArrayRealVector(this, true);
     }
 
@@ -1352,33 +1352,26 @@ public class ArrayRealVector implements RealVector, Serializable {
         return true;
       }
 
-      if (other == null) {
+      if (other == null || !(other instanceof RealVector)) {
         return false;
       }
 
-      try {
 
-          RealVector rhs = (RealVector) other;
-          if (data.length != rhs.getDimension()) {
-              return false;
-          }
-
-          if (rhs.isNaN()) {
-              return this.isNaN();
-          }
-
-          for (int i = 0; i < data.length; ++i) {
-              if (data[i] != rhs.getEntry(i)) {
-                  return false;
-              }
-          }
-          return true;
-
-      } catch (ClassCastException ex) {
-          // ignore exception
-          return false;
+      RealVector rhs = (RealVector) other;
+      if (data.length != rhs.getDimension()) {
+        return false;
       }
 
+      if (rhs.isNaN()) {
+        return this.isNaN();
+      }
+
+      for (int i = 0; i < data.length; ++i) {
+        if (data[i] != rhs.getEntry(i)) {
+          return false;
+        }
+      }
+      return true;
     }
 
     /**
@@ -1392,20 +1385,6 @@ public class ArrayRealVector implements RealVector, Serializable {
             return 9;
         }
         return MathUtils.hash(data);
-    }
-
-    /**
-     * Check if an index is valid.
-     * @param index index to check
-     * @exception MatrixIndexException if index is not valid
-     */
-    private void checkIndex(final int index)
-        throws MatrixIndexException {
-        if (index < 0 || index >= getDimension()) {
-            throw new MatrixIndexException(
-                    "index {0} out of allowed range [{1}, {2}]",
-                    index, 0, getDimension() - 1);
-        }
     }
 
 }

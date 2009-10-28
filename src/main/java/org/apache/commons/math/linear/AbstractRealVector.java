@@ -9,6 +9,12 @@ import org.apache.commons.math.analysis.UnivariateRealFunctions;
 
 public abstract class AbstractRealVector implements RealVector
 {
+  protected double defaultValue = 0;
+
+  public double getDefaultValue() {
+    return defaultValue;
+  }
+
 
   /**
    * Check if instance and specified vectors have the same dimension.
@@ -66,44 +72,23 @@ public abstract class AbstractRealVector implements RealVector
           setEntry(i + index, v[i]);
       }
   }
-  /*
-  public RealVector add(RealVector v) throws IllegalArgumentException
-  {
-    return map(BinaryRealFunction.Add, v);
-  }
-*/
+
   public RealVector add(double[] v) throws IllegalArgumentException
   {
     return add(new ArrayRealVector(v, false));
   }
 
   public abstract AbstractRealVector copy();
-/*
-  public double dotProduct(RealVector v) throws IllegalArgumentException
-  {
-    return collect(Collectors.Dot, v);
-  }
-*/
+
   public double dotProduct(double[] v) throws IllegalArgumentException
   {
     return dotProduct(new ArrayRealVector(v, false));
   }
-/*
-  public RealVector ebeDivide(RealVector v) throws IllegalArgumentException
-  {
-    return mapToSelf(BinaryRealFunction.Divide, v);
-  }
-*/
+
   public RealVector ebeDivide(double[] v) throws IllegalArgumentException
   {
     return ebeDivide(new ArrayRealVector(v, false));
   }
-/*
-  public RealVector ebeMultiply(RealVector v) throws IllegalArgumentException
-  {
-    return mapToSelf(BinaryRealFunction.Multiply, v);
-  }
-  */
 
   public RealVector ebeMultiply(double[] v) throws IllegalArgumentException
   {
@@ -129,25 +114,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     return getL1Distance(new ArrayRealVector(v, false));
   }
-/*
-  public double getL1Norm()
-  {
-    try
-    {
-      return collect(new AbstractUnaryCollector()
-      {
-        public void collect(double d)
-        {
-          value += Math.abs(d);
-        }
-      });
-    }
-    catch (FunctionEvaluationException e)
-    {
-      throw new IllegalArgumentException(e);
-    }
-  }
-*/
+
   public double getLInfDistance(RealVector v) throws IllegalArgumentException
   {
     return subtract(v).getLInfNorm();
@@ -157,32 +124,6 @@ public abstract class AbstractRealVector implements RealVector
   {
     return getLInfDistance(new ArrayRealVector(v, false));
   }
-/*
-  public double getLInfNorm()
-  {
-    try
-    {
-      return collect(new AbstractUnaryCollector()
-      {
-        public void collect(double d)
-        {
-          value = Math.max(value, d);
-        }
-        
-      });
-    }
-    catch (FunctionEvaluationException e)
-    {
-      throw new IllegalArgumentException(e);
-    }
-  }
-
-  public double getNorm()
-  {
-    return Math.sqrt(dotProduct(this));
-  }
-
-**************/
   
   public RealVector mapAbs()
   {
@@ -222,19 +163,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     return copy().mapAddToSelf(d);
   }
-/*
-  public RealVector mapAddToSelf(double d)
-  {
-    try
-    {
-      return mapToSelf(BinaryRealFunction.Add.provideDefaultSecondArgument(d));
-    }
-    catch (FunctionEvaluationException e)
-    {
-      throw new IllegalArgumentException(e);
-    }
-  }
-*/
+
   public RealVector mapAsin()
   {
     return copy().mapAsinToSelf();
@@ -341,19 +270,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     return copy().mapDivideToSelf(d);
   }
-/*
-  public RealVector mapDivideToSelf(double d)
-  {
-    try
-    {
-      return mapToSelf(BinaryRealFunction.Divide.provideDefaultSecondArgument(d));
-    }
-    catch (FunctionEvaluationException e)
-    {
-      throw new IllegalArgumentException(e);
-    }
-  }
-*/
+
   public RealVector mapExp()
   {
     return copy().mapExpToSelf();
@@ -409,18 +326,6 @@ public abstract class AbstractRealVector implements RealVector
   {
     return copy().mapFloorToSelf();
   }
-/*
-  public RealVector mapInvToSelf()
-  {
-    try
-    {
-      return mapToSelf(BinaryRealFunction.Divide.provideDefaultFirstArgument(1d));
-    }
-    catch (FunctionEvaluationException e)
-    {
-      throw new IllegalArgumentException(e);
-    }
-  }*/
 
   public RealVector mapLog()
   {
@@ -477,35 +382,11 @@ public abstract class AbstractRealVector implements RealVector
   {
     return copy().mapMultiplyToSelf(d);
   }
-/*
-  public RealVector mapMultiplyToSelf(double d)
-  {
-    try
-    {
-      return mapToSelf(BinaryRealFunction.Multiply.provideDefaultSecondArgument(d));
-    }
-    catch (FunctionEvaluationException e)
-    {
-      throw new IllegalArgumentException();
-    }
-  }*/
 
   public RealVector mapPow(double d)
   {
     return copy().mapPowToSelf(d);
   }
-/*
-  public RealVector mapPowToSelf(double d)
-  {
-    try
-    {
-      return mapToSelf(BinaryRealFunction.Pow.provideDefaultSecondArgument(d));
-    }
-    catch (FunctionEvaluationException e)
-    {
-      throw new IllegalArgumentException(e);
-    }
-  }*/
 
   public RealVector mapRint()
   {
@@ -596,18 +477,6 @@ public abstract class AbstractRealVector implements RealVector
   {
     return copy().mapSubtractToSelf(d);
   }
-/*
-  public RealVector mapSubtractToSelf(double d)
-  {
-    try
-    {
-      return mapToSelf(BinaryRealFunction.Subtract.provideDefaultSecondArgument(d));
-    }
-    catch (FunctionEvaluationException e)
-    {
-      throw new IllegalArgumentException(e);
-    }
-  }*/
 
   public RealVector mapTan()
   {
@@ -659,8 +528,6 @@ public abstract class AbstractRealVector implements RealVector
       throw new IllegalArgumentException(e);
     }
   }
-/*****************************/
-  
   
   public RealMatrix outerProduct(RealVector v) throws IllegalArgumentException
   {
@@ -692,19 +559,6 @@ public abstract class AbstractRealVector implements RealVector
   {
     return outerProduct(new ArrayRealVector(v, false));
   }
-/*
-  public RealVector projection(RealVector v) throws IllegalArgumentException
-  {
-    final double proj = dotProduct(v);
-    try
-    {
-      return v.map(BinaryRealFunction.Multiply.provideDefaultSecondArgument(proj));
-    }
-    catch (FunctionEvaluationException e)
-    {
-      throw new IllegalArgumentException(e);
-    }
-  }*/
 
   public RealVector projection(double[] v) throws IllegalArgumentException
   {
@@ -720,12 +574,7 @@ public abstract class AbstractRealVector implements RealVector
       e.setValue(value);
     }
   }
-  /*
-  public RealVector subtract(RealVector v) throws IllegalArgumentException
-  {
-    return map(BinaryRealFunction.Subtract, v);
-  }
-*/
+
   public RealVector subtract(double[] v) throws IllegalArgumentException
   {
     return subtract(new ArrayRealVector(v, false));
@@ -758,32 +607,6 @@ public abstract class AbstractRealVector implements RealVector
   {
     mapDivideToSelf(getNorm());
   }
-/*
-  public double collect(UnaryCollector collector) throws FunctionEvaluationException
-  {
-    Iterator<Entry> it = collector instanceof NonDefaultCollector
-                       ? nonDefaultIterator()
-                       : iterator();
-    Entry e = null;
-    while(it.hasNext() && (e = it.next()) != null)
-    {
-      collector.collect(e.index(), e.getValue());
-    }
-    return collector.collectedValue();
-  }
-
-  public double collect(BinaryCollector collector, RealVector other)
-  {
-    Iterator<Entry> it = collector instanceof NonDefaultCollector
-                       ? nonDefaultIterator()
-                       : iterator();
-    Entry e = null;
-    while(it.hasNext() && (e = it.next()) != null)
-    {
-      collector.collect(e.index(), e.getValue(), other.getEntry(e.index()));
-    }
-    return collector.collectedValue();
-  }*/
 
   public Iterator<Entry> nonDefaultIterator()
   {
@@ -814,12 +637,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     return copy().mapToSelf(function);
   }
-/*
-  public RealVector map(BinaryRealFunction function, RealVector other)
-  {
-    return copy().mapToSelf(function, other);
-  }
-*/
+
   public RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException
   {
     Iterator<Entry> it = getDefaultValue() == function.value(getDefaultValue())
@@ -832,19 +650,6 @@ public abstract class AbstractRealVector implements RealVector
     }
     return this;
   }
-/*
-  public RealVector mapToSelf(BinaryRealFunction function, RealVector other)
-  {
-    Iterator<Entry> it = function instanceof DefaultPreservingBinaryRealFunction 
-                       ? other.nonDefaultIterator()
-                       : other.iterator();
-    Entry e = null;
-    while(it.hasNext() && (e = it.next()) != null)
-    {
-      setEntry(e.index(), function.value(getEntry(e.index()), e.getValue()));
-    }
-    return this;
-  }*/
 
   protected class EntryImpl extends Entry
   {

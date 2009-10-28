@@ -17,12 +17,15 @@
 package org.apache.commons.math.linear;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.TestUtils;
+import org.apache.commons.math.analysis.UnivariateRealFunction;
 
 /**
  * Test cases for the {@link ArrayRealVector} class.
@@ -61,6 +64,26 @@ public class ArrayRealVectorTest extends TestCase {
 
         private UnsupportedOperationException unsupported() {
             return new UnsupportedOperationException("Not supported, unneeded for test purposes");
+        }
+
+        public RealVector map(UnivariateRealFunction function) throws FunctionEvaluationException {
+            throw unsupported();
+        }
+
+        public RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException {
+            throw unsupported();
+        }
+
+        public double getDefaultValue() {
+            return 0;
+        }
+
+        public Iterator<Entry> iterator() {
+            throw unsupported();
+        }
+
+        public Iterator<Entry> nonDefaultIterator() {
+            throw unsupported();
         }
 
         public RealVector copy() {
