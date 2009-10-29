@@ -23,7 +23,7 @@ import org.apache.commons.math.FunctionEvaluationException;
  *
  * @version $Revision$ $Date$
  */
-public class QuinticFunction implements DifferentiableUnivariateRealFunction {
+public class QuinticFunction extends AbstractUnivariateRealFunction implements DifferentiableUnivariateRealFunction {
 
     /* Evaluate quintic.
      * @see org.apache.commons.math.UnivariateRealFunction#value(double)
@@ -33,7 +33,7 @@ public class QuinticFunction implements DifferentiableUnivariateRealFunction {
     }
 
     public UnivariateRealFunction derivative() {
-        return new UnivariateRealFunction() {
+        return new AbstractUnivariateRealFunction() {
             public double value(double x) throws FunctionEvaluationException {
                 return (5*x*x-3.75)*x*x+0.25;
             }

@@ -23,7 +23,7 @@ import org.apache.commons.math.FunctionEvaluationException;
  *
  * @version $Revision$ $Date$
  */
-public class Expm1Function implements DifferentiableUnivariateRealFunction {
+public class Expm1Function extends AbstractUnivariateRealFunction implements DifferentiableUnivariateRealFunction {
 
     public double value(double x) throws FunctionEvaluationException {
         // Math.expm1() is available in jdk 1.5 but not in jdk 1.4.2.
@@ -31,7 +31,7 @@ public class Expm1Function implements DifferentiableUnivariateRealFunction {
     }
 
     public UnivariateRealFunction derivative() {
-        return new UnivariateRealFunction() {
+        return new AbstractUnivariateRealFunction() {
             public double value(double x) throws FunctionEvaluationException {
                 return Math.exp(x);
             }

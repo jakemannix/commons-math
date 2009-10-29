@@ -28,7 +28,7 @@ import org.apache.commons.math.FunctionEvaluationException;
  *
  * @version $Revision$ $Date$
  */
-public class SinFunction implements DifferentiableUnivariateRealFunction {
+public class SinFunction extends AbstractUnivariateRealFunction implements DifferentiableUnivariateRealFunction {
 
     /* Evaluate sinus fuction.
      * @see org.apache.commons.math.UnivariateRealFunction#value(double)
@@ -40,7 +40,7 @@ public class SinFunction implements DifferentiableUnivariateRealFunction {
     /* First derivative of sinus function
      */
     public UnivariateRealFunction derivative() {
-        return new UnivariateRealFunction() {
+        return new AbstractUnivariateRealFunction() {
             public double value(double x) throws FunctionEvaluationException {
                 return Math.cos(x);
             }

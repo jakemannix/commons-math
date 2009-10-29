@@ -52,7 +52,8 @@ public class ArrayRealVectorTest extends TestCase {
 
     // Testclass to test the RealVector interface
     // only with enough content to support the test
-    public static class RealVectorTestImpl implements RealVector, Serializable {
+    public static class RealVectorTestImpl implements RealVector, Serializable
+    {
 
         /** Serializable version identifier. */
         private static final long serialVersionUID = 4715341047369582908L;
@@ -482,6 +483,10 @@ public class ArrayRealVectorTest extends TestCase {
         public RealVector map(BinaryRealFunction function, RealVector other)
         {
           throw unsupported();
+        }
+
+        public double getDefaultValue() {
+            return 0;  //To change body of implemented methods use File | Settings | File Templates.
         }
 
         public RealVector mapToSelf(UnivariateRealFunction function)

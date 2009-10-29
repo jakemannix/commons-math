@@ -483,6 +483,10 @@ public class SparseRealVectorTest extends TestCase {
           throw unsupported();
         }
 
+        public double getDefaultValue() {
+            return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+
         public RealVector mapToSelf(UnivariateRealFunction function)
         {
           throw unsupported();
