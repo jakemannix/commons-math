@@ -5,19 +5,17 @@ import org.apache.commons.math.linear.BinaryCollector;
 public interface BinaryRealFunction
 {
 
-  static class Multiply extends AbstractBinaryRealFunction implements DefaultPreservingBinaryRealFunction
-  {
+  static class Multiply extends AbstractBinaryRealFunction {
     public double value(double d1, double d2) { return d1 * d2; }  
   }
   
-  static class Divide extends AbstractBinaryRealFunction implements DefaultPreservingBinaryRealFunction
-  {
+  static class Divide extends AbstractBinaryRealFunction {
     public double value(double d1, double d2) { return d1 / d2; }   
   }
   
-  public static final DefaultPreservingBinaryRealFunction Multiply = new Multiply();
+  public static final BinaryRealFunction Multiply = new Multiply();
 
-  public static final DefaultPreservingBinaryRealFunction Divide = new Divide();
+  public static final BinaryRealFunction Divide = new Divide();
 
   public static final BinaryRealFunction Add = new AbstractBinaryRealFunction()
   {

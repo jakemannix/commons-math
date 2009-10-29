@@ -59,8 +59,48 @@ public abstract class AbstractUnivariateRealFunction implements UnivariateRealFu
       {
         return f.value(AbstractUnivariateRealFunction.this.value(d));
       }
-      
     };
   }
 
+  public UnivariateRealFunction postCompose(final UnivariateRealFunction f)
+  {
+    return new AbstractUnivariateRealFunction()
+    {
+      public double value(double d) throws FunctionEvaluationException
+      {
+        return AbstractUnivariateRealFunction.this.value(f.value(d));
+      }
+    };
+  }
+
+  public UnivariateRealFunction combine(final UnivariateRealFunction f, final BinaryRealFunction combiner)
+  {
+    return new AbstractUnivariateRealFunction()
+    {
+      public double value(double d) throws FunctionEvaluationException
+      {
+        return combiner.value(AbstractUnivariateRealFunction.this.value(d), f.value(d));
+      }
+    };
+  }
+
+  public UnivariateRealFunction plus(UnivariateRealFunction f)
+  {
+    return this.combine(f, BinaryRealFunction.Add);
+  }
+
+  public UnivariateRealFunction minus(UnivariateRealFunction f)
+  {
+    return this.combine(f, BinaryRealFunction.Subtract);
+  }
+
+  public UnivariateRealFunction times(UnivariateRealFunction f)
+  {
+    return this.combine(f, BinaryRealFunction.Multiply);
+  }
+
+  public UnivariateRealFunction scale(final double scaleFactor)
+  {
+    return postCompose(BinaryRealFunction.Multiply.provideDefaultSecondArgument(scaleFactor));
+  }
 }

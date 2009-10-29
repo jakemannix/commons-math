@@ -5,8 +5,6 @@ import java.util.Iterator;
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathRuntimeException;
 import org.apache.commons.math.analysis.BinaryRealFunction;
-import org.apache.commons.math.analysis.DefaultPreservingBinaryRealFunction;
-import org.apache.commons.math.analysis.DefaultPreservingUnivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunctions;
 
