@@ -19,7 +19,6 @@ package org.apache.commons.math.linear;
 import java.util.Iterator;
 
 import org.apache.commons.math.FunctionEvaluationException;
-import org.apache.commons.math.analysis.BinaryRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 
 
@@ -48,28 +47,54 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
  */
 public interface RealVector {
 
-  RealVector map(UnivariateRealFunction function) throws FunctionEvaluationException;
+    /**
+     * The default value (often 0) for all entries of the RealVector which aren't defined.
+     * @return the defaultValue
+     */
+    double getDefaultValue();
+
+    /**
+     * Acts as if it is implemented as:
+     * Entry e = null;
+     * for(Iterator<Entry> it = iterator(); it.hasNext(); e = it.next()) {
+     *   e.setValue(function.value(e.getValue()));
+     * }
+     * @param function to apply to each successive entry
+     * @return this vector
+     * @throws FunctionEvaluationException if function throws it on application to any entry
+     */  
+    RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException;
+
+    /**
+     * Acts as if implemented as:
+     * return copy().map(function);
+     * @see RealVector#mapToSelf
+     */
+    RealVector map(UnivariateRealFunction function) throws FunctionEvaluationException;
   
-  RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException;
+    /*
+     *  Some methods not yet in this patch, which continue in this vein: 
+     */
+
+    //RealVector map(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
   
-  RealVector map(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
+    //RealVector mapToSelf(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
   
-  RealVector mapToSelf(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
+    //double collect(UnaryCollector collector) throws FunctionEvaluationException;
+
+    //double collect(BinaryCollector collector, RealVector other) throws FunctionEvaluationException;
+
   
-  double collect(UnaryCollector collector) throws FunctionEvaluationException;
+    public abstract class Entry {
+      int index;
+      abstract double getValue();
+      abstract void setValue(double newValue);
+    }
   
-  double collect(BinaryCollector collector, RealVector other) throws FunctionEvaluationException;
-  
-  public interface Entry {
-    double getValue();
-    int index();
-    void setValue(double newValue);
-  }
-  
-  Iterator<Entry> iterator();
-  
-  Iterator<Entry> nonDefaultIterator();
-  
+    Iterator<Entry> iterator();
+
+    Iterator<Entry> nonDefaultIterator();
+
     /**
      * Returns a (deep) copy of this.
      * @return vector copy
