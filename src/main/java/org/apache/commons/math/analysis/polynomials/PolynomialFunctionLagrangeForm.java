@@ -19,6 +19,7 @@ package org.apache.commons.math.analysis.polynomials;
 import org.apache.commons.math.DuplicateSampleAbscissaException;
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathRuntimeException;
+import org.apache.commons.math.analysis.AbstractUnivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 
 /**
@@ -33,7 +34,7 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
  * @version $Revision$ $Date$
  * @since 1.2
  */
-public class PolynomialFunctionLagrangeForm implements UnivariateRealFunction {
+public class PolynomialFunctionLagrangeForm extends AbstractUnivariateRealFunction {
 
     /**
      * The coefficients of the polynomial, ordered by degree -- i.e.

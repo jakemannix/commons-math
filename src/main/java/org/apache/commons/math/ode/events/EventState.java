@@ -19,6 +19,7 @@ package org.apache.commons.math.ode.events;
 
 import org.apache.commons.math.ConvergenceException;
 import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.analysis.AbstractUnivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.solvers.BrentSolver;
 import org.apache.commons.math.ode.DerivativeException;
@@ -190,7 +191,7 @@ public class EventState {
                     // variation direction, with respect to the integration direction
                     increasing = gb >= ga;
 
-                    final UnivariateRealFunction f = new UnivariateRealFunction() {
+                    final UnivariateRealFunction f = new AbstractUnivariateRealFunction() {
                         public double value(final double t) throws FunctionEvaluationException {
                             try {
                                 interpolator.setInterpolatedTime(t);

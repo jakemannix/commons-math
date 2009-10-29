@@ -46,7 +46,9 @@ public abstract class AbstractUnivariateRealFunction implements UnivariateRealFu
 
       public double value(RealVector point) throws FunctionEvaluationException
       {
-        return point.collect(this);
+        //  TODO: replace with this:
+        // return point.collect(this);
+        return value(point.getData());
       }
     };
   }

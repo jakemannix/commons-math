@@ -19,6 +19,7 @@ package org.apache.commons.math.optimization.general;
 
 import org.apache.commons.math.ConvergenceException;
 import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.analysis.AbstractUnivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.solvers.BrentSolver;
 import org.apache.commons.math.analysis.solvers.UnivariateRealSolver;
@@ -255,7 +256,7 @@ public class NonLinearConjugateGradientOptimizer
      * extremum along the search direction.
      * </p>
      */
-    private class LineSearchFunction implements UnivariateRealFunction {
+    private class LineSearchFunction extends AbstractUnivariateRealFunction {
         /** Search direction. */
         private final double[] searchDirection;
 

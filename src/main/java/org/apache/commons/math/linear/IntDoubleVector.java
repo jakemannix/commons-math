@@ -53,7 +53,7 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
       {
         if(currentSize >= indices.length)
           expand();
-        indices[currentSize] = e.index();
+        indices[currentSize] = e.index;
         values[currentSize] = e.getValue();
         currentSize++;
       }
@@ -75,7 +75,67 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
     return new IntDoubleVector(this);
   }
 
-  public RealVector append(RealVector v)
+    public RealVector add(RealVector v) throws IllegalArgumentException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public RealVector subtract(RealVector v) throws IllegalArgumentException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public RealVector mapAddToSelf(double d) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public RealVector mapSubtractToSelf(double d) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public RealVector mapMultiplyToSelf(double d) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public RealVector mapDivideToSelf(double d) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public RealVector mapPowToSelf(double d) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public RealVector mapInvToSelf() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public RealVector ebeMultiply(RealVector v) throws IllegalArgumentException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public RealVector ebeDivide(RealVector v) throws IllegalArgumentException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public double dotProduct(RealVector v) throws IllegalArgumentException {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public double getNorm() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public double getL1Norm() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public double getLInfNorm() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public RealVector projection(RealVector v) throws IllegalArgumentException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public RealVector append(RealVector v)
   {
     return append(v.getData());
   }
@@ -116,9 +176,9 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
     Entry e = null;
     while(it.hasNext() && (e = it.next()) != null)
     {
-      if(e.index() < index) continue;
-      if(e.index() >= end) break;
-      v.setEntry(e.index(), e.getValue());
+      if(e.index < index) continue;
+      if(e.index >= end) break;
+      v.setEntry(e.index, e.getValue());
     }
     return v;
   }
@@ -195,7 +255,7 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
     }
   }
 
-  protected class SparseEntryImpl implements Entry
+  protected class SparseEntryImpl extends Entry
   {
     int index = 0;
     public double getValue() { return values[indices[index]]; }

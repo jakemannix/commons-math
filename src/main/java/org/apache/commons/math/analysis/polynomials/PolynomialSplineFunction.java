@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 import org.apache.commons.math.ArgumentOutsideDomainException;
 import org.apache.commons.math.MathRuntimeException;
+import org.apache.commons.math.analysis.AbstractUnivariateRealFunction;
 import org.apache.commons.math.analysis.DifferentiableUnivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 
@@ -57,7 +58,7 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
  *
  * @version $Revision$ $Date$
  */
-public class PolynomialSplineFunction
+public class PolynomialSplineFunction extends AbstractUnivariateRealFunction
     implements DifferentiableUnivariateRealFunction {
 
     /** Spline segment interval delimiters (knots).   Size is n+1 for n segments. */

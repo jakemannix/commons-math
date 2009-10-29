@@ -17,13 +17,14 @@
 
 package org.apache.commons.math.optimization.fitting;
 
+import org.apache.commons.math.analysis.AbstractUnivariateRealFunction;
 import org.apache.commons.math.analysis.DifferentiableUnivariateRealFunction;
 
 /** Harmonic function of the form <code>f (t) = a cos (&omega; t + &phi;)</code>.
  * @version $Revision$ $Date$
  * @since 2.0
  */
-public class HarmonicFunction implements DifferentiableUnivariateRealFunction {
+public class HarmonicFunction extends AbstractUnivariateRealFunction implements DifferentiableUnivariateRealFunction {
 
     /** Amplitude a. */
     private final double a;
