@@ -610,7 +610,7 @@ public abstract class AbstractRealVector implements RealVector
 
   public Iterator<Entry> nonDefaultIterator()
   {
-    return iterator();
+    return new SparseEntryIterator();
   }
 
   public Iterator<Entry> iterator()
@@ -651,10 +651,65 @@ public abstract class AbstractRealVector implements RealVector
     return this;
   }
 
-  protected class EntryImpl extends Entry
-  {
+  protected class EntryImpl extends Entry {
+    public EntryImpl() { index = 0; }
     public double getValue() { return getEntry(index); }
-    public void setValue(double newValue) { setEntry(index, newValue); }    
+    public void setValue(double newValue) { setEntry(index, newValue); }
   }
-  
+
+    /**
+     * This class should rare be used, but is here to provide
+     * a default implementation of nonDefaultIterator(), which is implemented
+     * by walking over the entries, skipping those whose values are the default one.
+     *
+     * Concrete subclasses which are SparseVector implementations should
+     * make their own sparse iterator, not use this one.
+     *
+     * This implementation might be useful for ArrayRealVector, when expensive
+     * operations which preserve the default value are to be done on the entries,
+     * and the fraction of non-default values is small (i.e. someone took a
+     * SparseVector, and passed it into the copy-constructor of ArrayRealVector)
+     */
+  protected class SparseEntryIterator implements Iterator<Entry> {
+    int i;
+    int dim;
+    EntryImpl tmp = new EntryImpl();
+    EntryImpl current;
+    EntryImpl next;
+
+    protected SparseEntryIterator() {
+      i = 0;
+      dim = getDimension();
+      current = new EntryImpl();
+      if(current.getValue() == getDefaultValue()) advance(current);
+      next = new EntryImpl();
+      next.index = current.index;
+      advance(next);
+    }
+
+    protected void advance(EntryImpl e) {
+      if(e == null) return;
+      do { e.index++; } while(e.index < dim && e.getValue() == getDefaultValue());
+      if(e.index >= dim) e.index = -1;
+    }
+
+    public boolean hasNext() {
+        return current != null;
+    }
+
+    public Entry next() {
+        tmp.index = current.index;
+        if(next != null) {
+            current.index = next.index;
+            advance(next);
+            if(next.index < 0) next = null;
+        } else { current = null; }
+        return tmp;
+    }
+        
+    public void remove() {
+      throw new UnsupportedOperationException("Not supported");
+    }
+  }
+
 }

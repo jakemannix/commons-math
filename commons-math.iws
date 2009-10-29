@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="c9a96d7b-312d-4970-bd31-7851d483706b" name="Default" comment="Code cleanup based on Idea's nice suggestions. :)">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java" afterPath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/commons-math.iml" afterPath="$PROJECT_DIR$/commons-math.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/commons-math.iws" afterPath="$PROJECT_DIR$/commons-math.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java" afterPath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/commons-math.ipr" afterPath="$PROJECT_DIR$/commons-math.ipr" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java" afterPath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java" afterPath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java" afterPath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java" afterPath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java" />
     </list>
     <ignored path="commons-math.iws" />
@@ -78,46 +74,10 @@
   <component name="FileColors" enabled="false" enabledForTabs="false" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AbstractRealVector.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AbstractRealVector.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="35" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ArrayRealVector.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1373" column="18" selection-start="41375" selection-end="41375" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OpenMapRealVector.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="162" column="58" selection-start="6148" selection-end="6148" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ArrayRealVectorTest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="21" selection-start="2896" selection-end="2896" vertical-scroll-proportion="0.15855354">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SparseRealVectorTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="21" selection-start="2911" selection-end="2911" vertical-scroll-proportion="0.0">
+            <state line="708" column="8" selection-start="15374" selection-end="15374" vertical-scroll-proportion="2.794931">
               <folding />
             </state>
           </provider>
@@ -132,11 +92,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MaxIterationsExceededExceptionTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/MaxIterationsExceededExceptionTest.java">
+      <file leaf-file-name="ArrayRealVector.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="23" selection-start="887" selection-end="887" vertical-scroll-proportion="0.0">
+            <state line="1373" column="18" selection-start="41375" selection-end="41375" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArrayRealVectorTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="13" selection-start="1272" selection-end="1272" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SparseRealVectorTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="77" column="21" selection-start="2911" selection-end="2911" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractRealVectorTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="185" column="46" selection-start="5079" selection-end="5079" vertical-scroll-proportion="-11.615385">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -145,15 +134,6 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/util/OpenIntToDoubleHashMap.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="79" column="48" selection-start="2870" selection-end="2870" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="checkstyle.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/checkstyle.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="75" selection-start="2700" selection-end="2707" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -171,9 +151,11 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java" />
+        <option value="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java" />
       </list>
     </option>
   </component>
@@ -379,6 +361,80 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commons-math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commons-math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="linear" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commons-math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -409,13 +465,14 @@
     <property name="recentsLimit" value="5" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="options.lastSelected" value="MavenSettings" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="OverrideImplement.combined" value="true" />
   </component>
-  <component name="RunManager" selected="JUnit.LegendreGaussIntegratorTest">
+  <component name="RunManager" selected="JUnit.AbstractRealVectorTest">
     <configuration default="false" name="LegendreGaussIntegratorTest" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false">
         <pattern>
@@ -441,6 +498,40 @@
       </option>
       <envs />
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="AbstractRealVectorTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false">
+        <pattern>
+          <option name="PATTERN" value="org.apache.commons.math.linear.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <extension name="snapshooter" />
+      <module name="commons-math" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.apache.commons.math.linear" />
+      <option name="MAIN_CLASS_NAME" value="org.apache.commons.math.linear.AbstractRealVectorTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="60756" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -562,8 +653,9 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="JUnit.LegendreGaussIntegratorTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.AbstractRealVectorTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -608,9 +700,9 @@
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="9" side_tool="false" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32898173" sideWeight="0.5" order="2" side_tool="false" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3994778" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39970824" sideWeight="0.68798953" order="0" side_tool="false" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" />
@@ -655,11 +747,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/commons-math.iws">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.project">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -678,11 +765,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/geometry/Vector3D.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1373" column="18" selection-start="41375" selection-end="41375" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/MaxIterationsExceededExceptionTest.java">
@@ -716,21 +798,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="162" column="58" selection-start="6148" selection-end="6148" vertical-scroll-proportion="0.0">
+        <state line="336" column="16" selection-start="11684" selection-end="11692" vertical-scroll-proportion="-6.085137">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="17" selection-start="1976" selection-end="1976" vertical-scroll-proportion="0.0">
+        <state line="34" column="13" selection-start="1272" selection-end="1272" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="35" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0">
+        <state line="1373" column="18" selection-start="41375" selection-end="41375" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -742,9 +824,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="21" selection-start="2896" selection-end="2896" vertical-scroll-proportion="0.15855354">
+        <state line="47" column="17" selection-start="1976" selection-end="1976" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="185" column="46" selection-start="5079" selection-end="5079" vertical-scroll-proportion="-11.615385">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="708" column="8" selection-start="15374" selection-end="15374" vertical-scroll-proportion="2.794931">
           <folding />
         </state>
       </provider>
