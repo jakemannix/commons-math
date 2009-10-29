@@ -3,9 +3,6 @@
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="c9a96d7b-312d-4970-bd31-7851d483706b" name="Default" comment="Code cleanup based on Idea's nice suggestions. :)">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/commons-math.iws" afterPath="$PROJECT_DIR$/commons-math.iws" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java" afterPath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java" afterPath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java" />
     </list>
     <ignored path="commons-math.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,19 +71,19 @@
   <component name="FileColors" enabled="false" enabledForTabs="false" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AbstractRealVector.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AbstractRealVector.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="708" column="8" selection-start="15374" selection-end="15374" vertical-scroll-proportion="2.794931">
+            <state line="708" column="8" selection-start="15374" selection-end="15374" vertical-scroll-proportion="-46.653847">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RealVector.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="RealVector.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="17" selection-start="1976" selection-end="1976" vertical-scroll-proportion="0.0">
+            <state line="95" column="112" selection-start="3573" selection-end="3573" vertical-scroll-proportion="0.3838665">
               <folding />
             </state>
           </provider>
@@ -95,7 +92,16 @@
       <file leaf-file-name="ArrayRealVector.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1373" column="18" selection-start="41375" selection-end="41375" vertical-scroll-proportion="0.0">
+            <state line="866" column="18" selection-start="25922" selection-end="25926" vertical-scroll-proportion="-11.153846">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OpenMapRealVector.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="305" column="18" selection-start="10658" selection-end="10668" vertical-scroll-proportion="-11.615385">
               <folding />
             </state>
           </provider>
@@ -149,13 +155,13 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java" />
       </list>
     </option>
   </component>
@@ -405,20 +411,22 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="commons-math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="math" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="linear" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -433,6 +441,82 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="org" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commons-math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="org" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commons-math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="org" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="linear" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -701,7 +785,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="9" side_tool="false" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32898173" sideWeight="0.5" order="2" side_tool="false" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32898173" sideWeight="0.5" order="2" side_tool="false" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3994778" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39970824" sideWeight="0.68798953" order="0" side_tool="false" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" />
@@ -796,13 +880,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="336" column="16" selection-start="11684" selection-end="11692" vertical-scroll-proportion="-6.085137">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="34" column="13" selection-start="1272" selection-end="1272" vertical-scroll-proportion="0.0">
@@ -810,23 +887,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1373" column="18" selection-start="41375" selection-end="41375" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="77" column="21" selection-start="2911" selection-end="2911" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="17" selection-start="1976" selection-end="1976" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -842,7 +905,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="708" column="8" selection-start="15374" selection-end="15374" vertical-scroll-proportion="2.794931">
+        <state line="708" column="8" selection-start="15374" selection-end="15374" vertical-scroll-proportion="-46.653847">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="866" column="18" selection-start="25922" selection-end="25926" vertical-scroll-proportion="-11.153846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="305" column="18" selection-start="10658" selection-end="10668" vertical-scroll-proportion="-11.615385">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="112" selection-start="3573" selection-end="3573" vertical-scroll-proportion="0.3838665">
           <folding />
         </state>
       </provider>
