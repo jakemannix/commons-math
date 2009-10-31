@@ -188,7 +188,7 @@
                <formatter usefile="false" type="plain"/>
                <classpath refid="test.classpath"/>
                <batchtest>
-                  <fileset dir="${test.home}" includes="**/SparseRealVectorTest.java" 
+                  <fileset dir="${test.home}" includes="**/*Test.java" 
                   excludes="**/*AbstractTest.java"/> 
      <!--             <fileset dir="${test.home}" includes="**/*Test.java" 
                   excludes="**/*AbstractTest.java"/> -->

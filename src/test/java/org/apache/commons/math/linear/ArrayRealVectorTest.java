@@ -25,8 +25,6 @@ import junit.framework.TestSuite;
 
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.TestUtils;
-import org.apache.commons.math.analysis.BinaryRealFunction;
-import org.apache.commons.math.analysis.MultivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 
 /**
@@ -52,8 +50,7 @@ public class ArrayRealVectorTest extends TestCase {
 
     // Testclass to test the RealVector interface
     // only with enough content to support the test
-    public static class RealVectorTestImpl implements RealVector, Serializable
-    {
+    public static class RealVectorTestImpl implements RealVector, Serializable {
 
         /** Serializable version identifier. */
         private static final long serialVersionUID = 4715341047369582908L;
@@ -67,6 +64,26 @@ public class ArrayRealVectorTest extends TestCase {
 
         private UnsupportedOperationException unsupported() {
             return new UnsupportedOperationException("Not supported, unneeded for test purposes");
+        }
+
+        public RealVector map(UnivariateRealFunction function) throws FunctionEvaluationException {
+            throw unsupported();
+        }
+
+        public RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException {
+            throw unsupported();
+        }
+
+        public double getDefaultValue() {
+            return 0;
+        }
+
+        public Iterator<Entry> iterator() {
+            throw unsupported();
+        }
+
+        public Iterator<Entry> nonDefaultIterator() {
+            throw unsupported();
         }
 
         public RealVector copy() {
@@ -463,50 +480,6 @@ public class ArrayRealVectorTest extends TestCase {
 
         public boolean isInfinite() {
             throw unsupported();
-        }
-
-        public double collect(BinaryCollector collector, RealVector other)
-        {
-          throw unsupported();
-        }
-
-        public Iterator<Entry> iterator()
-        {
-          throw unsupported();
-        }
-
-        public RealVector map(UnivariateRealFunction function)
-        {
-          throw unsupported();
-        }
-
-        public RealVector map(BinaryRealFunction function, RealVector other)
-        {
-          throw unsupported();
-        }
-
-        public double getDefaultValue() {
-            return 0;  //To change body of implemented methods use File | Settings | File Templates.
-        }
-
-        public RealVector mapToSelf(UnivariateRealFunction function)
-        {
-          throw unsupported();
-        }
-
-        public RealVector mapToSelf(BinaryRealFunction function, RealVector other)
-        {
-          throw unsupported();
-        }
-
-        public Iterator<Entry> nonDefaultIterator()
-        {
-          throw unsupported();
-        }
-
-        public double collect(UnaryCollector collector) throws FunctionEvaluationException
-        {
-          throw unsupported();
         }
 
     }

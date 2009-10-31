@@ -75,14 +75,20 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
     return new IntDoubleVector(this);
   }
 
-    public RealVector add(RealVector v) throws IllegalArgumentException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+  public RealVector add(RealVector v) throws IllegalArgumentException
+  {
+    RealVector result = v.copy();
+    for(int i=0; i<indices.length; i++)
+    {
+      result.setEntry(indices[i], values[i]);
     }
+    return result;
+  }
 
-    public RealVector subtract(RealVector v) throws IllegalArgumentException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
+  public RealVector subtract(RealVector v) throws IllegalArgumentException
+  {
+    return null;
+  }
     public RealVector mapAddToSelf(double d) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -135,7 +141,7 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public RealVector append(RealVector v)
+  public RealVector append(RealVector v)
   {
     return append(v.getData());
   }

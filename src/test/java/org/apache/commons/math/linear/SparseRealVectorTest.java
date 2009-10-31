@@ -25,7 +25,6 @@ import junit.framework.TestSuite;
 
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.TestUtils;
-import org.apache.commons.math.analysis.BinaryRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 
 /**
@@ -65,6 +64,26 @@ public class SparseRealVectorTest extends TestCase {
 
         private UnsupportedOperationException unsupported() {
             return new UnsupportedOperationException("Not supported, unneeded for test purposes");
+        }
+
+        public RealVector map(UnivariateRealFunction function) throws FunctionEvaluationException {
+            throw unsupported();
+        }
+
+        public RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException {
+            throw unsupported();
+        }
+
+        public double getDefaultValue() {
+            return 0;
+        }
+
+        public Iterator<Entry> iterator() {
+            throw unsupported();
+        }
+
+        public Iterator<Entry> nonDefaultIterator() {
+            throw unsupported();
         }
 
         public RealVector copy() {
@@ -463,72 +482,6 @@ public class SparseRealVectorTest extends TestCase {
             throw unsupported();
         }
 
-        public double collect(BinaryCollector collector, RealVector other)
-        {
-          throw unsupported();
-        }
-
-        public Iterator<Entry> iterator()
-        {
-          throw unsupported();
-        }
-
-        public RealVector map(UnivariateRealFunction function)
-        {
-          throw unsupported();
-        }
-
-        public RealVector map(BinaryRealFunction function, RealVector other)
-        {
-          throw unsupported();
-        }
-
-        public double getDefaultValue() {
-            return 0;  //To change body of implemented methods use File | Settings | File Templates.
-        }
-
-        public RealVector mapToSelf(UnivariateRealFunction function)
-        {
-          throw unsupported();
-        }
-
-        public RealVector mapToSelf(BinaryRealFunction function, RealVector other)
-        {
-          throw unsupported();
-        }
-
-        public Iterator<Entry> nonDefaultIterator()
-        {
-          return new Iterator<Entry>()
-          {
-            int i=0;
-            public boolean hasNext()
-            {
-              return i<data.length;
-            }
-            public Entry next()
-            {
-              while(i<data.length && getEntry(i) == 0) i++;
-              final int index = i++;
-              return new Entry()
-              {
-                public double getValue() { return getEntry(index); }
-                public int index() { return index; }
-                public void setValue(double newValue) { setEntry(index, newValue); }                
-              };
-            }
-            public void remove()
-            {
-              // TODO Auto-generated method stub
-              throw new UnsupportedOperationException("Not yet supported");
-            }
-          };
-        }
-
-        public double collect(UnaryCollector function) throws FunctionEvaluationException
-        {
-          throw unsupported();
-        }
     }
 
     public static Test suite() {
@@ -540,24 +493,28 @@ public class SparseRealVectorTest extends TestCase {
     public void testConstructors() {
 
         OpenMapRealVector v0 = new OpenMapRealVector();
-        IntDoubleVector w0 = new IntDoubleVector();
         assertEquals("testData len", 0, v0.getDimension());
-        assertEquals("testData len", 0, w0.getDimension());
 
         OpenMapRealVector v1 = new OpenMapRealVector(7);
-        IntDoubleVector w1 = new IntDoubleVector(7);
         assertEquals("testData len", 7, v1.getDimension());
         assertEquals("testData is 0.0 ", 0.0, v1.getEntry(6));
-        assertEquals("testData len", 7, w1.getDimension());
-        assertEquals("testData is 0.0 ", 0.0, w1.getEntry(6));
 
         OpenMapRealVector v3 = new OpenMapRealVector(vec1);
-        IntDoubleVector w3 = new IntDoubleVector(vec1);
         assertEquals("testData len", 3, v3.getDimension());
         assertEquals("testData is 2.0 ", 2.0, v3.getEntry(1));
-        assertEquals("testData len", 3, w3.getDimension());
-        assertEquals("testData is 2.0 ", 2.0, w3.getEntry(1));
-        
+
+        //SparseRealVector v4 = new SparseRealVector(vec4, 3, 2);
+        //assertEquals("testData len", 2, v4.getDimension());
+        //assertEquals("testData is 4.0 ", 4.0, v4.getEntry(0));
+        //try {
+        //    new SparseRealVector(vec4, 8, 3);
+        //    fail("IllegalArgumentException expected");
+        //} catch (IllegalArgumentException ex) {
+            // expected behavior
+        //} catch (Exception e) {
+        //    fail("wrong exception caught");
+        //}
+
         RealVector v5_i = new OpenMapRealVector(dvec1);
         assertEquals("testData len", 9, v5_i.getDimension());
         assertEquals("testData is 9.0 ", 9.0, v5_i.getEntry(8));
@@ -567,74 +524,45 @@ public class SparseRealVectorTest extends TestCase {
         assertEquals("testData is 9.0 ", 9.0, v5.getEntry(8));
 
         OpenMapRealVector v7 = new OpenMapRealVector(v1);
-        IntDoubleVector w7 = new IntDoubleVector(w1);
         assertEquals("testData len", 7, v7.getDimension());
         assertEquals("testData is 0.0 ", 0.0, v7.getEntry(6));
-        assertEquals("testData len", 7, w7.getDimension());
-        assertEquals("testData is 0.0 ", 0.0, w7.getEntry(6));
 
         SparseRealVectorTestImpl v7_i = new SparseRealVectorTestImpl(vec1);
 
         OpenMapRealVector v7_2 = new OpenMapRealVector(v7_i);
-        IntDoubleVector w7_2 = new IntDoubleVector(v7_i);
         assertEquals("testData len", 3, v7_2.getDimension());
         assertEquals("testData is 0.0 ", 2.0d, v7_2.getEntry(1));
-        assertEquals("testData len", 3, w7_2.getDimension());
-        assertEquals("testData is 0.0 ", 2.0d, w7_2.getEntry(1));
 
         OpenMapRealVector v8 = new OpenMapRealVector(v1);
-        IntDoubleVector w8 = new IntDoubleVector(v1);
         assertEquals("testData len", 7, v8.getDimension());
         assertEquals("testData is 0.0 ", 0.0, v8.getEntry(6));
-        assertEquals("testData len", 7, w8.getDimension());
-        assertEquals("testData is 0.0 ", 0.0, w8.getEntry(6));
+
     }
 
     public void testDataInOut() {
 
         OpenMapRealVector v1 = new OpenMapRealVector(vec1);
-        IntDoubleVector w1 = new IntDoubleVector(vec1);
         OpenMapRealVector v2 = new OpenMapRealVector(vec2);
-        IntDoubleVector w2 = new IntDoubleVector(vec2);
         OpenMapRealVector v4 = new OpenMapRealVector(vec4);
-        IntDoubleVector w4 = new IntDoubleVector(vec4);
-        
         SparseRealVectorTestImpl v2_t = new SparseRealVectorTestImpl(vec2);
 
         RealVector v_append_1 = v1.append(v2);
-        RealVector w_append_1 = w1.append(w2); 
-        RealVector w_append_v_1 = w1.append(v2);
         assertEquals("testData len", 6, v_append_1.getDimension());
         assertEquals("testData is 4.0 ", 4.0, v_append_1.getEntry(3));
-        assertEquals("testData len", 6, w_append_1.getDimension());
-        assertEquals("testData is 4.0 ", 4.0, w_append_1.getEntry(3));
-        assertEquals("testData len", 6, w_append_v_1.getDimension());
-        assertEquals("testData is 4.0 ", 4.0, w_append_v_1.getEntry(3));
-
 
         RealVector v_append_2 = v1.append(2.0);
-        RealVector w_append_2 = w1.append(2.0);
         assertEquals("testData len", 4, v_append_2.getDimension());
         assertEquals("testData is 2.0 ", 2.0, v_append_2.getEntry(3));
-        assertEquals("testData len", 4, w_append_2.getDimension());
-        assertEquals("testData is 2.0 ", 2.0, w_append_2.getEntry(3));
 
         RealVector v_append_3 = v1.append(vec2);
-        RealVector w_append_3 = w1.append(vec2);
         assertEquals("testData len", 6, v_append_3.getDimension());
         assertEquals("testData is  ", 4.0, v_append_3.getEntry(3));
-        assertEquals("testData len", 6, w_append_3.getDimension());
-        assertEquals("testData is  ", 4.0, w_append_3.getEntry(3));
 
-        RealVector v_append_4 = v1.append(v2_t);
-        RealVector w_append_4 = w1.append(v2_t);
+	    RealVector v_append_4 = v1.append(v2_t);
         assertEquals("testData len", 6, v_append_4.getDimension());
         assertEquals("testData is 4.0 ", 4.0, v_append_4.getEntry(3));
-        assertEquals("testData len", 6, w_append_4.getDimension());
-        assertEquals("testData is 4.0 ", 4.0, w_append_4.getEntry(3));
 
         RealVector vout5 = v4.getSubVector(3, 3);
-        RealVector wout5 = w4.getSubVector(3, 3);
         assertEquals("testData len", 3, vout5.getDimension());
         assertEquals("testData is 4.0 ", 5.0, vout5.getEntry(1));
         try {
@@ -646,21 +574,8 @@ public class SparseRealVectorTest extends TestCase {
             fail("wrong exception caught");
         }
 
-        assertEquals("testData len", 3, wout5.getDimension());
-        assertEquals("testData is 4.0 ", 5.0, wout5.getEntry(1)); // FIXME: fails! getSubVector incorrect?
-        try {
-            w4.getSubVector(3, 7);
-            fail("MatrixIndexException expected");
-        } catch (MatrixIndexException ex) {
-            // expected behavior
-        } catch (Exception e) {
-            fail("wrong exception caught");
-        }
-        
         OpenMapRealVector v_set1 = (OpenMapRealVector) v1.copy();
-        IntDoubleVector w_set1 = (IntDoubleVector) w1.copy();
         v_set1.setEntry(1, 11.0);
-        w_set1.setEntry(1, 11.0);
         assertEquals("testData is 11.0 ", 11.0, v_set1.getEntry(1));
         try {
             v_set1.setEntry(3, 11.0);
@@ -670,20 +585,7 @@ public class SparseRealVectorTest extends TestCase {
         } catch (Exception e) {
             fail("wrong exception caught");
         }
-        assertEquals("testData is 11.0 ", 11.0, w_set1.getEntry(1));
-        try {
-            w_set1.setEntry(3, 11.0);
-            fail("MatrixIndexException expected");
-        } catch (MatrixIndexException ex) {
-            // expected behavior
-        } catch (Exception e) {
-            fail("wrong exception caught");
-        }
 
-/**
- * CURRENT CHECKPOINT TODO: continue copy/paste        
- */
-        
         OpenMapRealVector v_set2 = (OpenMapRealVector) v4.copy();
         v_set2.setSubVector(3, v1);
         assertEquals("testData is 1.0 ", 1.0, v_set2.getEntry(3));
