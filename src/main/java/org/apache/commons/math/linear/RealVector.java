@@ -20,6 +20,7 @@ import java.util.Iterator;
 
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
+import org.apache.commons.math.analysis.purefunctions.PureBinaryRealFunction;
 
 
 /**
@@ -71,18 +72,14 @@ public interface RealVector {
      * @see RealVector#mapToSelf
      */
     RealVector map(UnivariateRealFunction function) throws FunctionEvaluationException;
-  
-    /*
-     *  Some methods not yet in this patch, which continue in this vein: 
-     */
 
-    //RealVector map(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
+    RealVector map(PureBinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
   
-    //RealVector mapToSelf(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
+    RealVector mapToSelf(PureBinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
   
-    //double collect(UnaryCollector collector) throws FunctionEvaluationException;
+    double collect(UnivariateCollector collector) throws FunctionEvaluationException;
 
-    //double collect(BinaryCollector collector, RealVector other) throws FunctionEvaluationException;
+    double collect(BinaryCollector collector, RealVector other) throws FunctionEvaluationException;
 
   
     public abstract class Entry {

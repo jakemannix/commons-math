@@ -17,6 +17,7 @@
 package org.apache.commons.math.analysis;
 
 import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.analysis.purefunctions.AbstractUnivariateRealFunction;
 
 /**
  * Wrapper class for counting functions calls.

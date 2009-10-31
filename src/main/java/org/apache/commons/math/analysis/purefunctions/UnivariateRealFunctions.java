@@ -1,6 +1,8 @@
-package org.apache.commons.math.analysis;
+package org.apache.commons.math.analysis.purefunctions;
 
 import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.analysis.UnivariateRealFunction;
+import org.apache.commons.math.analysis.purefunctions.AbstractUnivariateRealFunction;
 
 public class UnivariateRealFunctions
 {

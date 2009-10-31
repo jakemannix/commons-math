@@ -1,11 +1,12 @@
-package org.apache.commons.math.analysis;
+package org.apache.commons.math.analysis.purefunctions;
 
 import org.apache.commons.math.FunctionEvaluationException;
-import org.apache.commons.math.linear.AbstractUnaryCollector;
+import org.apache.commons.math.analysis.UnivariateRealFunction;
+import org.apache.commons.math.linear.AbstractUnivariateCollector;
 import org.apache.commons.math.linear.RealVector;
 
 
-public abstract class AbstractUnivariateRealFunction implements UnivariateRealFunction
+public abstract class AbstractUnivariateRealFunction implements PureUnivariateRealFunction
 {
   public double value(int index, double d) throws FunctionEvaluationException
   {
@@ -14,19 +15,19 @@ public abstract class AbstractUnivariateRealFunction implements UnivariateRealFu
   
   public abstract double value(double d) throws FunctionEvaluationException;
 
-  public MultivariateRealFunction asCollector()
+  public PureMultivariateRealFunction asCollector()
   {
-    return asCollector(BinaryRealFunction.Add);
+    return asCollector(PureBinaryRealFunction.Add);
   }
 
-  public MultivariateRealFunction asCollector(BinaryRealFunction combiner)
+  public PureMultivariateRealFunction asCollector(PureBinaryRealFunction combiner)
   {
     return asCollector(combiner, 0d);
   }
   
-  public MultivariateRealFunction asCollector(final BinaryRealFunction combiner, final double initialValue)
+  public PureMultivariateRealFunction asCollector(final PureBinaryRealFunction combiner, final double initialValue)
   {
-    return new AbstractUnaryCollector(initialValue)
+    return new AbstractUnivariateCollector(initialValue)
     {   
       public void collect(double d)
       {
@@ -53,7 +54,7 @@ public abstract class AbstractUnivariateRealFunction implements UnivariateRealFu
     };
   }
   
-  public UnivariateRealFunction preCompose(final UnivariateRealFunction f)
+  public PureUnivariateRealFunction preCompose(final UnivariateRealFunction f)
   {
     return new AbstractUnivariateRealFunction()
     {
@@ -64,7 +65,7 @@ public abstract class AbstractUnivariateRealFunction implements UnivariateRealFu
     };
   }
 
-  public UnivariateRealFunction postCompose(final UnivariateRealFunction f)
+  public PureUnivariateRealFunction postCompose(final UnivariateRealFunction f)
   {
     return new AbstractUnivariateRealFunction()
     {
@@ -75,7 +76,7 @@ public abstract class AbstractUnivariateRealFunction implements UnivariateRealFu
     };
   }
 
-  public UnivariateRealFunction combine(final UnivariateRealFunction f, final BinaryRealFunction combiner)
+  public PureUnivariateRealFunction combine(final UnivariateRealFunction f, final PureBinaryRealFunction combiner)
   {
     return new AbstractUnivariateRealFunction()
     {
@@ -86,23 +87,23 @@ public abstract class AbstractUnivariateRealFunction implements UnivariateRealFu
     };
   }
 
-  public UnivariateRealFunction plus(UnivariateRealFunction f)
+  public PureUnivariateRealFunction plus(UnivariateRealFunction f)
   {
-    return this.combine(f, BinaryRealFunction.Add);
+    return this.combine(f, PureBinaryRealFunction.Add);
   }
 
-  public UnivariateRealFunction minus(UnivariateRealFunction f)
+  public PureUnivariateRealFunction minus(UnivariateRealFunction f)
   {
-    return this.combine(f, BinaryRealFunction.Subtract);
+    return this.combine(f, PureBinaryRealFunction.Subtract);
   }
 
-  public UnivariateRealFunction times(UnivariateRealFunction f)
+  public PureUnivariateRealFunction times(UnivariateRealFunction f)
   {
-    return this.combine(f, BinaryRealFunction.Multiply);
+    return this.combine(f, PureBinaryRealFunction.Multiply);
   }
 
-  public UnivariateRealFunction scale(final double scaleFactor)
+  public PureUnivariateRealFunction scale(final double scaleFactor)
   {
-    return postCompose(BinaryRealFunction.Multiply.provideDefaultSecondArgument(scaleFactor));
+    return postCompose(PureBinaryRealFunction.Multiply.provideDefaultSecondArgument(scaleFactor));
   }
 }

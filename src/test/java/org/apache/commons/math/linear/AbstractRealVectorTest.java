@@ -1,8 +1,7 @@
 package org.apache.commons.math.linear;
 
 import junit.framework.TestCase;
-import org.apache.commons.math.analysis.AbstractUnivariateRealFunction;
-import org.apache.commons.math.analysis.UnivariateRealFunction;
+import org.apache.commons.math.analysis.purefunctions.AbstractUnivariateRealFunction;
 import org.apache.commons.math.linear.RealVector.Entry;
 
 import java.util.Iterator;

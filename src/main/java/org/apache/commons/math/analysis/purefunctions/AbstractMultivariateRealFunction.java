@@ -1,6 +1,7 @@
-package org.apache.commons.math.analysis;
+package org.apache.commons.math.analysis.purefunctions;
 
 import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.analysis.MultivariateRealFunction;
 import org.apache.commons.math.linear.ArrayRealVector;
 import org.apache.commons.math.linear.RealVector;
 
@@ -9,7 +10,7 @@ import org.apache.commons.math.linear.RealVector;
  * <b>MUST</b> be overridden, because they forward to each other in this default implementation.
  *
  */
-public abstract class AbstractMultivariateRealFunction implements MultivariateRealFunction
+public abstract class AbstractMultivariateRealFunction implements PureMultivariateRealFunction
 {
   public AbstractMultivariateRealFunction()
   {

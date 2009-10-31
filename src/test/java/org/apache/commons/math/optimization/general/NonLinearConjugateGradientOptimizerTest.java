@@ -26,7 +26,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.apache.commons.math.FunctionEvaluationException;
-import org.apache.commons.math.analysis.AbstractMultivariateRealFunction;
+import org.apache.commons.math.analysis.purefunctions.AbstractMultivariateRealFunction;
 import org.apache.commons.math.analysis.DifferentiableMultivariateRealFunction;
 import org.apache.commons.math.analysis.MultivariateRealFunction;
 import org.apache.commons.math.analysis.MultivariateVectorialFunction;

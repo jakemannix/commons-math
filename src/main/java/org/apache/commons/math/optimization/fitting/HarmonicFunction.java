@@ -17,7 +17,7 @@
 
 package org.apache.commons.math.optimization.fitting;
 
-import org.apache.commons.math.analysis.AbstractUnivariateRealFunction;
+import org.apache.commons.math.analysis.purefunctions.AbstractUnivariateRealFunction;
 import org.apache.commons.math.analysis.DifferentiableUnivariateRealFunction;
 
 /** Harmonic function of the form <code>f (t) = a cos (&omega; t + &phi;)</code>.

@@ -17,8 +17,6 @@
 package org.apache.commons.math.analysis;
 
 import org.apache.commons.math.FunctionEvaluationException;
-import org.apache.commons.math.linear.AbstractUnaryCollector;
-import org.apache.commons.math.linear.RealVector;
 
 /**
  * An interface representing a univariate real function.
@@ -34,24 +32,4 @@ public interface UnivariateRealFunction {
      * @throws FunctionEvaluationException if the function evaluation fails
      */
     double value(double x) throws FunctionEvaluationException;
-
-    MultivariateRealFunction asCollector();
-
-    MultivariateRealFunction asCollector(BinaryRealFunction combiner);
-
-    MultivariateRealFunction asCollector(final BinaryRealFunction combiner, final double initialValue);
-
-    UnivariateRealFunction preCompose(final UnivariateRealFunction f);
-
-    UnivariateRealFunction postCompose(final UnivariateRealFunction f);
-
-    UnivariateRealFunction combine(final UnivariateRealFunction f, final BinaryRealFunction combiner);
-
-    UnivariateRealFunction plus(UnivariateRealFunction f);
-
-    UnivariateRealFunction minus(UnivariateRealFunction f);
-
-    UnivariateRealFunction times(UnivariateRealFunction f);
-
-    UnivariateRealFunction scale(final double scaleFactor);
 }

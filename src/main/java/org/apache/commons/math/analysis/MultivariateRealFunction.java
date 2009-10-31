@@ -36,6 +36,4 @@ public interface MultivariateRealFunction {
      */
     double value(double[] point)
         throws FunctionEvaluationException, IllegalArgumentException;
-    
-    double value(RealVector point) throws FunctionEvaluationException;
 }

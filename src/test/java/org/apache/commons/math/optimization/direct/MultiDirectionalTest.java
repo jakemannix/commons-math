@@ -19,7 +19,7 @@ package org.apache.commons.math.optimization.direct;
 
 import org.apache.commons.math.ConvergenceException;
 import org.apache.commons.math.FunctionEvaluationException;
-import org.apache.commons.math.analysis.AbstractMultivariateRealFunction;
+import org.apache.commons.math.analysis.purefunctions.AbstractMultivariateRealFunction;
 import org.apache.commons.math.analysis.MultivariateRealFunction;
 import org.apache.commons.math.optimization.GoalType;
 import org.apache.commons.math.optimization.OptimizationException;

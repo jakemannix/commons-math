@@ -1,18 +1,18 @@
 package org.apache.commons.math.linear;
 
 import org.apache.commons.math.FunctionEvaluationException;
-import org.apache.commons.math.analysis.AbstractMultivariateRealFunction;
+import org.apache.commons.math.analysis.purefunctions.AbstractMultivariateRealFunction;
 
-public abstract class AbstractUnaryCollector extends AbstractMultivariateRealFunction implements UnaryCollector
+public abstract class AbstractUnivariateCollector extends AbstractMultivariateRealFunction implements UnivariateCollector
 {
   protected double value;
   
-  public AbstractUnaryCollector()
+  public AbstractUnivariateCollector()
   {
     this(0);
   }
   
-  public AbstractUnaryCollector(double initialValue)
+  public AbstractUnivariateCollector(double initialValue)
   {
     value = initialValue;
   }

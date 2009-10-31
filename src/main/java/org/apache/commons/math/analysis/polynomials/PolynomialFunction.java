@@ -20,7 +20,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 import org.apache.commons.math.MathRuntimeException;
-import org.apache.commons.math.analysis.AbstractUnivariateRealFunction;
+import org.apache.commons.math.analysis.purefunctions.AbstractUnivariateRealFunction;
 import org.apache.commons.math.analysis.DifferentiableUnivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 
