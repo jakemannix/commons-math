@@ -185,7 +185,7 @@ public class AbstractRealVectorTest extends TestCase {
     public void testClone() throws Exception {
         double[] d = new double[1000000];
         Random r = new Random(1234);
-        for(double v : d) v = r.nextDouble();
+        for(int i=0;i<d.length; i++) d[i] = r.nextDouble();
         assertTrue(new ArrayRealVector(d).getNorm() > 0);
         double[] c = d.clone();
         c[0] = 1;
