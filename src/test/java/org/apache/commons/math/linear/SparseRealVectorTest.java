@@ -82,7 +82,7 @@ public class SparseRealVectorTest extends TestCase {
             throw unsupported();
         }
 
-        public Iterator<Entry> nonDefaultIterator() {
+        public Iterator<Entry> sparseIterator() {
             throw unsupported();
         }
 

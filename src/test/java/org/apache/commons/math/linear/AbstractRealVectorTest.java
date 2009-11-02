@@ -183,7 +183,7 @@ public class AbstractRealVectorTest extends TestCase {
         Entry e;
         int i = 0;
         double[] nonDefaultV2 = { -3d, 2d, 1d };
-        for(Iterator<Entry> it = v.nonDefaultIterator(); it.hasNext() && (e = it.next()) != null; i++) {
+        for(Iterator<Entry> it = v.sparseIterator(); it.hasNext() && (e = it.next()) != null; i++) {
             assertEquals(nonDefaultV2[i], e.getValue());
         }
     }

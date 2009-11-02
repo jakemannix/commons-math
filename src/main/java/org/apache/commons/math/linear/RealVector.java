@@ -68,32 +68,30 @@ public interface RealVector {
     /**
      * Acts as if implemented as:
      * return copy().map(function);
-     * @see RealVector#mapToSelf
+     * {@see #mapToSelf }
      */
     RealVector map(UnivariateRealFunction function) throws FunctionEvaluationException;
-  
-    /*
-     *  Some methods not yet in this patch, which continue in this vein: 
-     */
-
-    //RealVector map(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
-  
-    //RealVector mapToSelf(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
-  
-    //double collect(UnaryCollector collector) throws FunctionEvaluationException;
-
-    //double collect(BinaryCollector collector, RealVector other) throws FunctionEvaluationException;
-
   
     public abstract class Entry {
       int index;
       abstract double getValue();
       abstract void setValue(double newValue);
     }
-  
+
+    /**
+     * Generic dense iterator - starts with index == zero, and hasNext() == true until index == getDimension();
+     * @return a dense iterator
+     */
     Iterator<Entry> iterator();
 
-    Iterator<Entry> nonDefaultIterator();
+    /**
+     * Specialized implementations may choose to not iterate over all dimensions, either because those values are
+     * unset, or are equal to defaultValue(), or are small enough to be ignored for the purposes of iteration.
+     * No guarantees are made about order of iteration.
+     * In dense implementations, this method will often delegate to {@see #iterator() }
+     * @return a sparse iterator
+     */
+    Iterator<Entry> sparseIterator();
 
     /**
      * Returns a (deep) copy of this.

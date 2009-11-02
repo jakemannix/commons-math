@@ -540,11 +540,11 @@ public abstract class AbstractRealVector implements RealVector
     {
       product = new Array2DRowRealMatrix(this.getDimension(), v.getDimension());
     }
-    Iterator<Entry> thisIt = nonDefaultIterator();
+    Iterator<Entry> thisIt = sparseIterator();
     Entry thisE = null;
     while(thisIt.hasNext() && (thisE = thisIt.next()) != null)
     {
-      Iterator<Entry> otherIt = v.nonDefaultIterator();
+      Iterator<Entry> otherIt = v.sparseIterator();
       Entry otherE = null;
       while(otherIt.hasNext() && (otherE = otherIt.next()) != null)
       {
@@ -608,7 +608,7 @@ public abstract class AbstractRealVector implements RealVector
     mapDivideToSelf(getNorm());
   }
 
-  public Iterator<Entry> nonDefaultIterator()
+  public Iterator<Entry> sparseIterator()
   {
     return new SparseEntryIterator();
   }
@@ -618,9 +618,9 @@ public abstract class AbstractRealVector implements RealVector
     final int dim = getDimension();
     return new Iterator<Entry>()
     {
-      int i=0;
+      int i = 0;
       EntryImpl e = new EntryImpl();      
-      public boolean hasNext() { return i<dim; }
+      public boolean hasNext() { return i < dim; }
       public Entry next() 
       {
         e.index = i++;
@@ -641,9 +641,9 @@ public abstract class AbstractRealVector implements RealVector
   public RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException
   {
     Iterator<Entry> it = getDefaultValue() == function.value(getDefaultValue())
-                       ? nonDefaultIterator()
+                       ? sparseIterator()
                        : iterator();
-    Entry e = null;
+    Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
       e.setValue(function.value(e.getValue()));
@@ -651,7 +651,8 @@ public abstract class AbstractRealVector implements RealVector
     return this;
   }
 
-  protected class EntryImpl extends Entry {
+  protected class EntryImpl extends Entry
+  {
     public EntryImpl() { index = 0; }
     public double getValue() { return getEntry(index); }
     public void setValue(double newValue) { setEntry(index, newValue); }
@@ -659,7 +660,7 @@ public abstract class AbstractRealVector implements RealVector
 
     /**
      * This class should rare be used, but is here to provide
-     * a default implementation of nonDefaultIterator(), which is implemented
+     * a default implementation of sparseIterator(), which is implemented
      * by walking over the entries, skipping those whose values are the default one.
      *
      * Concrete subclasses which are SparseVector implementations should
