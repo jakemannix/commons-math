@@ -27,7 +27,7 @@ import org.apache.commons.math.util.OpenIntToDoubleHashMap.Iterator;
  * @version $Revision$ $Date$
  * @since 2.0
 */
-public class OpenMapRealVector implements SparseRealVector, Serializable {
+public class OpenMapRealVector extends AbstractRealVector implements SparseRealVector, Serializable {
 
     /** Default Tolerance for having a value considered zero. */
     public static final double DEFAULT_ZERO_TOLERANCE = 1.0e-12;
@@ -41,8 +41,9 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
     /** Dimension of the vector. */
     private final int virtualSize;
 
-    /** Tolerance for having a value considered zero. */
-    private double epsilon;
+    private double defaultMinusEpsilon;
+
+    private double defaultPlusEpsilon;
 
     /**
      * Build a 0-length vector.
@@ -54,7 +55,7 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
      * into this vector.</p>
      */
     public OpenMapRealVector() {
-        this(0, DEFAULT_ZERO_TOLERANCE);
+        this(0, DEFAULT_ZERO_TOLERANCE, 0);
     }
 
     /**
@@ -62,7 +63,7 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
      * @param dimension size of the vector
      */
     public OpenMapRealVector(int dimension) {
-        this(dimension, DEFAULT_ZERO_TOLERANCE);
+        this(dimension, DEFAULT_ZERO_TOLERANCE, 0);
     }
 
     /**
@@ -70,10 +71,10 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
      * @param dimension Size of the vector
      * @param epsilon The tolerance for having a value considered zero
      */
-    public OpenMapRealVector(int dimension, double epsilon) {
+    public OpenMapRealVector(int dimension, double epsilon, double defaultValue) {
         virtualSize = dimension;
-        entries = new OpenIntToDoubleHashMap(0.0);
-        this.epsilon = epsilon;
+        entries = new OpenIntToDoubleHashMap(defaultValue);
+        setDefault(defaultValue, epsilon);
     }
 
     /**
@@ -84,7 +85,9 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
     protected OpenMapRealVector(OpenMapRealVector v, int resize) {
         virtualSize = v.getDimension() + resize;
         entries = new OpenIntToDoubleHashMap(v.entries);
-        epsilon = v.getEpsilon();
+        defaultValue = v.defaultValue;
+        defaultMinusEpsilon = v.defaultMinusEpsilon;
+        defaultPlusEpsilon = v.defaultPlusEpsilon;
     }
 
     /**
@@ -102,10 +105,10 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
      * @param expectedSize The expected number of non-zero entries
      * @param epsilon The tolerance for having a value considered zero
      */
-    public OpenMapRealVector(int dimension, int expectedSize, double epsilon) {
+    public OpenMapRealVector(int dimension, int expectedSize, double epsilon, double defaultValue) {
         virtualSize = dimension;
-        entries = new OpenIntToDoubleHashMap(expectedSize, 0.0);
-        this.epsilon = epsilon;
+        entries = new OpenIntToDoubleHashMap(expectedSize, defaultValue);
+        setDefault(defaultValue, epsilon);
     }
 
     /**
@@ -126,10 +129,10 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
     public OpenMapRealVector(double[] values, double epsilon) {
         virtualSize = values.length;
         entries = new OpenIntToDoubleHashMap(0.0);
-        this.epsilon = epsilon;
+        setDefault(0, epsilon);
         for (int key = 0; key < values.length; key++) {
             double value = values[key];
-            if (!isZero(value)) {
+            if (!isDefaultValue(value)) {
                 entries.put(key, value);
             }
         }
@@ -141,7 +144,7 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
      * @param values The set of values to create from
      */
     public OpenMapRealVector(Double[] values) {
-        this(values, DEFAULT_ZERO_TOLERANCE);
+        this(values, DEFAULT_ZERO_TOLERANCE, 0);
     }
 
     /**
@@ -150,13 +153,13 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
      * @param values The set of values to create from
      * @param epsilon The tolerance for having a value considered zero
      */
-    public OpenMapRealVector(Double[] values, double epsilon) {
+    public OpenMapRealVector(Double[] values, double epsilon, double defaultValue) {
         virtualSize = values.length;
-        entries = new OpenIntToDoubleHashMap(0.0);
-        this.epsilon = epsilon;
+        entries = new OpenIntToDoubleHashMap(defaultValue);
+        setDefault(defaultValue, epsilon);
         for (int key = 0; key < values.length; key++) {
             double value = values[key].doubleValue();
-            if (!isZero(value)) {
+            if (!isDefaultValue(value)) {
                 entries.put(key, value);
             }
         }
@@ -169,7 +172,8 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
     public OpenMapRealVector(OpenMapRealVector v) {
         virtualSize = v.getDimension();
         entries = new OpenIntToDoubleHashMap(v.getEntries());
-        epsilon = v.getEpsilon();
+        defaultPlusEpsilon = v.defaultPlusEpsilon;
+        defaultMinusEpsilon = v.defaultMinusEpsilon;
     }
 
     /**
@@ -179,13 +183,21 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
     public OpenMapRealVector(RealVector v) {
         virtualSize = v.getDimension();
         entries = new OpenIntToDoubleHashMap(0.0);
-        epsilon = DEFAULT_ZERO_TOLERANCE;
+        setDefault(v.getDefaultValue(), DEFAULT_ZERO_TOLERANCE);
         for (int key = 0; key < virtualSize; key++) {
             double value = v.getEntry(key);
-            if (!isZero(value)) {
+            if (!isDefaultValue(value)) {
                 entries.put(key, value);
             }
         }
+    }
+
+    private void setDefault(double defaultValue, double epsilon) {
+      if(epsilon < 0) {
+        throw new IllegalArgumentException("default tolerance must be > 0 :" + epsilon);
+      }
+      defaultPlusEpsilon = defaultValue + epsilon;
+      defaultMinusEpsilon = defaultValue - epsilon;
     }
 
     /**
@@ -199,26 +211,10 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
     /**
      * Determine if this value is zero.
      * @param value The value to test
-     * @return <code>true</code> if this value is zero, <code>false</code> otherwise
+     * @return <code>true</code> if this value is equal to the defaultValue, <code>false</code> otherwise
      */
-    protected boolean isZero(double value) {
-        return value > -epsilon && value < epsilon;
-    }
-
-    /**
-     * Get the tolerance for having a value considered zero.
-     * @return The test range for testing if a value is zero
-     */
-    public double getEpsilon() {
-        return epsilon;
-    }
-
-    /**
-     * Set the tolerance for having a value considered zero.
-     * @param epsilon The test range for testing if a value is zero
-     */
-    public void setEpsilon(double epsilon) {
-        this.epsilon = epsilon;
+    protected boolean isDefaultValue(double value) {
+        return value < defaultPlusEpsilon && value > defaultMinusEpsilon;
     }
 
     /** {@inheritDoc} */
@@ -1099,7 +1095,7 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
     /** {@inheritDoc} */
     public void setEntry(int index, double value) throws MatrixIndexException {
         checkIndex(index);
-        if (!isZero(value)) {
+        if (!isDefaultValue(value)) {
             entries.put(index, value);
         } else if (entries.containsKey(index)) {
             entries.remove(index);
@@ -1185,7 +1181,7 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
     /** {@inheritDoc} */
     public void unitize() {
         double norm = getNorm();
-        if (isZero(norm)) {
+        if (isDefaultValue(norm)) {
             throw  MathRuntimeException.createArithmeticException("cannot normalize a zero norm vector");
         }
         Iterator iter = entries.iterator();
@@ -1196,37 +1192,6 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
 
     }
 
-    /**
-     * Check if an index is valid.
-     *
-     * @param index
-     *            index to check
-     * @exception MatrixIndexException
-     *                if index is not valid
-     */
-    private void checkIndex(final int index) throws MatrixIndexException {
-        if (index < 0 || index >= getDimension()) {
-            throw new MatrixIndexException(
-                    "index {0} out of allowed range [{1}, {2}]",
-                    index, 0, getDimension() - 1);
-        }
-    }
-
-    /**
-     * Check if instance dimension is equal to some expected value.
-     *
-     * @param n
-     *            expected dimension.
-     * @exception IllegalArgumentException
-     *                if the dimension is inconsistent with vector size
-     */
-    protected void checkVectorDimensions(int n) throws IllegalArgumentException {
-        if (getDimension() != n) {
-            throw MathRuntimeException.createIllegalArgumentException(
-                    "vector length mismatch: got {0} but expected {1}",
-                    getDimension(), n);
-        }
-    }
 
     /** {@inheritDoc} */
     public double[] toArray() {
@@ -1243,7 +1208,7 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
         final int prime = 31;
         int result = 1;
         long temp;
-        temp = Double.doubleToLongBits(epsilon);
+        temp = Double.doubleToLongBits(defaultPlusEpsilon) + Double.doubleToLongBits(defaultMinusEpsilon);
         result = prime * result + (int) (temp ^ (temp >>> 32));
         result = prime * result + virtualSize;
         Iterator iter = entries.iterator();
@@ -1276,8 +1241,12 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
         if (virtualSize != other.virtualSize) {
             return false;
         }
-        if (Double.doubleToLongBits(epsilon) !=
-            Double.doubleToLongBits(other.epsilon)) {
+        if (Double.doubleToLongBits(defaultMinusEpsilon) !=
+            Double.doubleToLongBits(other.defaultMinusEpsilon)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(defaultPlusEpsilon) !=
+            Double.doubleToLongBits(other.defaultPlusEpsilon)) {
             return false;
         }
         Iterator iter = entries.iterator();
