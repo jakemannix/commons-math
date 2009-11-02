@@ -222,7 +222,7 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public OpenMapRealVector add(RealVector v) throws IllegalArgumentException {
+    public RealVector add(RealVector v) throws IllegalArgumentException {
         checkVectorDimensions(v.getDimension());
         if (v instanceof OpenMapRealVector) {
             return add((OpenMapRealVector) v);
@@ -238,13 +238,15 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
      */
     public OpenMapRealVector add(OpenMapRealVector v) throws IllegalArgumentException{
         checkVectorDimensions(v.getDimension());
-        OpenMapRealVector res = copy();
-        Iterator iter = v.getEntries().iterator();
+        boolean copyThis = entries.size() > v.entries.size();
+        OpenMapRealVector res = copyThis ? copy() : v.copy();
+        Iterator iter = copyThis ? v.entries.iterator() : entries.iterator();
+        OpenIntToDoubleHashMap randomAccessEntries = copyThis ? entries : v.entries;
         while (iter.hasNext()) {
             iter.advance();
             int key = iter.key();
-            if (entries.containsKey(key)) {
-                res.setEntry(key, entries.get(key) + iter.value());
+            if (randomAccessEntries.containsKey(key)) {
+                res.setEntry(key, randomAccessEntries.get(key) + iter.value());
             } else {
                 res.setEntry(key, iter.value());
             }
@@ -253,13 +255,16 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public OpenMapRealVector add(double[] v) throws IllegalArgumentException {
+    public RealVector add(double[] v) throws IllegalArgumentException {
         checkVectorDimensions(v.length);
-        OpenMapRealVector res = new OpenMapRealVector(getDimension());
-        for (int i = 0; i < v.length; i++) {
-            res.setEntry(i, v[i] + getEntry(i));
+        double[] out = v.clone();
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            int key = iter.key();
+            out[key] += iter.value();
         }
-        return res;
+        return new ArrayRealVector(out, false);
     }
 
     /**
@@ -308,6 +313,11 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
 
     /** {@inheritDoc} */
     public double dotProduct(RealVector v) throws IllegalArgumentException {
+        if (v instanceof ArrayRealVector) {
+            return dotProduct(((ArrayRealVector)v).getDataRef());
+        } else if (v instanceof OpenMapRealVector) {
+            return dotProduct((OpenMapRealVector)v);
+        }
         checkVectorDimensions(v.getDimension());
         double res = 0;
         Iterator iter = entries.iterator();
@@ -318,18 +328,26 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
         return res;
     }
 
+    public double dotProduct(OpenMapRealVector v) throws IllegalArgumentException {
+        checkVectorDimensions(v.getDimension());
+        double res = 0;
+        boolean thisIsSmaller = entries.size() < v.entries.size();
+        Iterator iter = thisIsSmaller ? entries.iterator() : v.entries.iterator();
+        OpenIntToDoubleHashMap larger = thisIsSmaller ? v.entries : entries;
+        while(iter.hasNext()) {
+            iter.advance();
+            res += iter.value() * larger.get(iter.key());
+        }
+        return res;
+    }
+
     /** {@inheritDoc} */
     public double dotProduct(double[] v) throws IllegalArgumentException {
         checkVectorDimensions(v.length);
         double res = 0;
         Iterator iter = entries.iterator();
         while (iter.hasNext()) {
-            int idx = iter.key();
-            double value = 0;
-            if (idx < v.length) {
-                value = v[idx];
-            }
-            res += value * iter.value();
+            res += v[iter.key()] * iter.value();
         }
         return res;
     }
@@ -422,20 +440,22 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
      * @throws IllegalArgumentException If the dimensions don't match
      */
     public double getDistance(OpenMapRealVector v) throws IllegalArgumentException {
-        Iterator iter = entries.iterator();
+        boolean thisIsSmaller = entries.size() < v.entries.size();
+        Iterator iter = thisIsSmaller ? v.entries.iterator() : entries.iterator();
+        OpenIntToDoubleHashMap randomAccess = thisIsSmaller ? entries : v.entries;
         double res = 0;
         while (iter.hasNext()) {
             iter.advance();
-            int key = iter.key();
-            double delta;
-            delta = iter.value() - v.getEntry(key);
+            final double delta;
+            delta = iter.value() - randomAccess.get(iter.key());
             res += delta * delta;
         }
-        iter = v.getEntries().iterator();
+        iter = thisIsSmaller ? entries.iterator() : v.entries.iterator();
+        randomAccess = thisIsSmaller ? v.entries : entries;
         while (iter.hasNext()) {
             iter.advance();
             int key = iter.key();
-            if (!entries.containsKey(key)) {
+            if (!randomAccess.containsKey(key)) {
                 final double value = iter.value();
                 res += value * value;
             }
@@ -448,8 +468,11 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
         checkVectorDimensions(v.getDimension());
         if (v instanceof OpenMapRealVector) {
             return getDistance((OpenMapRealVector) v);
+        } else if (v instanceof ArrayRealVector) {
+            return getDistance(((ArrayRealVector)v).getDataRef());
+        } else {
+            return getDistance(v.getData());
         }
-        return getDistance(v.getData());
     }
 
     /** {@inheritDoc} */
@@ -478,23 +501,24 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
      * @return distance between two vectors.
      */
     public double getL1Distance(OpenMapRealVector v) {
-        double max = 0;
-        Iterator iter = entries.iterator();
+        boolean thisIsSmaller = entries.size() < v.entries.size();
+        Iterator iter = thisIsSmaller ? v.entries.iterator() : entries.iterator();
+        OpenIntToDoubleHashMap randomAccess = thisIsSmaller ? entries : v.entries;
+        double res = 0;
         while (iter.hasNext()) {
             iter.advance();
-            double delta = Math.abs(iter.value() - v.getEntry(iter.key()));
-            max += delta;
+            res += Math.abs(iter.value() - randomAccess.get(iter.key()));
         }
-        iter = v.getEntries().iterator();
+        iter = thisIsSmaller ? entries.iterator() : v.entries.iterator();
+        randomAccess = thisIsSmaller ? v.entries : entries;
         while (iter.hasNext()) {
             iter.advance();
             int key = iter.key();
-            if (!entries.containsKey(key)) {
-                double delta = Math.abs(iter.value());
-                max +=  Math.abs(delta);
+            if (!randomAccess.containsKey(key)) {
+                res += Math.abs(iter.value());
             }
         }
-        return max;
+        return res;
     }
 
     /** {@inheritDoc} */
@@ -502,6 +526,8 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
         checkVectorDimensions(v.getDimension());
         if (v instanceof OpenMapRealVector) {
             return getL1Distance((OpenMapRealVector) v);
+        } else if (v instanceof ArrayRealVector) {
+            return getL1Distance(((ArrayRealVector)v).getDataRef());
         }
         return getL1Distance(v.getData());
     }
@@ -534,26 +560,25 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
      * @return the LInfDistance
      */
     private double getLInfDistance(OpenMapRealVector v) {
-        double max = 0;
-        Iterator iter = entries.iterator();
+        boolean thisIsSmaller = entries.size() < v.entries.size();
+        Iterator iter = thisIsSmaller ? v.entries.iterator() : entries.iterator();
+        OpenIntToDoubleHashMap randomAccess = thisIsSmaller ? entries : v.entries;
+        double res = 0;
         while (iter.hasNext()) {
             iter.advance();
-            double delta = Math.abs(iter.value() - v.getEntry(iter.key()));
-            if (delta > max) {
-                max = delta;
-            }
+            double delta = Math.abs(iter.value() - randomAccess.get(iter.key()));
+            res = Math.max(delta, res);
         }
-        iter = v.getEntries().iterator();
+        iter = thisIsSmaller ? entries.iterator() : v.entries.iterator();
+        randomAccess = thisIsSmaller ? v.entries : entries;
         while (iter.hasNext()) {
             iter.advance();
             int key = iter.key();
-            if (!entries.containsKey(key)) {
-                if (iter.value() > max) {
-                    max = iter.value();
-                }
+            if (!randomAccess.containsKey(key)) {
+                res = Math.max(res, iter.value());
             }
         }
-        return max;
+        return res;
     }
 
     /** {@inheritDoc} */
@@ -561,6 +586,8 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
         checkVectorDimensions(v.getDimension());
         if (v instanceof OpenMapRealVector) {
             return getLInfDistance((OpenMapRealVector) v);
+        } else if (v instanceof ArrayRealVector) {
+            return getLInfDistance(((ArrayRealVector)v).getDataRef());
         }
         return getLInfDistance(v.getData());
     }
@@ -570,10 +597,7 @@ public class OpenMapRealVector implements SparseRealVector, Serializable {
         checkVectorDimensions(v.length);
         double max = 0;
         for (int i = 0; i < v.length; i++) {
-            double delta = Math.abs(getEntry(i) - v[i]);
-            if (delta > max) {
-                max = delta;
-            }
+            max = Math.max(max, Math.abs(getEntry(i) - v[i]));
         }
         return max;
     }
