@@ -5,6 +5,7 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.linear.RealVector.Entry;
 
 import java.util.Iterator;
+import java.util.Random;
 
 /**
  * 
@@ -179,5 +180,31 @@ public class AbstractRealVectorTest extends TestCase {
         for(Iterator<Entry> it = v.sparseIterator(); it.hasNext() && (e = it.next()) != null; i++) {
             assertEquals(nonDefaultV2[i], e.getValue());
         }
+    }
+
+    public void testClone() throws Exception {
+        double[] d = new double[1000000];
+        Random r = new Random(1234);
+        for(double v : d) v = r.nextDouble();
+        assertTrue(new ArrayRealVector(d).getNorm() > 0);
+        double[] c = d.clone();
+        c[0] = 1;
+        assertNotSame(c[0], d[0]);
+        d[0] = 1;
+        assertEquals(new ArrayRealVector(d).getNorm(), new ArrayRealVector(c).getNorm());
+        long cloneTime = 0;
+        long setAndAddTime = 0;
+        for(int i=0; i<10; i++) {
+          long start = System.nanoTime();
+          double[] v = d.clone();
+          for(int j=0; j<v.length; j++) v[j] += 1234.5678;
+          if(i > 4) cloneTime += System.nanoTime() - start;
+          start = System.nanoTime();
+          v = new double[d.length];
+          for(int j=0; j<v.length; j++) v[j] = d[j] + 1234.5678;
+          if(i > 4) setAndAddTime += System.nanoTime() - start;
+        }
+        System.out.println("Clone  time: " + (cloneTime / 5000000d) + "ms");
+        System.out.println("SetAdd time: " + (setAndAddTime / 5000000d) + "ms");
     }
 }
