@@ -75,17 +75,58 @@ public abstract class AbstractRealVector implements RealVector
 
   public RealVector add(double[] v) throws IllegalArgumentException
   {
-    return add(new ArrayRealVector(v, false));
+    double[] result = v.clone();
+    Iterator<Entry> it = getDefaultValue() == 0 ? sparseIterator() : iterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null)
+    {
+      result[e.index] += e.getValue();
+    }
+    return new ArrayRealVector(result, false);
   }
 
   public RealVector add(RealVector v) throws IllegalArgumentException
   {
+    if(v instanceof ArrayRealVector)
+    {
+      double[] values = ((ArrayRealVector)v).getDataRef();
+      return add(values);
+    }
     RealVector result = v.copy();
     Iterator<Entry> it = getDefaultValue() == 0 ? sparseIterator() : iterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
       v.setEntry(e.index, e.getValue() + result.getEntry(e.index));
+    }
+    return result;
+  }
+
+  public RealVector subtract(double[] v) throws IllegalArgumentException
+  {
+    double[] result = v.clone();
+    Iterator<Entry> it = getDefaultValue() == 0 ? sparseIterator() : iterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null)
+    {
+      result[e.index] = e.getValue() - result[e.index];
+    }
+    return new ArrayRealVector(result, false);
+  }
+
+  public RealVector subtract(RealVector v) throws IllegalArgumentException
+  {
+    if(v instanceof ArrayRealVector)
+    {
+      double[] values = ((ArrayRealVector)v).getDataRef();
+      return add(values);
+    }
+    RealVector result = v.copy();
+    Iterator<Entry> it = getDefaultValue() == 0 ? sparseIterator() : iterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null)
+    {
+      v.setEntry(e.index, e.getValue() - result.getEntry(e.index));
     }
     return result;
   }
@@ -118,15 +159,12 @@ public abstract class AbstractRealVector implements RealVector
 
   public double dotProduct(RealVector v) throws IllegalArgumentException
   {
+    checkVectorDimensions(v);
     double d = 0;
-    Iterator<Entry> it;
-    if(this instanceof SparseRealVector && getDefaultValue() == 0)
-    {
-      it = sparseIterator();
-      if(v instanceof SparseRealVector && v.getDefaultValue() == 0)
-      {
-          
-      }
+    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null) {
+      d += e.getValue() * v.getEntry(e.index);
     }
     return d;
   }
@@ -143,32 +181,76 @@ public abstract class AbstractRealVector implements RealVector
 
   public double getDistance(RealVector v) throws IllegalArgumentException
   {
-    return subtract(v).getNorm();
+    checkVectorDimensions(v);
+    double d = 0;
+    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null) {
+      final double diff = e.getValue() - v.getEntry(e.index);
+      d += diff * diff;
+    }
+    return Math.sqrt(d);
   }
 
   public double getDistance(double[] v) throws IllegalArgumentException
   {
-    return getDistance(new ArrayRealVector(v, false));
+    checkVectorDimensions(v.length);
+    double d = 0;
+    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null) {
+      final double diff = e.getValue() - v[e.index];
+      d += diff * diff;
+    }
+    return Math.sqrt(d);
   }
 
   public double getL1Distance(RealVector v) throws IllegalArgumentException
   {
-    return subtract(v).getL1Norm();
+    checkVectorDimensions(v);
+    double d = 0;
+    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null) {
+      d += Math.abs(e.getValue() - v.getEntry(e.index));
+    }
+    return d;
   }
 
   public double getL1Distance(double[] v) throws IllegalArgumentException
   {
-    return getL1Distance(new ArrayRealVector(v, false));
+    checkVectorDimensions(v.length);
+    double d = 0;
+    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null) {
+      d += Math.abs(e.getValue() - v[e.index]);
+    }
+    return d;
   }
 
   public double getLInfDistance(RealVector v) throws IllegalArgumentException
   {
-    return subtract(v).getLInfNorm();
+    checkVectorDimensions(v);
+    double d = 0;
+    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null) {
+      d = Math.max(Math.abs(e.getValue() - v.getEntry(e.index)), d);
+    }
+    return d;
   }
 
   public double getLInfDistance(double[] v) throws IllegalArgumentException
   {
-    return getLInfDistance(new ArrayRealVector(v, false));
+    checkVectorDimensions(v.length);
+    double d = 0;
+    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null) {
+      d = Math.max(Math.abs(e.getValue() - v[e.index]), d);
+    }
+    return d;
   }
   
   public RealVector mapAbs()
@@ -614,11 +696,6 @@ public abstract class AbstractRealVector implements RealVector
     {
       e.setValue(value);
     }
-  }
-
-  public RealVector subtract(double[] v) throws IllegalArgumentException
-  {
-    return subtract(new ArrayRealVector(v, false));
   }
 
   public double[] toArray()

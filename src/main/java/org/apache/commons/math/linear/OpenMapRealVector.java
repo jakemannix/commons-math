@@ -209,51 +209,44 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
     }
 
     /**
-     * Determine if this value is zero.
+     * Determine if this value is within epsilon of the defaultValue.
      * @param value The value to test
-     * @return <code>true</code> if this value is equal to the defaultValue, <code>false</code> otherwise
+     * @return <code>true</code> if this value is within epsilon to the defaultValue, <code>false</code> otherwise
      */
     protected boolean isDefaultValue(double value) {
         return value < defaultPlusEpsilon && value > defaultMinusEpsilon;
     }
 
     /** {@inheritDoc} */
-    public OpenMapRealVector add(RealVector v) throws IllegalArgumentException {
+    public RealVector add(RealVector v) throws IllegalArgumentException {
         checkVectorDimensions(v.getDimension());
         if (v instanceof OpenMapRealVector) {
             return add((OpenMapRealVector) v);
+        } else {
+            return super.add(v);
         }
-        return add(v.getData());
     }
 
     /**
-     * Optimized method to add two OpenMapRealVectors.
+     * Optimized method to add two OpenMapRealVectors.  Copies the larger vector, iterates over the smaller.
      * @param v Vector to add with
      * @return The sum of <code>this</code> with <code>v</code>
      * @throws IllegalArgumentException If the dimensions don't match
      */
     public OpenMapRealVector add(OpenMapRealVector v) throws IllegalArgumentException{
         checkVectorDimensions(v.getDimension());
-        OpenMapRealVector res = copy();
-        Iterator iter = v.getEntries().iterator();
+        boolean copyThis = entries.size() > v.entries.size();
+        OpenMapRealVector res = copyThis ? this.copy() : v.copy();
+        Iterator iter = copyThis ? v.entries.iterator() : entries.iterator();
+        OpenIntToDoubleHashMap randomAccess = copyThis ? entries : v.entries;
         while (iter.hasNext()) {
             iter.advance();
             int key = iter.key();
-            if (entries.containsKey(key)) {
-                res.setEntry(key, entries.get(key) + iter.value());
+            if (randomAccess.containsKey(key)) {
+                res.setEntry(key, randomAccess.get(key) + iter.value());
             } else {
                 res.setEntry(key, iter.value());
             }
-        }
-        return res;
-    }
-
-    /** {@inheritDoc} */
-    public OpenMapRealVector add(double[] v) throws IllegalArgumentException {
-        checkVectorDimensions(v.length);
-        OpenMapRealVector res = new OpenMapRealVector(getDimension());
-        for (int i = 0; i < v.length; i++) {
-            res.setEntry(i, v[i] + getEntry(i));
         }
         return res;
     }
@@ -302,33 +295,6 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
         return new OpenMapRealVector(this);
     }
 
-    /** {@inheritDoc} */
-    public double dotProduct(RealVector v) throws IllegalArgumentException {
-        checkVectorDimensions(v.getDimension());
-        double res = 0;
-        Iterator iter = entries.iterator();
-        while (iter.hasNext()) {
-            iter.advance();
-            res += v.getEntry(iter.key()) * iter.value();
-        }
-        return res;
-    }
-
-    /** {@inheritDoc} */
-    public double dotProduct(double[] v) throws IllegalArgumentException {
-        checkVectorDimensions(v.length);
-        double res = 0;
-        Iterator iter = entries.iterator();
-        while (iter.hasNext()) {
-            int idx = iter.key();
-            double value = 0;
-            if (idx < v.length) {
-                value = v[idx];
-            }
-            res += value * iter.value();
-        }
-        return res;
-    }
 
     /** {@inheritDoc} */
     public OpenMapRealVector ebeDivide(RealVector v) throws IllegalArgumentException {
