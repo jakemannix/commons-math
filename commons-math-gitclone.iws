@@ -64,6 +64,33 @@
   <component name="FileColors" enabled="false" enabledForTabs="false" />
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="UnivariateCollector.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/UnivariateCollector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="48" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Collector.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/Collector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="0" selection-start="99" selection-end="99" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MultiCollector.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/MultiCollector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="3" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="AbstractBinaryCollector.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractBinaryCollector.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -73,28 +100,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OpenMapRealVector.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="13" selection-start="1232" selection-end="1232" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RealVector.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="81" column="4" selection-start="3249" selection-end="3249" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractRealVector.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AbstractRealVector.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="725" column="139" selection-start="21804" selection-end="21871" vertical-scroll-proportion="5.029872">
+            <state line="667" column="26" selection-start="19517" selection-end="19517" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,55 +111,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PureBinaryRealFunction.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/purefunctions/PureBinaryRealFunction.java">
+      <file leaf-file-name="ArrayRealVector.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="17" selection-start="280" selection-end="280" vertical-scroll-proportion="0.0">
+            <state line="32" column="13" selection-start="1295" selection-end="1295" vertical-scroll-proportion="-4.6153846">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Collectors.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/Collectors.java">
+      <file leaf-file-name="RealPointValuePair.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/optimization/RealPointValuePair.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="13" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0">
+            <state line="30" column="13" selection-start="1175" selection-end="1175" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BinaryCollector.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/BinaryCollector.java">
+      <file leaf-file-name="VectorialPointValuePair.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/optimization/VectorialPointValuePair.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="17" selection-start="58" selection-end="58" vertical-scroll-proportion="0.0">
+            <state line="29" column="13" selection-start="1184" selection-end="1184" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Collector.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/Collector.java">
+      <file leaf-file-name="BigReal.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/util/BigReal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="17" selection-start="58" selection-end="58" vertical-scroll-proportion="0.0">
+            <state line="36" column="13" selection-start="1303" selection-end="1303" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UnivariateCollector.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/UnivariateCollector.java">
+      <file leaf-file-name="OpenIntToDoubleHashMap.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/util/OpenIntToDoubleHashMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="17" selection-start="143" selection-end="143" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractUnivariateCollector.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractUnivariateCollector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="9" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0">
+            <state line="38" column="13" selection-start="1582" selection-end="1582" vertical-scroll-proportion="-2.154596">
               <folding />
             </state>
           </provider>
@@ -166,9 +166,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/IntDoubleVector.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/UnivariateRealFunction.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/purefunctions/PureRealFunction.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/MultivariateRealFunction.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/AbstractPureBinaryRealFunction.java" />
@@ -182,6 +179,9 @@
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/UnivariateCollector.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/purefunctions/ComposableFunction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/purefunctions/BinaryRealFunction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/MultiCollector.java" />
       </list>
     </option>
   </component>
@@ -287,7 +287,51 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="linear" />
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commons-math-gitclone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commons-math-gitclone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="org" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apache.commons.math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commons-math-gitclone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commons-math-gitclone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="org" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apache.commons.math" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="optimization" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -575,81 +619,51 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/purefunctions/UnivariateRealFunctions.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/FunctionEvaluationException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="281" selection-end="281" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/UnivariateMatrixFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="17" selection-start="1038" selection-end="1038" vertical-scroll-proportion="0.0">
+        <state line="28" column="53" selection-start="1177" selection-end="1177" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/UnivariateRealFunction.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/MathException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="17" selection-start="1022" selection-end="1022" vertical-scroll-proportion="0.0">
+        <state line="35" column="13" selection-start="1341" selection-end="1341" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/UnivariateVectorialFunction.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/purefunctions/BinaryRealFunction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="17" selection-start="1041" selection-end="1041" vertical-scroll-proportion="0.0">
+        <state line="33" column="33" selection-start="1101" selection-end="1101" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/analysis/MonitoredFunction.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealMatrixChangingVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="47" selection-start="1112" selection-end="1128" vertical-scroll-proportion="0.0">
+        <state line="26" column="17" selection-start="1010" selection-end="1010" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/analysis/Expm1Function.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractUnivariateCollector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="13" selection-start="1088" selection-end="1088" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="13" selection-start="1232" selection-end="1232" vertical-scroll-proportion="0.0">
+        <state line="7" column="102" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="4" selection-start="3249" selection-end="3249" vertical-scroll-proportion="0.0">
+        <state line="48" column="17" selection-start="2050" selection-end="2050" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/Collector.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/UnivariateCollector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="17" selection-start="58" selection-end="58" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/Collectors.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/BinaryCollector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="17" selection-start="58" selection-end="58" vertical-scroll-proportion="0.0">
+        <state line="4" column="48" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -661,33 +675,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractUnivariateCollector.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/Collector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="9" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0">
+        <state line="6" column="0" selection-start="99" selection-end="99" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/UnivariateCollector.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/MultiCollector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="143" selection-end="143" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/purefunctions/PureBinaryRealFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="17" selection-start="280" selection-end="280" vertical-scroll-proportion="0.0">
+        <state line="15" column="3" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="725" column="139" selection-start="21804" selection-end="21871" vertical-scroll-proportion="5.029872">
+        <state line="667" column="26" selection-start="19517" selection-end="19517" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="13" selection-start="1295" selection-end="1295" vertical-scroll-proportion="-4.6153846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/optimization/RealPointValuePair.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="13" selection-start="1175" selection-end="1175" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/optimization/VectorialPointValuePair.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="13" selection-start="1184" selection-end="1184" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/util/BigReal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="13" selection-start="1303" selection-end="1303" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/util/OpenIntToDoubleHashMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="13" selection-start="1582" selection-end="1582" vertical-scroll-proportion="-2.154596">
+          <folding />
         </state>
       </provider>
     </entry>

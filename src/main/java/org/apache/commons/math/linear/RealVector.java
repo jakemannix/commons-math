@@ -20,7 +20,7 @@ import java.util.Iterator;
 
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
-import org.apache.commons.math.analysis.purefunctions.PureBinaryRealFunction;
+import org.apache.commons.math.analysis.purefunctions.BinaryRealFunction;
 
 
 /**
@@ -73,9 +73,9 @@ public interface RealVector {
      */
     RealVector map(UnivariateRealFunction function) throws FunctionEvaluationException;
 
-    RealVector map(PureBinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
+    RealVector map(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
   
-    RealVector mapToSelf(PureBinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
+    RealVector mapToSelf(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException;
   
     double collect(UnivariateCollector collector) throws FunctionEvaluationException;
 

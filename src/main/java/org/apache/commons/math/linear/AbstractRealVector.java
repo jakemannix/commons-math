@@ -5,7 +5,7 @@ import java.util.Iterator;
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathRuntimeException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
-import org.apache.commons.math.analysis.purefunctions.PureBinaryRealFunction;
+import org.apache.commons.math.analysis.purefunctions.BinaryRealFunction;
 import org.apache.commons.math.analysis.purefunctions.UnivariateRealFunctions;
 
 public class AbstractRealVector implements RealVector {
@@ -85,7 +85,7 @@ public class AbstractRealVector implements RealVector {
 
     public RealVector subtract(RealVector v) throws IllegalArgumentException {
         try {
-            return map(PureBinaryRealFunction.Subtract, v);
+            return map(BinaryRealFunction.Subtract, v);
         } catch (FunctionEvaluationException e) {
             throw new IllegalArgumentException(e);
         }
@@ -97,7 +97,7 @@ public class AbstractRealVector implements RealVector {
 
     public RealVector add(RealVector v) throws IllegalArgumentException {
         try {
-            return map(PureBinaryRealFunction.Add, v);
+            return map(BinaryRealFunction.Add, v);
         } catch (FunctionEvaluationException e) {
             throw new IllegalArgumentException(e);
         }
@@ -149,7 +149,7 @@ public class AbstractRealVector implements RealVector {
 
     public RealVector ebeDivide(RealVector v) throws IllegalArgumentException {
         try {
-            return mapToSelf(PureBinaryRealFunction.Divide, v);
+            return mapToSelf(BinaryRealFunction.Divide, v);
         } catch (FunctionEvaluationException e) {
             throw new IllegalArgumentException(e);
         }
@@ -211,7 +211,7 @@ public class AbstractRealVector implements RealVector {
 
     public RealVector mapAddToSelf(double d) {
         try {
-            return map(PureBinaryRealFunction.Add.provideDefaultSecondArgument(d));
+            return map(BinaryRealFunction.Add.provideDefaultSecondArgument(d));
         } catch (FunctionEvaluationException e) {
             throw new IllegalArgumentException(e);
         }
@@ -657,11 +657,11 @@ public class AbstractRealVector implements RealVector {
         return copy().mapToSelf(function);
     }
 
-    public RealVector map(PureBinaryRealFunction function, RealVector other) throws FunctionEvaluationException {
+    public RealVector map(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public RealVector mapToSelf(PureBinaryRealFunction function, RealVector other) throws FunctionEvaluationException {
+    public RealVector mapToSelf(BinaryRealFunction function, RealVector other) throws FunctionEvaluationException {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
