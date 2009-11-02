@@ -165,7 +165,7 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
      * @param v vector to copy
      */
     public ArrayRealVector(ArrayRealVector v) {
-        data = v.data.clone();
+        this(v, true);
     }
 
     /**
@@ -369,29 +369,11 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     }
 
     /** {@inheritDoc} */
-    public RealVector mapLog10() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.log10(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapLog10ToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.log10(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapLog1p() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.log1p(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -403,29 +385,11 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     }
 
     /** {@inheritDoc} */
-    public RealVector mapCosh() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.cosh(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapCoshToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.cosh(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapSinh() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.sinh(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -437,29 +401,11 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     }
 
     /** {@inheritDoc} */
-    public RealVector mapTanh() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.tanh(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapTanhToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.tanh(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapCos() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.cos(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -471,29 +417,11 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     }
 
     /** {@inheritDoc} */
-    public RealVector mapSin() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.sin(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapSinToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.sin(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapTan() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.tan(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -505,29 +433,11 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     }
 
     /** {@inheritDoc} */
-    public RealVector mapAcos() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.acos(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapAcosToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.acos(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapAsin() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.asin(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -539,29 +449,11 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     }
 
     /** {@inheritDoc} */
-    public RealVector mapAtan() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.atan(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapAtanToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.atan(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapInv() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = 1.0 / data[i];
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -573,29 +465,11 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     }
 
     /** {@inheritDoc} */
-    public RealVector mapAbs() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.abs(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapAbsToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.abs(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapSqrt() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.sqrt(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -607,29 +481,11 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     }
 
     /** {@inheritDoc} */
-    public RealVector mapCbrt() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.cbrt(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapCbrtToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.cbrt(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapCeil() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.ceil(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -641,29 +497,11 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     }
 
     /** {@inheritDoc} */
-    public RealVector mapFloor() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.floor(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapFloorToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.floor(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapRint() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.rint(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -675,29 +513,11 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     }
 
     /** {@inheritDoc} */
-    public RealVector mapSignum() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.signum(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapSignumToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.signum(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapUlp() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.ulp(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -711,15 +531,15 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     /** {@inheritDoc} */
     public RealVector ebeMultiply(RealVector v)
         throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return ebeMultiply((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
-            double[] out = new double[data.length];
+            double[] out = data.clone();
             for (int i = 0; i < data.length; i++) {
-                out[i] = data[i] * v.getEntry(i);
+                out[i] *= v.getEntry(i);
             }
-            return new ArrayRealVector(out);
+            return new ArrayRealVector(out, false);
         }
     }
 
@@ -727,11 +547,11 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     public RealVector ebeMultiply(double[] v)
         throws IllegalArgumentException {
         checkVectorDimensions(v.length);
-        double[] out = new double[data.length];
+        double[] out = data.clone();
         for (int i = 0; i < data.length; i++) {
-            out[i] = data[i] * v[i];
+            out[i] *= v[i];
         }
-        return new ArrayRealVector(out);
+        return new ArrayRealVector(out, false);
     }
 
     /**
@@ -748,15 +568,15 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     /** {@inheritDoc} */
     public RealVector ebeDivide(RealVector v)
         throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return ebeDivide((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
-            double[] out = new double[data.length];
+            double[] out = data.clone();
             for (int i = 0; i < data.length; i++) {
-                out[i] = data[i] / v.getEntry(i);
+                out[i] /= v.getEntry(i);
             }
-            return new ArrayRealVector(out);
+            return new ArrayRealVector(out, false);
         }
     }
 
@@ -764,11 +584,11 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     public RealVector ebeDivide(double[] v)
         throws IllegalArgumentException {
         checkVectorDimensions(v.length);
-        double[] out = new double[data.length];
+        double[] out = data.clone();
         for (int i = 0; i < data.length; i++) {
-                out[i] = data[i] / v[i];
+                out[i] /= v[i];
         }
-        return new ArrayRealVector(out);
+        return new ArrayRealVector(out, false);
     }
 
     /**
@@ -865,9 +685,9 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     /** {@inheritDoc} */
     public double getDistance(RealVector v)
         throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return getDistance((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
             double sum = 0;
             for (int i = 0; i < data.length; ++i) {
@@ -911,9 +731,9 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     /** {@inheritDoc} */
     public double getL1Distance(RealVector v)
         throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return getL1Distance((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
             double sum = 0;
             for (int i = 0; i < data.length; ++i) {
@@ -957,9 +777,9 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     /** {@inheritDoc} */
     public double getLInfDistance(RealVector v)
         throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return getLInfDistance((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
             double max = 0;
             for (int i = 0; i < data.length; ++i) {
@@ -1006,7 +826,7 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
         if (norm == 0) {
             throw MathRuntimeException.createArithmeticException("zero norm");
         }
-        return mapDivide(getNorm());
+        return mapDivide(norm);
     }
 
     /** {@inheritDoc} */
@@ -1015,9 +835,7 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
         if (norm == 0) {
             throw MathRuntimeException.createArithmeticException("cannot normalize a zero norm vector");
         }
-        for (int i = 0; i < data.length; i++) {
-            data[i] /= norm;
-        }
+        mapDivideToSelf(norm);
     }
 
     /** {@inheritDoc} */
@@ -1042,9 +860,9 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
     /** {@inheritDoc} */
     public RealMatrix outerProduct(RealVector v)
         throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return outerProduct((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
             final int m = data.length;
             final RealMatrix out = MatrixUtils.createRealMatrix(m, m);
