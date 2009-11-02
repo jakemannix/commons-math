@@ -76,7 +76,34 @@
       <file leaf-file-name="AbstractRealVector.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="22" selection-start="334" selection-end="334" vertical-scroll-proportion="-1.6991644">
+            <state line="610" column="25" selection-start="12418" selection-end="12418" vertical-scroll-proportion="0.33333334">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UnivariateRealFunctions.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/UnivariateRealFunctions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="0" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractUnivariateRealFunction.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/AbstractUnivariateRealFunction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="36" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UnivariateRealFunction.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/UnivariateRealFunction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="17" selection-start="1022" selection-end="1022" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -128,8 +155,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/MultivariateRealFunction.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/AbstractPureBinaryRealFunction.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/AbstractMultivariateRealFunction.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/purefunctions/PureUnivariateRealFunction.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/purefunctions/PureBinaryRealFunction.java" />
@@ -144,6 +169,8 @@
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/purefunctions/BinaryRealFunction.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/MultiCollector.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/AbstractUnivariateRealFunction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/UnivariateRealFunctions.java" />
       </list>
     </option>
   </component>
@@ -249,7 +276,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="analysis" />
+              <option name="myItemId" value="linear" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -552,9 +579,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/AbstractUnivariateRealFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="36" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/UnivariateRealFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="17" selection-start="1022" selection-end="1022" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/analysis/UnivariateRealFunctions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="42" selection-end="42" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="22" selection-start="334" selection-end="334" vertical-scroll-proportion="-1.6991644">
+        <state line="610" column="25" selection-start="12418" selection-end="12418" vertical-scroll-proportion="0.33333334">
           <folding />
         </state>
       </provider>
