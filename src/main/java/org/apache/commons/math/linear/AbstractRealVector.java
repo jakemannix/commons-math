@@ -78,11 +78,57 @@ public abstract class AbstractRealVector implements RealVector
     return add(new ArrayRealVector(v, false));
   }
 
+  public RealVector add(RealVector v) throws IllegalArgumentException
+  {
+    RealVector result = v.copy();
+    Iterator<Entry> it = getDefaultValue() == 0 ? sparseIterator() : iterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null)
+    {
+      v.setEntry(e.index, e.getValue() + result.getEntry(e.index));
+    }
+    return result;
+  }
+
+  public RealVector mapAdd(double d)
+  {
+    return copy().mapAddToSelf(d);
+  }
+
+  public RealVector mapAddToSelf(double d)
+  {
+    if(d != 0)
+    {
+      Iterator<Entry> it = iterator();
+      Entry e;
+      while(it.hasNext() && (e = it.next()) != null)
+      {
+        e.setValue(e.getValue() + d);
+      }
+    }
+    return this;
+  }
+
   public abstract AbstractRealVector copy();
 
   public double dotProduct(double[] v) throws IllegalArgumentException
   {
     return dotProduct(new ArrayRealVector(v, false));
+  }
+
+  public double dotProduct(RealVector v) throws IllegalArgumentException
+  {
+    double d = 0;
+    Iterator<Entry> it;
+    if(this instanceof SparseRealVector && getDefaultValue() == 0)
+    {
+      it = sparseIterator();
+      if(v instanceof SparseRealVector && v.getDefaultValue() == 0)
+      {
+          
+      }
+    }
+    return d;
   }
 
   public RealVector ebeDivide(double[] v) throws IllegalArgumentException
@@ -157,11 +203,6 @@ public abstract class AbstractRealVector implements RealVector
     {
       throw new IllegalArgumentException(e);
     }
-  }
-
-  public RealVector mapAdd(double d)
-  {
-    return copy().mapAddToSelf(d);
   }
 
   public RealVector mapAsin()

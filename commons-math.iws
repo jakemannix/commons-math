@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="c9a96d7b-312d-4970-bd31-7851d483706b" name="Default" comment="Code cleanup based on Idea's nice suggestions. :)">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java" afterPath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/commons-math.iws" afterPath="$PROJECT_DIR$/commons-math.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java" afterPath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java" afterPath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java" afterPath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java" afterPath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java" />
     </list>
     <ignored path="commons-math.iws" />
@@ -76,10 +73,10 @@
   <component name="FileColors" enabled="false" enabledForTabs="false" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AbstractRealVector.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AbstractRealVector.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="662" column="41" selection-start="13784" selection-end="13784" vertical-scroll-proportion="0.0">
+            <state line="127" column="8" selection-start="3561" selection-end="3561" vertical-scroll-proportion="0.76634216">
               <folding />
             </state>
           </provider>
@@ -97,7 +94,7 @@
       <file leaf-file-name="ArrayRealVector.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="866" column="18" selection-start="25922" selection-end="25926" vertical-scroll-proportion="0.0">
+            <state line="228" column="22" selection-start="8251" selection-end="8255" vertical-scroll-proportion="-36.5">
               <folding />
             </state>
           </provider>
@@ -112,10 +109,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArrayRealVectorTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ArrayRealVectorTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="13" selection-start="1272" selection-end="1272" vertical-scroll-proportion="-9.077886">
+            <state line="34" column="13" selection-start="1272" selection-end="1272" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -133,7 +130,7 @@
       <file leaf-file-name="AbstractRealVectorTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="185" column="42" selection-start="5075" selection-end="5075" vertical-scroll-proportion="0.0">
+            <state line="82" column="38" selection-start="2449" selection-end="2449" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -160,10 +157,10 @@
       <list>
         <option value="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java" />
+        <option value="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java" />
       </list>
     </option>
@@ -874,28 +871,9 @@
         <state line="19" column="23" selection-start="874" selection-end="874" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="866" column="18" selection-start="25922" selection-end="25926" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="305" column="18" selection-start="10658" selection-end="10668" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="21" selection-start="2911" selection-end="2911" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="185" column="42" selection-start="5075" selection-end="5075" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -912,16 +890,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="662" column="41" selection-start="13784" selection-end="13784" vertical-scroll-proportion="0.0">
+        <state line="34" column="13" selection-start="1272" selection-end="1272" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="13" selection-start="1272" selection-end="1272" vertical-scroll-proportion="-9.077886">
+        <state line="77" column="21" selection-start="2911" selection-end="2911" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="228" column="22" selection-start="8251" selection-end="8255" vertical-scroll-proportion="-36.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="82" column="38" selection-start="2449" selection-end="2449" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="127" column="8" selection-start="3561" selection-end="3561" vertical-scroll-proportion="0.76634216">
           <folding />
         </state>
       </provider>

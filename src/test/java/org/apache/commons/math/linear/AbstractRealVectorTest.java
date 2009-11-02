@@ -22,33 +22,6 @@ public class AbstractRealVectorTest extends TestCase {
 
         @Override
         public double[] getData() { return values; }
-
-        /**
-         *   THESE ARE TO BE TESTED
-         *
-        @Override
-        public RealVector map(UnivariateRealFunction function) {
-            return null;
-        }
-
-        @Override
-        public RealVector mapToSelf(UnivariateRealFunction function) {
-            return null;
-        }
-
-        @Override
-        public Iterator<Entry> iterator() {
-            return null;
-        }
-
-        @Override
-        public Iterator<Entry> nonDefaultIterator() {
-            return null;
-        }
-
-        /**
-         *    END TO BE TESTED
-         */
         
         @Override
         public AbstractRealVector copy() {
@@ -61,35 +34,55 @@ public class AbstractRealVectorTest extends TestCase {
         }
 
         public RealVector add(RealVector v) throws IllegalArgumentException {
-            throw unsupported();
+            RealVector result = new ArrayRealVector(v);
+            return result.add(this);
         }
 
         public RealVector subtract(RealVector v) throws IllegalArgumentException {
-            throw unsupported();
+            RealVector result = new ArrayRealVector(v);
+            return result.subtract(this).mapMultiplyToSelf(-1);
         }
 
         public RealVector mapAddToSelf(double d) {
-            throw unsupported();
+            for(int i=0; i<values.length; i++) {
+                values[i] += d;
+            }
+            return this;
         }
 
         public RealVector mapSubtractToSelf(double d) {
-            throw unsupported();
+            for(int i=0; i<values.length; i++) {
+                values[i] -= d;
+            }
+            return this;
         }
 
         public RealVector mapMultiplyToSelf(double d) {
-            throw unsupported();
+            for(int i=0; i<values.length; i++) {
+                values[i] *= d;
+            }
+            return this;
         }
 
         public RealVector mapDivideToSelf(double d) {
-            throw unsupported();
+            for(int i=0; i<values.length; i++) {
+                values[i] /= d;
+            }
+            return this;
         }
 
         public RealVector mapPowToSelf(double d) {
-            throw unsupported();
+            for(int i=0; i<values.length; i++) {
+                values[i] = Math.pow(values[i], d);
+            }
+            return this;
         }
 
         public RealVector mapInvToSelf() {
-            throw unsupported();
+            for(int i=0; i<values.length; i++) {
+                values[i] = 1/values[i];
+            }
+            return this;
         }
 
         public RealVector ebeMultiply(RealVector v) throws IllegalArgumentException {
@@ -178,7 +171,7 @@ public class AbstractRealVectorTest extends TestCase {
         }
     }
 
-    public void testNonDefaultIterator() throws Exception {
+    public void testSparseIterator() throws Exception {
         RealVector v = new TestVectorImpl(vec2.clone());
         Entry e;
         int i = 0;
