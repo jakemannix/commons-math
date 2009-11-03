@@ -18,6 +18,7 @@ package org.apache.commons.math.linear;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import org.apache.commons.math.MathRuntimeException;
 import org.apache.commons.math.util.MathUtils;
@@ -27,7 +28,7 @@ import org.apache.commons.math.util.MathUtils;
  * @version $Revision$ $Date$
  * @since 2.0
  */
-public class ArrayRealVector implements RealVector, Serializable {
+public class ArrayRealVector extends AbstractRealVector implements RealVector, Serializable {
 
     /** Serializable version identifier. */
     private static final long serialVersionUID = -1097961340710804027L;
@@ -164,7 +165,7 @@ public class ArrayRealVector implements RealVector, Serializable {
      * @param v vector to copy
      */
     public ArrayRealVector(ArrayRealVector v) {
-        data = v.data.clone();
+        this(v, true);
     }
 
     /**
@@ -221,20 +222,22 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector copy() {
+    public AbstractRealVector copy() {
         return new ArrayRealVector(this, true);
     }
 
     /** {@inheritDoc} */
     public RealVector add(RealVector v)
     throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return add((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
-            double[] out = new double[data.length];
-            for (int i = 0; i < data.length; i++) {
-                out[i] = data[i] + v.getEntry(i);
+            double[] out = data.clone();
+            Iterator<Entry> it = v.sparseIterator();
+            Entry e;
+            while(it.hasNext() && (e = it.next()) != null) {
+                out[e.index] += e.getValue();
             }
             return new ArrayRealVector(out);
         }
@@ -244,9 +247,9 @@ public class ArrayRealVector implements RealVector, Serializable {
     public RealVector add(double[] v)
     throws IllegalArgumentException {
         checkVectorDimensions(v.length);
-        double[] out = new double[data.length];
+        double[] out = data.clone();
         for (int i = 0; i < data.length; i++) {
-            out[i] = data[i] + v[i];
+            out[i] += v[i];
         }
         return new ArrayRealVector(out);
     }
@@ -265,13 +268,15 @@ public class ArrayRealVector implements RealVector, Serializable {
     /** {@inheritDoc} */
     public RealVector subtract(RealVector v)
     throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return subtract((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
-            double[] out = new double[data.length];
-            for (int i = 0; i < data.length; i++) {
-                out[i] = data[i] - v.getEntry(i);
+            double[] out = data.clone();
+            Iterator<Entry> it = v.sparseIterator();
+            Entry e;
+            while(it.hasNext() && (e = it.next()) != null) {
+                out[e.index] -= e.getValue();
             }
             return new ArrayRealVector(out);
         }
@@ -281,9 +286,9 @@ public class ArrayRealVector implements RealVector, Serializable {
     public RealVector subtract(double[] v)
     throws IllegalArgumentException {
         checkVectorDimensions(v.length);
-        double[] out = new double[data.length];
+        double[] out = data.clone();
         for (int i = 0; i < data.length; i++) {
-            out[i] = data[i] - v[i];
+            out[i] -= v[i];
         }
         return new ArrayRealVector(out);
     }
@@ -300,29 +305,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapAdd(double d) {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = data[i] + d;
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapAddToSelf(double d) {
         for (int i = 0; i < data.length; i++) {
             data[i] = data[i] + d;
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapSubtract(double d) {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = data[i] - d;
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -334,29 +321,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapMultiply(double d) {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = data[i] * d;
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapMultiplyToSelf(double d) {
         for (int i = 0; i < data.length; i++) {
             data[i] = data[i] * d;
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapDivide(double d) {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = data[i] / d;
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -368,29 +337,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapPow(double d) {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.pow(data[i], d);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapPowToSelf(double d) {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.pow(data[i], d);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapExp() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.exp(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -402,29 +353,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapExpm1() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.expm1(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapExpm1ToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.expm1(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapLog() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.log(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -436,29 +369,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapLog10() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.log10(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapLog10ToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.log10(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapLog1p() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.log1p(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -470,29 +385,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapCosh() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.cosh(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapCoshToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.cosh(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapSinh() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.sinh(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -504,29 +401,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapTanh() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.tanh(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapTanhToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.tanh(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapCos() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.cos(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -538,29 +417,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapSin() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.sin(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapSinToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.sin(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapTan() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.tan(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -572,29 +433,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapAcos() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.acos(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapAcosToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.acos(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapAsin() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.asin(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -606,29 +449,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapAtan() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.atan(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapAtanToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.atan(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapInv() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = 1.0 / data[i];
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -640,29 +465,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapAbs() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.abs(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapAbsToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.abs(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapSqrt() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.sqrt(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -674,29 +481,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapCbrt() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.cbrt(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapCbrtToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.cbrt(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapCeil() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.ceil(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -708,29 +497,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapFloor() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.floor(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapFloorToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.floor(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapRint() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.rint(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -742,29 +513,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     }
 
     /** {@inheritDoc} */
-    public RealVector mapSignum() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.signum(data[i]);
-        }
-        return new ArrayRealVector(out);
-    }
-
-    /** {@inheritDoc} */
     public RealVector mapSignumToSelf() {
         for (int i = 0; i < data.length; i++) {
             data[i] = Math.signum(data[i]);
         }
         return this;
-    }
-
-    /** {@inheritDoc} */
-    public RealVector mapUlp() {
-        double[] out = new double[data.length];
-        for (int i = 0; i < data.length; i++) {
-            out[i] = Math.ulp(data[i]);
-        }
-        return new ArrayRealVector(out);
     }
 
     /** {@inheritDoc} */
@@ -778,15 +531,15 @@ public class ArrayRealVector implements RealVector, Serializable {
     /** {@inheritDoc} */
     public RealVector ebeMultiply(RealVector v)
         throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return ebeMultiply((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
-            double[] out = new double[data.length];
+            double[] out = data.clone();
             for (int i = 0; i < data.length; i++) {
-                out[i] = data[i] * v.getEntry(i);
+                out[i] *= v.getEntry(i);
             }
-            return new ArrayRealVector(out);
+            return new ArrayRealVector(out, false);
         }
     }
 
@@ -794,11 +547,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     public RealVector ebeMultiply(double[] v)
         throws IllegalArgumentException {
         checkVectorDimensions(v.length);
-        double[] out = new double[data.length];
+        double[] out = data.clone();
         for (int i = 0; i < data.length; i++) {
-            out[i] = data[i] * v[i];
+            out[i] *= v[i];
         }
-        return new ArrayRealVector(out);
+        return new ArrayRealVector(out, false);
     }
 
     /**
@@ -815,15 +568,15 @@ public class ArrayRealVector implements RealVector, Serializable {
     /** {@inheritDoc} */
     public RealVector ebeDivide(RealVector v)
         throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return ebeDivide((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
-            double[] out = new double[data.length];
+            double[] out = data.clone();
             for (int i = 0; i < data.length; i++) {
-                out[i] = data[i] / v.getEntry(i);
+                out[i] /= v.getEntry(i);
             }
-            return new ArrayRealVector(out);
+            return new ArrayRealVector(out, false);
         }
     }
 
@@ -831,11 +584,11 @@ public class ArrayRealVector implements RealVector, Serializable {
     public RealVector ebeDivide(double[] v)
         throws IllegalArgumentException {
         checkVectorDimensions(v.length);
-        double[] out = new double[data.length];
+        double[] out = data.clone();
         for (int i = 0; i < data.length; i++) {
-                out[i] = data[i] / v[i];
+                out[i] /= v[i];
         }
-        return new ArrayRealVector(out);
+        return new ArrayRealVector(out, false);
     }
 
     /**
@@ -866,13 +619,15 @@ public class ArrayRealVector implements RealVector, Serializable {
     /** {@inheritDoc} */
     public double dotProduct(RealVector v)
         throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return dotProduct((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
             double dot = 0;
-            for (int i = 0; i < data.length; i++) {
-                dot += data[i] * v.getEntry(i);
+            Iterator<Entry> it = v.sparseIterator();
+            Entry e;
+            while(it.hasNext() && (e = it.next()) != null) {
+                dot += data[e.index] * e.getValue();
             }
             return dot;
         }
@@ -930,9 +685,9 @@ public class ArrayRealVector implements RealVector, Serializable {
     /** {@inheritDoc} */
     public double getDistance(RealVector v)
         throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return getDistance((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
             double sum = 0;
             for (int i = 0; i < data.length; ++i) {
@@ -976,9 +731,9 @@ public class ArrayRealVector implements RealVector, Serializable {
     /** {@inheritDoc} */
     public double getL1Distance(RealVector v)
         throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return getL1Distance((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
             double sum = 0;
             for (int i = 0; i < data.length; ++i) {
@@ -1022,9 +777,9 @@ public class ArrayRealVector implements RealVector, Serializable {
     /** {@inheritDoc} */
     public double getLInfDistance(RealVector v)
         throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return getLInfDistance((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
             double max = 0;
             for (int i = 0; i < data.length; ++i) {
@@ -1071,7 +826,7 @@ public class ArrayRealVector implements RealVector, Serializable {
         if (norm == 0) {
             throw MathRuntimeException.createArithmeticException("zero norm");
         }
-        return mapDivide(getNorm());
+        return mapDivide(norm);
     }
 
     /** {@inheritDoc} */
@@ -1080,9 +835,7 @@ public class ArrayRealVector implements RealVector, Serializable {
         if (norm == 0) {
             throw MathRuntimeException.createArithmeticException("cannot normalize a zero norm vector");
         }
-        for (int i = 0; i < data.length; i++) {
-            data[i] /= norm;
-        }
+        mapDivideToSelf(norm);
     }
 
     /** {@inheritDoc} */
@@ -1107,9 +860,9 @@ public class ArrayRealVector implements RealVector, Serializable {
     /** {@inheritDoc} */
     public RealMatrix outerProduct(RealVector v)
         throws IllegalArgumentException {
-        try {
+        if(v instanceof ArrayRealVector) {
             return outerProduct((ArrayRealVector) v);
-        } catch (ClassCastException cce) {
+        } else {
             checkVectorDimensions(v);
             final int m = data.length;
             final RealMatrix out = MatrixUtils.createRealMatrix(m, m);
@@ -1352,33 +1105,26 @@ public class ArrayRealVector implements RealVector, Serializable {
         return true;
       }
 
-      if (other == null) {
+      if (other == null || !(other instanceof RealVector)) {
         return false;
       }
 
-      try {
 
-          RealVector rhs = (RealVector) other;
-          if (data.length != rhs.getDimension()) {
-              return false;
-          }
-
-          if (rhs.isNaN()) {
-              return this.isNaN();
-          }
-
-          for (int i = 0; i < data.length; ++i) {
-              if (data[i] != rhs.getEntry(i)) {
-                  return false;
-              }
-          }
-          return true;
-
-      } catch (ClassCastException ex) {
-          // ignore exception
-          return false;
+      RealVector rhs = (RealVector) other;
+      if (data.length != rhs.getDimension()) {
+        return false;
       }
 
+      if (rhs.isNaN()) {
+        return this.isNaN();
+      }
+
+      for (int i = 0; i < data.length; ++i) {
+        if (data[i] != rhs.getEntry(i)) {
+          return false;
+        }
+      }
+      return true;
     }
 
     /**
@@ -1392,20 +1138,6 @@ public class ArrayRealVector implements RealVector, Serializable {
             return 9;
         }
         return MathUtils.hash(data);
-    }
-
-    /**
-     * Check if an index is valid.
-     * @param index index to check
-     * @exception MatrixIndexException if index is not valid
-     */
-    private void checkIndex(final int index)
-        throws MatrixIndexException {
-        if (index < 0 || index >= getDimension()) {
-            throw new MatrixIndexException(
-                    "index {0} out of allowed range [{1}, {2}]",
-                    index, 0, getDimension() - 1);
-        }
     }
 
 }
