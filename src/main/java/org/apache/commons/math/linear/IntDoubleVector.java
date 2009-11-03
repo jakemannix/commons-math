@@ -89,46 +89,6 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
   {
     return null;
   }
-                                         /*
-    public RealVector mapAddToSelf(double d) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public RealVector mapSubtractToSelf(double d) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public RealVector mapMultiplyToSelf(double d) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public RealVector mapDivideToSelf(double d) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public RealVector mapPowToSelf(double d) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public RealVector mapInvToSelf() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public RealVector ebeMultiply(RealVector v) throws IllegalArgumentException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public RealVector ebeDivide(RealVector v) throws IllegalArgumentException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-                                       */
-    public double dotProduct(RealVector v) throws IllegalArgumentException {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public double getNorm() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
-    }
 
     public double getL1Norm() {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
@@ -138,9 +98,6 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public RealVector projection(RealVector v) throws IllegalArgumentException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
 
   public RealVector append(RealVector v)
   {
@@ -179,7 +136,7 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
     checkIndex(index + n);
     int end = index + n;
     IntDoubleVector v = new IntDoubleVector(n);
-    Iterator<Entry> it = nonDefaultIterator();
+    Iterator<Entry> it = sparseIterator();
     Entry e = null;
     while(it.hasNext() && (e = it.next()) != null)
     {
@@ -193,7 +150,7 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
   public boolean isInfinite()
   {
     if(isNaN()) return false;
-    Iterator<Entry> it = nonDefaultIterator();
+    Iterator<Entry> it = sparseIterator();
     Entry e = null;
     while(it.hasNext() && (e = it.next()) != null)
     {
@@ -205,18 +162,18 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
 
   public boolean isNaN()
   {
-    Iterator<Entry> it = nonDefaultIterator();
-    Entry e = null;
+    Iterator<Entry> it = sparseIterator();
+    Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
       if(e.getValue() == Double.NaN) 
         return true;
     }
     return false;
-    
   }
 
-  public Iterator<Entry> nonDefaultIterator()
+  @Override
+  public Iterator<Entry> sparseIterator()
   {
     return new Iterator<Entry>()
     {

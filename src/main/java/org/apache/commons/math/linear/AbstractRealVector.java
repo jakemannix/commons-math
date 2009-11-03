@@ -163,14 +163,41 @@ public abstract class AbstractRealVector implements RealVector
     return d;
   }
 
+  public RealVector projection(RealVector v)
+  {
+    return v.mapMultiply(dotProduct(v) / v.dotProduct(v));
+  }
+
   public RealVector ebeDivide(double[] v) throws IllegalArgumentException
   {
     return ebeDivide(new ArrayRealVector(v, false));
   }
 
+  public RealVector ebeDivide(RealVector v) throws IllegalArgumentException
+  {
+    RealVector result = copy();
+    Iterator<Entry> it = sparseIterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null) {
+      result.setEntry(e.index, result.getEntry(e.index) / e.getValue());
+    }
+    return result;
+  }
+
   public RealVector ebeMultiply(double[] v) throws IllegalArgumentException
   {
     return ebeMultiply(new ArrayRealVector(v, false));
+  }
+
+  public RealVector ebeMultiply(RealVector v) throws IllegalArgumentException
+  {
+    RealVector result = copy();
+    Iterator<Entry> it = sparseIterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null) {
+      result.setEntry(e.index, result.getEntry(e.index) * e.getValue());
+    }
+    return result;
   }
 
   public double getDistance(RealVector v) throws IllegalArgumentException
@@ -538,6 +565,26 @@ public abstract class AbstractRealVector implements RealVector
     }
   }
 
+  public RealVector mapDivideToSelf(final double d)
+  {
+    try
+    {
+      return mapToSelf(new UnivariateRealFunction()
+      {
+        public double value(double x) throws FunctionEvaluationException
+        {
+          return x / d;
+        }
+      });
+    }
+    catch (FunctionEvaluationException e)
+    {
+      // cannot happen from Math.xxx methods.
+      throw new RuntimeException(e);
+    }
+  }
+
+
   public RealVector mapPow(double d)
   {
     return copy().mapPowToSelf(d);
@@ -782,6 +829,11 @@ public abstract class AbstractRealVector implements RealVector
   public double[] getData()
   {
     return toArray();
+  }
+
+  public double getNorm()
+  {
+    return Math.sqrt(dotProduct(this));
   }
 
   public RealVector unitVector()
