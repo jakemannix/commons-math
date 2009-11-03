@@ -28,7 +28,7 @@ import org.apache.commons.math.util.MathUtils;
  * @version $Revision$ $Date$
  * @since 2.0
  */
-public class ArrayRealVector extends AbstractRealVector implements RealVector, Serializable {
+public class ArrayRealVector extends AbstractRealVector implements Serializable {
 
     /** Serializable version identifier. */
     private static final long serialVersionUID = -1097961340710804027L;
@@ -237,7 +237,7 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
             Iterator<Entry> it = v.sparseIterator();
             Entry e;
             while(it.hasNext() && (e = it.next()) != null) {
-                out[e.index] += e.getValue();
+                out[e.index()] += e.getValue();
             }
             return new ArrayRealVector(out);
         }
@@ -276,7 +276,7 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
             Iterator<Entry> it = v.sparseIterator();
             Entry e;
             while(it.hasNext() && (e = it.next()) != null) {
-                out[e.index] -= e.getValue();
+                out[e.index()] -= e.getValue();
             }
             return new ArrayRealVector(out);
         }
@@ -627,7 +627,7 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
             Iterator<Entry> it = v.sparseIterator();
             Entry e;
             while(it.hasNext() && (e = it.next()) != null) {
-                dot += data[e.index] * e.getValue();
+                dot += data[e.index()] * e.getValue();
             }
             return dot;
         }

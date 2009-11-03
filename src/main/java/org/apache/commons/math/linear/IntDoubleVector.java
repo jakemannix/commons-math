@@ -53,7 +53,7 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
       {
         if(currentSize >= indices.length)
           expand();
-        indices[currentSize] = e.index;
+        indices[currentSize] = e.index();
         values[currentSize] = e.getValue();
         currentSize++;
       }
@@ -207,9 +207,10 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
       i = -(i+1);
       if(currentSize >= indices.length)
         expand();
-      try {
-      System.arraycopy(indices, i, indices, i+1, currentSize - i);
-      System.arraycopy(values, i, values, i+1, currentSize - i);
+      try
+      {
+        System.arraycopy(indices, i, indices, i+1, currentSize - i);
+        System.arraycopy(values, i, values, i+1, currentSize - i);
       } catch (Exception e) { 
         StringBuffer buf = new StringBuffer("i: ").append(i).append(" [");
         for(int j : indices) buf.append(j).append(", ");
@@ -222,12 +223,11 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
     }
   }
 
-  protected class SparseEntryImpl extends Entry
+  protected class SparseEntryImpl extends EntryImpl
   {
-    int index = 0;
-    public double getValue() { return values[indices[index]]; }
     public int index() { return indices[index]; }
-    public void setValue(double newValue) { values[indices[index]] = newValue; }    
+    public double getValue() { return values[indices[index]]; }
+    public void setValue(double newValue) { values[indices[index]] = newValue; }
   }
   
 }

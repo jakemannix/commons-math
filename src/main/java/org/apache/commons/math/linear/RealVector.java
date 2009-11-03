@@ -66,10 +66,10 @@ public interface RealVector {
      */
     RealVector map(UnivariateRealFunction function) throws FunctionEvaluationException;
   
-    public abstract class Entry {
-      int index;
-      abstract double getValue();
-      abstract void setValue(double newValue);
+    public interface Entry {
+      int index();
+      double getValue();
+      void setValue(double newValue);
     }
 
     /**

@@ -74,7 +74,7 @@ public abstract class AbstractRealVector implements RealVector
     Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
-      result[e.index] += e.getValue();
+      result[e.index()] += e.getValue();
     }
     return new ArrayRealVector(result, false);
   }
@@ -91,7 +91,7 @@ public abstract class AbstractRealVector implements RealVector
     Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
-      result.setEntry(e.index, e.getValue() + result.getEntry(e.index));
+      result.setEntry(e.index(), e.getValue() + result.getEntry(e.index()));
     }
     return result;
   }
@@ -103,7 +103,7 @@ public abstract class AbstractRealVector implements RealVector
     Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
-      result[e.index] = e.getValue() - result[e.index];
+      result[e.index()] = e.getValue() - result[e.index()];
     }
     return new ArrayRealVector(result, false);
   }
@@ -120,7 +120,7 @@ public abstract class AbstractRealVector implements RealVector
     Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
-      v.setEntry(e.index, e.getValue() - result.getEntry(e.index));
+      v.setEntry(e.index(), e.getValue() - result.getEntry(e.index()));
     }
     return result;
   }
@@ -158,7 +158,7 @@ public abstract class AbstractRealVector implements RealVector
     Iterator<Entry> it = sparseIterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
-      d += e.getValue() * v.getEntry(e.index);
+      d += e.getValue() * v.getEntry(e.index());
     }
     return d;
   }
@@ -179,7 +179,7 @@ public abstract class AbstractRealVector implements RealVector
     Iterator<Entry> it = sparseIterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
-      result.setEntry(e.index, result.getEntry(e.index) / e.getValue());
+      result.setEntry(e.index(), result.getEntry(e.index()) / e.getValue());
     }
     return result;
   }
@@ -195,7 +195,7 @@ public abstract class AbstractRealVector implements RealVector
     Iterator<Entry> it = sparseIterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
-      result.setEntry(e.index, result.getEntry(e.index) * e.getValue());
+      result.setEntry(e.index(), result.getEntry(e.index()) * e.getValue());
     }
     return result;
   }
@@ -207,7 +207,7 @@ public abstract class AbstractRealVector implements RealVector
     Iterator<Entry> it = sparseIterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
-      final double diff = e.getValue() - v.getEntry(e.index);
+      final double diff = e.getValue() - v.getEntry(e.index());
       d += diff * diff;
     }
     return Math.sqrt(d);
@@ -220,7 +220,7 @@ public abstract class AbstractRealVector implements RealVector
     Iterator<Entry> it = iterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
-      final double diff = e.getValue() - v[e.index];
+      final double diff = e.getValue() - v[e.index()];
       d += diff * diff;
     }
     return Math.sqrt(d);
@@ -233,7 +233,7 @@ public abstract class AbstractRealVector implements RealVector
     Iterator<Entry> it = iterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
-      d += Math.abs(e.getValue() - v.getEntry(e.index));
+      d += Math.abs(e.getValue() - v.getEntry(e.index()));
     }
     return d;
   }
@@ -245,7 +245,7 @@ public abstract class AbstractRealVector implements RealVector
     Iterator<Entry> it = iterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
-      d += Math.abs(e.getValue() - v[e.index]);
+      d += Math.abs(e.getValue() - v[e.index()]);
     }
     return d;
   }
@@ -257,7 +257,7 @@ public abstract class AbstractRealVector implements RealVector
     Iterator<Entry> it = iterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
-      d = Math.max(Math.abs(e.getValue() - v.getEntry(e.index)), d);
+      d = Math.max(Math.abs(e.getValue() - v.getEntry(e.index())), d);
     }
     return d;
   }
@@ -269,7 +269,7 @@ public abstract class AbstractRealVector implements RealVector
     Iterator<Entry> it = iterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
-      d = Math.max(Math.abs(e.getValue() - v[e.index]), d);
+      d = Math.max(Math.abs(e.getValue() - v[e.index()]), d);
     }
     return d;
   }
@@ -788,7 +788,7 @@ public abstract class AbstractRealVector implements RealVector
       Entry otherE = null;
       while(otherIt.hasNext() && (otherE = otherIt.next()) != null)
       {
-        product.setEntry(thisE.index, otherE.index, thisE.getValue() * otherE.getValue());
+        product.setEntry(thisE.index(), otherE.index(), thisE.getValue() * otherE.getValue());
       }
     }
     
@@ -916,9 +916,10 @@ public abstract class AbstractRealVector implements RealVector
     return false;
   }
 
-  protected class EntryImpl extends Entry
+  protected class EntryImpl implements Entry
   {
-    public EntryImpl() { index = 0; }
+    int index = 0;
+    public int index() { return index; }
     public double getValue() { return getEntry(index); }
     public void setValue(double newValue) { setEntry(index, newValue); }
   }
