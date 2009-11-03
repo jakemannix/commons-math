@@ -59,7 +59,15 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
       }
     }
   }
-  
+
+  public IntDoubleVector(int[] indices, double[] values, boolean copy)
+  {
+    dimension = indices.length;
+    this.indices = copy ? indices.clone() : indices;
+    this.values = copy ? values.clone() : values;
+    currentSize = indices.length;
+  }
+
   protected void expand()
   {
     int[] newIndices = new int[indices.length * 2];
@@ -75,19 +83,39 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
     return new IntDoubleVector(this);
   }
 
-  public RealVector add(RealVector v) throws IllegalArgumentException
+  @Override
+  public double dotProduct(RealVector v)
   {
-    RealVector result = v.copy();
-    for(int i=0; i<indices.length; i++)
+    if(v instanceof IntDoubleVector)
     {
-      result.setEntry(indices[i], values[i]);
+      return dotProduct((IntDoubleVector)v);
     }
-    return result;
+    return super.dotProduct(v);
   }
 
-  public RealVector subtract(RealVector v) throws IllegalArgumentException
+  public double dotProduct(IntDoubleVector v)
   {
-    return null;
+    double result = 0;
+    int i = 0;
+    int j = 0;
+    final int[] ind = indices;
+    final int[] vInd = v.indices;
+    final double[] val = values;
+    final double[] vVal = v.values;
+    final int sz = currentSize;
+    final int vSz = v.currentSize;
+    do
+    {
+      while(ind[i] < vInd[j] && i < sz) i++;
+      while(vInd[j] < ind[i] && j < vSz) j++;
+      if(ind[i] == vInd[j])
+      {
+        result += val[i] * vVal[j];
+        i++;
+        j++;
+      }
+    } while(i < sz && j < vSz);
+    return result;
   }
 
     public double getL1Norm() {
@@ -135,41 +163,16 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
     checkIndex(index);
     checkIndex(index + n);
     int end = index + n;
-    IntDoubleVector v = new IntDoubleVector(n);
-    Iterator<Entry> it = sparseIterator();
-    Entry e = null;
-    while(it.hasNext() && (e = it.next()) != null)
-    {
-      if(e.index < index) continue;
-      if(e.index >= end) break;
-      v.setEntry(e.index, e.getValue());
-    }
-    return v;
-  }
-
-  public boolean isInfinite()
-  {
-    if(isNaN()) return false;
-    Iterator<Entry> it = sparseIterator();
-    Entry e = null;
-    while(it.hasNext() && (e = it.next()) != null)
-    {
-      if(e.getValue() == Double.POSITIVE_INFINITY || e.getValue() == Double.POSITIVE_INFINITY) 
-        return true;
-    }
-    return false;
-  }
-
-  public boolean isNaN()
-  {
-    Iterator<Entry> it = sparseIterator();
-    Entry e;
-    while(it.hasNext() && (e = it.next()) != null)
-    {
-      if(e.getValue() == Double.NaN) 
-        return true;
-    }
-    return false;
+    int thisStart = Arrays.binarySearch(indices, index);
+    if(thisStart < 0) thisStart = -(thisStart + 1);
+    int thisEnd = Arrays.binarySearch(indices, end);
+    if(thisEnd < 0) thisEnd = -(thisEnd + 1);
+    // TODO: fix start and end points!
+    int[] resInd = new int[thisEnd - thisStart];
+    double[] resVal = new double[resInd.length];
+    System.arraycopy(indices, thisStart, resInd, 0, resInd.length);
+    System.arraycopy(values, thisStart, resVal, 0, resVal.length);
+    return new IntDoubleVector(resInd, resVal, false);
   }
 
   @Override

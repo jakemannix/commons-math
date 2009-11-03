@@ -891,6 +891,31 @@ public abstract class AbstractRealVector implements RealVector
     return this;
   }
 
+  public boolean isInfinite()
+  {
+    if(isNaN()) return false;
+    Iterator<Entry> it = sparseIterator();
+    Entry e = null;
+    while(it.hasNext() && (e = it.next()) != null)
+    {
+      if(e.getValue() == Double.POSITIVE_INFINITY || e.getValue() == Double.POSITIVE_INFINITY)
+        return true;
+    }
+    return false;
+  }
+
+  public boolean isNaN()
+  {
+    Iterator<Entry> it = sparseIterator();
+    Entry e;
+    while(it.hasNext() && (e = it.next()) != null)
+    {
+      if(e.getValue() == Double.NaN)
+        return true;
+    }
+    return false;
+  }
+
   protected class EntryImpl extends Entry
   {
     public EntryImpl() { index = 0; }
