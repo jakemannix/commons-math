@@ -89,6 +89,7 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
   {
     return null;
   }
+    
     public RealVector mapAddToSelf(double d) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
