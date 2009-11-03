@@ -444,6 +444,25 @@ public abstract class AbstractRealVector implements RealVector
     return copy().mapInvToSelf();
   }
 
+  public RealVector mapInvToSelf()
+  {
+    try
+    {
+      return mapToSelf(new UnivariateRealFunction()
+      {
+        public double value(double x) throws FunctionEvaluationException
+        {
+          return 1/x;
+        }
+      });
+    }
+    catch (FunctionEvaluationException e)
+    {
+      // cannot happen from Math.xxx methods.
+      throw new RuntimeException(e);
+    }
+  }
+
   public RealVector mapLog()
   {
     return copy().mapLogToSelf();
@@ -500,9 +519,47 @@ public abstract class AbstractRealVector implements RealVector
     return copy().mapMultiplyToSelf(d);
   }
 
+  public RealVector mapMultiplyToSelf(final double d)
+  {
+    try
+    {
+      return mapToSelf(new UnivariateRealFunction()
+      {
+        public double value(double x) throws FunctionEvaluationException
+        {
+          return x * d;
+        }
+      });
+    }
+    catch (FunctionEvaluationException e)
+    {
+      // cannot happen from Math.xxx methods.
+      throw new RuntimeException(e);
+    }
+  }
+
   public RealVector mapPow(double d)
   {
     return copy().mapPowToSelf(d);
+  }
+
+  public RealVector mapPowToSelf(final double d)
+  {
+    try
+    {
+      return mapToSelf(new UnivariateRealFunction()
+      {
+        public double value(double x) throws FunctionEvaluationException
+        {
+          return Math.pow(x, d);
+        }
+      });
+    }
+    catch (FunctionEvaluationException e)
+    {
+      // cannot happen from Math.xxx methods.
+      throw new RuntimeException(e);
+    }
   }
 
   public RealVector mapRint()
@@ -593,6 +650,25 @@ public abstract class AbstractRealVector implements RealVector
   public RealVector mapSubtract(double d)
   {
     return copy().mapSubtractToSelf(d);
+  }
+
+  public RealVector mapSubtractToSelf(final double d)
+  {
+    try
+    {
+      return mapToSelf(new UnivariateRealFunction()
+      {
+        public double value(double x) throws FunctionEvaluationException
+        {
+          return x - d;
+        }
+      });
+    }
+    catch (FunctionEvaluationException e)
+    {
+      // cannot happen from Math.xxx methods.
+      throw new RuntimeException(e);
+    }
   }
 
   public RealVector mapTan()
