@@ -48,12 +48,6 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
 public interface RealVector {
 
     /**
-     * The default value (often 0) for all entries of the RealVector which aren't defined.
-     * @return the defaultValue
-     */
-    double getDefaultValue();
-
-    /**
      * Acts as if it is implemented as:
      * Entry e = null;
      * for(Iterator<Entry> it = iterator(); it.hasNext(); e = it.next()) {

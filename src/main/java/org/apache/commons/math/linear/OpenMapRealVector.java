@@ -41,9 +41,9 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
     /** Dimension of the vector. */
     private final int virtualSize;
 
-    private double defaultMinusEpsilon;
+    private double minusEpsilon;
 
-    private double defaultPlusEpsilon;
+    private double plusEpsilon;
 
     /**
      * Build a 0-length vector.
@@ -85,9 +85,8 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
     protected OpenMapRealVector(OpenMapRealVector v, int resize) {
         virtualSize = v.getDimension() + resize;
         entries = new OpenIntToDoubleHashMap(v.entries);
-        defaultValue = v.defaultValue;
-        defaultMinusEpsilon = v.defaultMinusEpsilon;
-        defaultPlusEpsilon = v.defaultPlusEpsilon;
+        minusEpsilon = v.minusEpsilon;
+        plusEpsilon = v.plusEpsilon;
     }
 
     /**
@@ -172,8 +171,8 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
     public OpenMapRealVector(OpenMapRealVector v) {
         virtualSize = v.getDimension();
         entries = new OpenIntToDoubleHashMap(v.getEntries());
-        defaultPlusEpsilon = v.defaultPlusEpsilon;
-        defaultMinusEpsilon = v.defaultMinusEpsilon;
+        plusEpsilon = v.plusEpsilon;
+        minusEpsilon = v.minusEpsilon;
     }
 
     /**
@@ -183,7 +182,7 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
     public OpenMapRealVector(RealVector v) {
         virtualSize = v.getDimension();
         entries = new OpenIntToDoubleHashMap(0.0);
-        setDefault(v.getDefaultValue(), DEFAULT_ZERO_TOLERANCE);
+        setDefault(0, DEFAULT_ZERO_TOLERANCE);
         for (int key = 0; key < virtualSize; key++) {
             double value = v.getEntry(key);
             if (!isDefaultValue(value)) {
@@ -196,8 +195,8 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
       if(epsilon < 0) {
         throw new IllegalArgumentException("default tolerance must be > 0 :" + epsilon);
       }
-      defaultPlusEpsilon = defaultValue + epsilon;
-      defaultMinusEpsilon = defaultValue - epsilon;
+      plusEpsilon = defaultValue + epsilon;
+      minusEpsilon = defaultValue - epsilon;
     }
 
     /**
@@ -209,12 +208,12 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
     }
 
     /**
-     * Determine if this value is within epsilon of the defaultValue.
+     * Determine if this value is within epsilon of the defaultValue (currently always zero).
      * @param value The value to test
      * @return <code>true</code> if this value is within epsilon to the defaultValue, <code>false</code> otherwise
      */
     protected boolean isDefaultValue(double value) {
-        return value < defaultPlusEpsilon && value > defaultMinusEpsilon;
+        return value < plusEpsilon && value > minusEpsilon;
     }
 
     /** {@inheritDoc} */
@@ -1174,7 +1173,7 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
         final int prime = 31;
         int result = 1;
         long temp;
-        temp = Double.doubleToLongBits(defaultPlusEpsilon) + Double.doubleToLongBits(defaultMinusEpsilon);
+        temp = Double.doubleToLongBits(plusEpsilon) + Double.doubleToLongBits(minusEpsilon);
         result = prime * result + (int) (temp ^ (temp >>> 32));
         result = prime * result + virtualSize;
         Iterator iter = entries.iterator();
@@ -1207,12 +1206,12 @@ public class OpenMapRealVector extends AbstractRealVector implements SparseRealV
         if (virtualSize != other.virtualSize) {
             return false;
         }
-        if (Double.doubleToLongBits(defaultMinusEpsilon) !=
-            Double.doubleToLongBits(other.defaultMinusEpsilon)) {
+        if (Double.doubleToLongBits(minusEpsilon) !=
+            Double.doubleToLongBits(other.minusEpsilon)) {
             return false;
         }
-        if (Double.doubleToLongBits(defaultPlusEpsilon) !=
-            Double.doubleToLongBits(other.defaultPlusEpsilon)) {
+        if (Double.doubleToLongBits(plusEpsilon) !=
+            Double.doubleToLongBits(other.plusEpsilon)) {
             return false;
         }
         Iterator iter = entries.iterator();

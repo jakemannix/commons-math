@@ -74,10 +74,6 @@ public class SparseRealVectorTest extends TestCase {
             throw unsupported();
         }
 
-        public double getDefaultValue() {
-            return 0;
-        }
-
         public Iterator<Entry> iterator() {
             throw unsupported();
         }
@@ -87,7 +83,7 @@ public class SparseRealVectorTest extends TestCase {
         }
 
         public RealVector copy() {
-            throw unsupported();
+            return new SparseRealVectorTestImpl(data);
         }
 
         public RealVector add(RealVector v) throws IllegalArgumentException {
@@ -455,7 +451,7 @@ public class SparseRealVectorTest extends TestCase {
         }
 
         public void setEntry(int index, double value) throws MatrixIndexException {
-            throw unsupported();
+            data[index] = value;
         }
 
         public void setSubVector(int index, RealVector v) throws MatrixIndexException {

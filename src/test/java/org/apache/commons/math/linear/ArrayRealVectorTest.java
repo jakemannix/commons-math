@@ -74,16 +74,25 @@ public class ArrayRealVectorTest extends TestCase {
             throw unsupported();
         }
 
-        public double getDefaultValue() {
-            return 0;
-        }
-
         public Iterator<Entry> iterator() {
-            throw unsupported();
+            return new Iterator<Entry>() {
+                int i=0;
+                public boolean hasNext() { return i<data.length; }
+                public Entry next() {
+                    final int j = i++;
+                    Entry e = new Entry() {
+                        double getValue() { return data[j]; }
+                        void setValue(double newValue) { data[j] = newValue; }
+                    };
+                    e.index = j;
+                    return e;
+                }
+                public void remove() { }
+            };
         }
 
         public Iterator<Entry> sparseIterator() {
-            throw unsupported();
+            return iterator();
         }
 
         public RealVector copy() {

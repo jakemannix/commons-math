@@ -9,12 +9,6 @@ import org.apache.commons.math.analysis.UnivariateRealFunctions;
 
 public abstract class AbstractRealVector implements RealVector
 {
-  protected double defaultValue = 0;
-
-  public double getDefaultValue() {
-    return defaultValue;
-  }
-
 
   /**
    * Check if instance and specified vectors have the same dimension.
@@ -76,7 +70,7 @@ public abstract class AbstractRealVector implements RealVector
   public RealVector add(double[] v) throws IllegalArgumentException
   {
     double[] result = v.clone();
-    Iterator<Entry> it = getDefaultValue() == 0 ? sparseIterator() : iterator();
+    Iterator<Entry> it = sparseIterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
@@ -93,11 +87,11 @@ public abstract class AbstractRealVector implements RealVector
       return add(values);
     }
     RealVector result = v.copy();
-    Iterator<Entry> it = getDefaultValue() == 0 ? sparseIterator() : iterator();
+    Iterator<Entry> it = sparseIterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
-      v.setEntry(e.index, e.getValue() + result.getEntry(e.index));
+      result.setEntry(e.index, e.getValue() + result.getEntry(e.index));
     }
     return result;
   }
@@ -105,7 +99,7 @@ public abstract class AbstractRealVector implements RealVector
   public RealVector subtract(double[] v) throws IllegalArgumentException
   {
     double[] result = v.clone();
-    Iterator<Entry> it = getDefaultValue() == 0 ? sparseIterator() : iterator();
+    Iterator<Entry> it = sparseIterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
@@ -122,7 +116,7 @@ public abstract class AbstractRealVector implements RealVector
       return add(values);
     }
     RealVector result = v.copy();
-    Iterator<Entry> it = getDefaultValue() == 0 ? sparseIterator() : iterator();
+    Iterator<Entry> it = sparseIterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null)
     {
@@ -161,7 +155,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     checkVectorDimensions(v);
     double d = 0;
-    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Iterator<Entry> it = sparseIterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
       d += e.getValue() * v.getEntry(e.index);
@@ -183,7 +177,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     checkVectorDimensions(v);
     double d = 0;
-    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Iterator<Entry> it = sparseIterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
       final double diff = e.getValue() - v.getEntry(e.index);
@@ -196,7 +190,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     checkVectorDimensions(v.length);
     double d = 0;
-    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Iterator<Entry> it = iterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
       final double diff = e.getValue() - v[e.index];
@@ -209,7 +203,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     checkVectorDimensions(v);
     double d = 0;
-    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Iterator<Entry> it = iterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
       d += Math.abs(e.getValue() - v.getEntry(e.index));
@@ -221,7 +215,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     checkVectorDimensions(v.length);
     double d = 0;
-    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Iterator<Entry> it = iterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
       d += Math.abs(e.getValue() - v[e.index]);
@@ -233,7 +227,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     checkVectorDimensions(v);
     double d = 0;
-    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Iterator<Entry> it = iterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
       d = Math.max(Math.abs(e.getValue() - v.getEntry(e.index)), d);
@@ -245,7 +239,7 @@ public abstract class AbstractRealVector implements RealVector
   {
     checkVectorDimensions(v.length);
     double d = 0;
-    Iterator<Entry> it = (this instanceof SparseRealVector && getDefaultValue() == 0) ? sparseIterator() : iterator();
+    Iterator<Entry> it = iterator();
     Entry e;
     while(it.hasNext() && (e = it.next()) != null) {
       d = Math.max(Math.abs(e.getValue() - v[e.index]), d);
@@ -447,7 +441,7 @@ public abstract class AbstractRealVector implements RealVector
 
   public RealVector mapInv()
   {
-    return copy().mapFloorToSelf();
+    return copy().mapInvToSelf();
   }
 
   public RealVector mapLog()
@@ -758,7 +752,7 @@ public abstract class AbstractRealVector implements RealVector
 
   public RealVector mapToSelf(UnivariateRealFunction function) throws FunctionEvaluationException
   {
-    Iterator<Entry> it = getDefaultValue() == function.value(getDefaultValue())
+    Iterator<Entry> it = function.value(0) == 0
                        ? sparseIterator()
                        : iterator();
     Entry e;
@@ -800,7 +794,7 @@ public abstract class AbstractRealVector implements RealVector
       i = 0;
       dim = getDimension();
       current = new EntryImpl();
-      if(current.getValue() == getDefaultValue()) advance(current);
+      if(current.getValue() == 0) advance(current);
       next = new EntryImpl();
       next.index = current.index;
       advance(next);
@@ -808,7 +802,7 @@ public abstract class AbstractRealVector implements RealVector
 
     protected void advance(EntryImpl e) {
       if(e == null) return;
-      do { e.index++; } while(e.index < dim && e.getValue() == getDefaultValue());
+      do { e.index++; } while(e.index < dim && e.getValue() == 0);
       if(e.index >= dim) e.index = -1;
     }
 

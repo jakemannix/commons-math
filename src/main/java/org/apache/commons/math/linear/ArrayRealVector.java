@@ -234,7 +234,7 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
         } else {
             checkVectorDimensions(v);
             double[] out = data.clone();
-            Iterator<Entry> it = v.getDefaultValue() == 0 ? v.sparseIterator() : v.iterator();
+            Iterator<Entry> it = v.sparseIterator();
             Entry e;
             while(it.hasNext() && (e = it.next()) != null) {
                 out[e.index] += e.getValue();
@@ -273,7 +273,7 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
         } else {
             checkVectorDimensions(v);
             double[] out = data.clone();
-            Iterator<Entry> it = v.getDefaultValue() == 0 ? v.sparseIterator() : v.iterator();
+            Iterator<Entry> it = v.sparseIterator();
             Entry e;
             while(it.hasNext() && (e = it.next()) != null) {
                 out[e.index] -= e.getValue();
@@ -624,7 +624,7 @@ public class ArrayRealVector extends AbstractRealVector implements RealVector, S
         } else {
             checkVectorDimensions(v);
             double dot = 0;
-            Iterator<Entry> it = v.getDefaultValue() == 0 ? v.sparseIterator() : v.iterator();
+            Iterator<Entry> it = v.sparseIterator();
             Entry e;
             while(it.hasNext() && (e = it.next()) != null) {
                 dot += data[e.index] * e.getValue();
