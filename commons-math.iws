@@ -168,7 +168,7 @@
       <file leaf-file-name="SparseRealVectorTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="768" column="91" selection-start="25440" selection-end="25440" vertical-scroll-proportion="4.1721067">
+            <state line="559" column="28" selection-start="15977" selection-end="15977" vertical-scroll-proportion="0.45103857">
               <folding />
             </state>
           </provider>
@@ -1037,7 +1037,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="768" column="91" selection-start="25440" selection-end="25440" vertical-scroll-proportion="4.1721067">
+        <state line="559" column="28" selection-start="15977" selection-end="15977" vertical-scroll-proportion="0.45103857">
           <folding />
         </state>
       </provider>
