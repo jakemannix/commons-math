@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="c9a96d7b-312d-4970-bd31-7851d483706b" name="Default" comment="Code cleanup based on Idea's nice suggestions. :)">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java" afterPath="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/commons-math.iws" afterPath="$PROJECT_DIR$/commons-math.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/IntDoubleVector.java" afterPath="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/IntDoubleVector.java" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="commons-math.iws" />
@@ -154,10 +154,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IntDoubleVector.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="IntDoubleVector.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/IntDoubleVector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="40" selection-start="1305" selection-end="1305" vertical-scroll-proportion="-0.60571426">
+            <state line="173" column="7" selection-start="4104" selection-end="4104" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -165,10 +165,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SparseRealVectorTest.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="SparseRealVectorTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="87" selection-start="2686" selection-end="2686" vertical-scroll-proportion="-9.692307">
+            <state line="768" column="91" selection-start="25440" selection-end="25440" vertical-scroll-proportion="4.1721067">
               <folding />
             </state>
           </provider>
@@ -207,9 +207,9 @@
         <option value="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/RealVector.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/AbstractRealVector.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/IntDoubleVector.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/ArrayRealVector.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/ArrayRealVectorTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/IntDoubleVector.java" />
       </list>
     </option>
   </component>
@@ -1012,13 +1012,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="87" selection-start="2686" selection-end="2686" vertical-scroll-proportion="-9.692307">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/AbstractRealVectorTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="187" column="19" selection-start="5507" selection-end="5507" vertical-scroll-proportion="0.0">
@@ -1035,10 +1028,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/apache/commons/math/linear/IntDoubleVector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="40" selection-start="1305" selection-end="1305" vertical-scroll-proportion="-0.60571426">
+        <state line="173" column="7" selection-start="4104" selection-end="4104" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/apache/commons/math/linear/SparseRealVectorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="768" column="91" selection-start="25440" selection-end="25440" vertical-scroll-proportion="4.1721067">
+          <folding />
         </state>
       </provider>
     </entry>

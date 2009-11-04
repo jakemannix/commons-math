@@ -48,7 +48,7 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
       Arrays.fill(indices, Integer.MAX_VALUE);
       values = new double[10];
       Iterator<Entry> it = vector.sparseIterator();
-      Entry e = null;
+      Entry e;
       while(it.hasNext() && (e = it.next()) != null)
       {
         if(currentSize >= indices.length)
@@ -118,13 +118,17 @@ public class IntDoubleVector extends AbstractRealVector implements SparseRealVec
     return result;
   }
 
-    public double getL1Norm() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+  // TODO
+  public double getL1Norm()
+  {
+     return 0;  //To change body of implemented methods use File | Settings | File Templates.
+  }
 
-    public double getLInfNorm() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+  // TODO
+  public double getLInfNorm()
+  {
+     return 0;  //To change body of implemented methods use File | Settings | File Templates.
+  }
 
 
   public RealVector append(RealVector v)
